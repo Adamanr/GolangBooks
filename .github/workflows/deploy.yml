@@ -1,4 +1,4 @@
-name: Golang Books
+name: Golang Book
 
 on:
   push:
@@ -8,22 +8,24 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v2
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
         with:
-          mdbook-version: 'latest'
+          components: rustfmt, clippy
 
-      - run: mdbook build
+      - name: Install mdbook
+        run: cargo install mdbook
 
-      - name: Deploy
+      - name: Build book
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./book
