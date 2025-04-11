@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html" class="active"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,7 +155,290 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Небезопасный-go"><a class="header" href="#Небезопасный-go">Небезопасный Go</a></h1>
+                        <h1 id="Небезопасный-go-Работа-с-пакетом-unsafe"><a class="header" href="#Небезопасный-go-Работа-с-пакетом-unsafe">Небезопасный Go: Работа с пакетом unsafe</a></h1>
+<p>В этой главе мы изучим пакет <code>unsafe</code> в Go - мощный инструмент для низкоуровневого программирования, который позволяет обходить некоторые ограничения системы типов. Однако с большой силой приходит большая ответственность: неправильное использование <code>unsafe</code> может привести к нестабильности программы и трудноуловимым ошибкам.</p>
+<h2 id="Почему-нужен-пакет-unsafe"><a class="header" href="#Почему-нужен-пакет-unsafe">Почему нужен пакет unsafe?</a></h2>
+<p>Пакет <code>unsafe</code> необходим для:</p>
+<ul>
+<li>Работы с необработанной памятью</li>
+<li>Преобразования типов без проверки</li>
+<li>Оптимизации производительности</li>
+<li>Взаимодействия с C-кодом</li>
+<li>Реализации низкоуровневых структур данных</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong>Важно</strong>: Использование <code>unsafe</code> нарушает гарантии безопасности типов Go и может привести к неопределённому поведению. Используйте его только когда это действительно необходимо.</p>
+</blockquote>
+<h2 id="Основные-возможности-unsafe"><a class="header" href="#Основные-возможности-unsafe">Основные возможности unsafe</a></h2>
+<h3 id="1-Указатели-и-арифметика-указателей"><a class="header" href="#1-Указатели-и-арифметика-указателей">1. Указатели и арифметика указателей</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "unsafe"
+)
+
+func main() {
+    // Создаём массив
+    arr := [4]int{10, 20, 30, 40}
+    
+    // Получаем указатель на первый элемент
+    ptr := unsafe.Pointer(&amp;arr[0])
+    
+    // Выполняем арифметику указателей
+    for i := 0; i &lt; 4; i++ {
+        // Получаем указатель на i-й элемент
+        elemPtr := unsafe.Pointer(uintptr(ptr) + uintptr(i)*unsafe.Sizeof(arr[0]))
+        
+        // Преобразуем обратно в *int
+        elem := (*int)(elemPtr)
+        
+        fmt.Printf("Элемент %d: %d\n", i, *elem)
+    }
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>unsafe.Pointer</code> позволяет преобразовывать указатели между типами</li>
+<li><code>uintptr</code> используется для арифметики указателей</li>
+<li><code>unsafe.Sizeof</code> возвращает размер типа в байтах</li>
+<li>Арифметика указателей требует осторожности</li>
+</ul>
+<h3 id="2-Преобразование-типов"><a class="header" href="#2-Преобразование-типов">2. Преобразование типов</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "unsafe"
+)
+
+type MyStruct struct {
+    a int
+    b float64
+    c string
+}
+
+func main() {
+    // Создаём структуру
+    s := MyStruct{
+        a: 42,
+        b: 3.14,
+        c: "hello",
+    }
+    
+    // Получаем указатель на структуру
+    ptr := unsafe.Pointer(&amp;s)
+    
+    // Преобразуем в массив байт
+    bytes := (*[unsafe.Sizeof(s)]byte)(ptr)
+    
+    // Выводим байты
+    fmt.Printf("Байты структуры: %v\n", bytes[:])
+    
+    // Изменяем значение через указатель
+    intPtr := (*int)(unsafe.Pointer(&amp;s.a))
+    *intPtr = 100
+    
+    fmt.Printf("Изменённое значение: %d\n", s.a)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Можно преобразовывать указатели между любыми типами</li>
+<li>Можно получать доступ к полям структуры через указатели</li>
+<li>Нужно быть осторожным с выравниванием и размерами типов</li>
+</ul>
+<h3 id="3-Работа-с-необработанной-памятью"><a class="header" href="#3-Работа-с-необработанной-памятью">3. Работа с необработанной памятью</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "unsafe"
+)
+
+func main() {
+    // Выделяем память
+    size := unsafe.Sizeof(int(0))
+    ptr := unsafe.Pointer(new(int))
+    
+    // Записываем значение
+    *(*int)(ptr) = 42
+    
+    // Читаем значение
+    value := *(*int)(ptr)
+    fmt.Printf("Значение: %d\n", value)
+    
+    // Освобождаем память (в реальном коде нужно использовать runtime.GC)
+    ptr = nil
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Можно выделять и освобождать память</li>
+<li>Нужно следить за утечками памяти</li>
+<li>Важно правильно управлять жизненным циклом объектов</li>
+</ul>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Структуры-с-переменным-размером"><a class="header" href="#1-Структуры-с-переменным-размером">1. Структуры с переменным размером</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "unsafe"
+)
+
+type DynamicArray struct {
+    len  int
+    cap  int
+    data [1]int // Начальный элемент
+}
+
+func NewDynamicArray(capacity int) *DynamicArray {
+    // Вычисляем размер структуры
+    size := unsafe.Sizeof(DynamicArray{}) + 
+            unsafe.Sizeof(int(0)) * uintptr(capacity-1)
+    
+    // Выделяем память
+    ptr := unsafe.Pointer(new([1]byte))
+    arr := (*DynamicArray)(ptr)
+    
+    // Инициализируем поля
+    arr.len = 0
+    arr.cap = capacity
+    
+    return arr
+}
+
+func (a *DynamicArray) Append(value int) {
+    if a.len &gt;= a.cap {
+        panic("массив переполнен")
+    }
+    
+    // Получаем указатель на элемент
+    elemPtr := unsafe.Pointer(uintptr(unsafe.Pointer(&amp;a.data[0])) + 
+                            uintptr(a.len)*unsafe.Sizeof(int(0)))
+    
+    // Записываем значение
+    *(*int)(elemPtr) = value
+    a.len++
+}
+
+func main() {
+    arr := NewDynamicArray(10)
+    
+    for i := 0; i &lt; 5; i++ {
+        arr.Append(i * 10)
+    }
+    
+    fmt.Printf("Длина: %d, Ёмкость: %d\n", arr.len, arr.cap)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Можно создавать структуры с переменным размером</li>
+<li>Нужно правильно вычислять размеры и смещения</li>
+<li>Важно следить за границами массива</li>
+</ul>
+<h3 id="2-Взаимодействие-с-c-кодом"><a class="header" href="#2-Взаимодействие-с-c-кодом">2. Взаимодействие с C-кодом</a></h3>
+<pre><code class="language-go">package main
+
+/*
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+void* allocate_memory(size_t size) {
+    return malloc(size);
+}
+
+void free_memory(void* ptr) {
+    free(ptr);
+}
+*/
+import "C"
+import (
+    "fmt"
+    "unsafe"
+)
+
+func main() {
+    // Выделяем память через C
+    size := C.size_t(100)
+    ptr := C.allocate_memory(size)
+    defer C.free_memory(ptr)
+    
+    // Преобразуем указатель
+    goPtr := unsafe.Pointer(ptr)
+    
+    // Используем память
+    bytes := (*[100]byte)(goPtr)
+    for i := 0; i &lt; 100; i++ {
+        bytes[i] = byte(i)
+    }
+    
+    fmt.Printf("Первый байт: %d\n", bytes[0])
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Можно работать с C-функциями</li>
+<li>Нужно правильно управлять памятью</li>
+<li>Важно следить за типами указателей</li>
+</ul>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Собственная-реализация-слайса"><a class="header" href="#Задание-1-Собственная-реализация-слайса">Задание 1: Собственная реализация слайса</a></h3>
+<p>Создайте собственную реализацию слайса, которая:</p>
+<ol>
+<li>Использует unsafe для работы с памятью</li>
+<li>Поддерживает динамическое расширение</li>
+<li>Обеспечивает безопасный доступ</li>
+<li>Оптимизирует производительность</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Эффективная работа с памятью</li>
+<li>Безопасный доступ к элементам</li>
+<li>Хорошая производительность</li>
+<li>Минимальные накладные расходы</li>
+</ul>
+<h3 id="Задание-2-Низкоуровневый-парсер"><a class="header" href="#Задание-2-Низкоуровневый-парсер">Задание 2: Низкоуровневый парсер</a></h3>
+<p>Реализуйте низкоуровневый парсер, который:</p>
+<ol>
+<li>Работает с необработанной памятью</li>
+<li>Эффективно обрабатывает данные</li>
+<li>Минимизирует аллокации</li>
+<li>Обеспечивает безопасность</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Высокая производительность</li>
+<li>Минимальное использование памяти</li>
+<li>Безопасная работа</li>
+<li>Чистый интерфейс</li>
+</ul>
+<h3 id="Задание-3-Оптимизированный-пул-объектов"><a class="header" href="#Задание-3-Оптимизированный-пул-объектов">Задание 3: Оптимизированный пул объектов</a></h3>
+<p>Создайте пул объектов, который:</p>
+<ol>
+<li>Использует unsafe для управления памятью</li>
+<li>Поддерживает переиспользование объектов</li>
+<li>Обеспечивает безопасность</li>
+<li>Оптимизирует производительность</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Эффективное управление памятью</li>
+<li>Высокая производительность</li>
+<li>Безопасность использования</li>
+<li>Минимальные накладные расходы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель главы</strong>: К концу этой главы вы должны уметь:</p>
+<ul>
+<li>Понимать принципы работы unsafe</li>
+<li>Безопасно использовать низкоуровневые операции</li>
+<li>Оптимизировать производительность</li>
+<li>Писать эффективный код</li>
+</ul>
+</blockquote>
 
                     </main>
 

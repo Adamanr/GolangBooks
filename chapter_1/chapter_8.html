@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html" class="active"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,148 +155,273 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Структуры"><a class="header" href="#Структуры">Структуры</a></h1>
-<p>В Go <strong>структуры</strong> (structs) предоставляют мощный способ группировать связанные данные в одном объекте, что делает работу с данными удобной и гибкой. Структуры — это основа работы с данными в Go, и они позволяют создавать сложные типы с упрощённым синтаксисом. Методы, которые можно добавлять к структурам, расширяют их функциональность, а <strong>реверсивные методы</strong> (value и pointer receivers) дают вам контроль над изменением данных внутри методов.</p>
-<h4 id="Создание-структуры"><a class="header" href="#Создание-структуры">Создание структуры</a></h4>
-<p>Пример структуры для описания человека:</p>
+                        <h1 id="Структуры-в-go-организация-данных-и-поведение"><a class="header" href="#Структуры-в-go-организация-данных-и-поведение">Структуры в Go: организация данных и поведение</a></h1>
+<p>В этом уроке мы изучим структуры — один из самых мощных инструментов Go для организации данных и поведения. Структуры позволяют создавать сложные типы данных, которые могут содержать как данные, так и методы для работы с ними.</p>
+<h2 id="Почему-важны-структуры"><a class="header" href="#Почему-важны-структуры">Почему важны структуры?</a></h2>
+<p>Структуры в Go необходимы для:</p>
+<ul>
+<li>Группировки связанных данных</li>
+<li>Создания пользовательских типов</li>
+<li>Инкапсуляции данных и поведения</li>
+<li>Реализации объектно-ориентированного подхода</li>
+<li>Создания сложных структур данных</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go нет классов, но структуры с методами позволяют реализовать многие концепции объектно-ориентированного программирования.</p>
+</blockquote>
+<h2 id="Основы-структур"><a class="header" href="#Основы-структур">Основы структур</a></h2>
+<h3 id="1-Создание-и-использование-структур"><a class="header" href="#1-Создание-и-использование-структур">1. Создание и использование структур</a></h3>
 <pre><code class="language-go">type Person struct {
+    Name    string
+    Age     int
+    Address struct {
+        City    string
+        Country string
+    }
+}
+
+func main() {
+    // Создание структуры
+    person := Person{
+        Name: "Иван",
+        Age:  30,
+        Address: struct {
+            City    string
+            Country string
+        }{
+            City:    "Москва",
+            Country: "Россия",
+        },
+    }
+    
+    // Доступ к полям
+    fmt.Printf("%s живёт в %s\n", person.Name, person.Address.City)
+}
+</code></pre>
+<h3 id="2-Методы-структур"><a class="header" href="#2-Методы-структур">2. Методы структур</a></h3>
+<pre><code class="language-go">type Rectangle struct {
+    Width  float64
+    Height float64
+}
+
+// Метод с получателем-значением
+func (r Rectangle) Area() float64 {
+    return r.Width * r.Height
+}
+
+// Метод с получателем-указателем
+func (r *Rectangle) Scale(factor float64) {
+    r.Width *= factor
+    r.Height *= factor
+}
+
+func main() {
+    rect := Rectangle{Width: 10, Height: 5}
+    fmt.Println("Площадь:", rect.Area())
+    
+    rect.Scale(2)
+    fmt.Println("Новая площадь:", rect.Area())
+}
+</code></pre>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Встраивание-структур"><a class="header" href="#1-Встраивание-структур">1. Встраивание структур</a></h3>
+<pre><code class="language-go">type Animal struct {
     Name string
     Age  int
 }
-</code></pre>
-<p>Здесь <code>Person</code> — это структура, которая имеет два поля: <code>Name</code> типа <code>string</code> и <code>Age</code> типа <code>int</code>.</p>
-<h4 id="Использование-структуры"><a class="header" href="#Использование-структуры">Использование структуры</a></h4>
-<p>После объявления структуры, можно создавать объекты этого типа:</p>
-<pre><code class="language-go">func main() {
-    person := Person{Name: "John", Age: 30}
-    fmt.Println(person.Name)  // Выведет "John"
-    fmt.Println(person.Age)   // Выведет 30
+
+type Dog struct {
+    Animal
+    Breed string
 }
-</code></pre>
-<p>Мы можем обращаться к полям структуры и изменять их:</p>
-<pre><code class="language-go">person.Age = 31
-fmt.Println(person.Age)  // Выведет 31
-</code></pre>
-<h4 id="Анонимные-поля"><a class="header" href="#Анонимные-поля">Анонимные поля</a></h4>
-<p>Go позволяет использовать анонимные поля в структурах, что позволяет включать поля других структур без явного имени:</p>
-<pre><code class="language-go">type Employee struct {
-    Person
-    Position string
+
+func (a Animal) Speak() string {
+    return "Я животное"
 }
-</code></pre>
-<p>В этом примере <code>Employee</code> включает в себя структуру <code>Person</code>, а также имеет дополнительное поле <code>Position</code>. Теперь к полям структуры <code>Person</code> можно обращаться напрямую через объект <code>Employee</code>:</p>
-<pre><code class="language-go">func main() {
-    employee := Employee{Person: Person{Name: "John", Age: 30}, Position: "Developer"}
-    fmt.Println(employee.Name)   // Выведет "John"
-    fmt.Println(employee.Age)    // Выведет 30
-    fmt.Println(employee.Position) // Выведет "Developer"
-}
-</code></pre>
-<h3 id="Методы-для-структур"><a class="header" href="#Методы-для-структур">Методы для структур</a></h3>
-<p>Go поддерживает добавление методов к структурам, что позволяет связывать действия с данными в объекте.</p>
-<p>Пример метода для структуры <code>Person</code>:</p>
-<pre><code class="language-go">func (p Person) Greet() string {
-    return "Hello, my name is " + p.Name
-}
-</code></pre>
-<p>Этот метод <code>Greet</code> можно вызывать для любого объекта типа <code>Person</code>:</p>
-<pre><code class="language-go">func main() {
-    person := Person{Name: "Alice", Age: 25}
-    fmt.Println(person.Greet())  // Выведет "Hello, my name is Alice"
-}
-</code></pre>
-<h3 id="Реверсивные-методы-Указатели-и-Значения"><a class="header" href="#Реверсивные-методы-Указатели-и-Значения">Реверсивные методы: Указатели и Значения</a></h3>
-<p>Методы могут принимать структуры либо по <strong>значению</strong> (value), либо по <strong>указателю</strong> (pointer), и это влияет на то, как метод работает с данными структуры.</p>
-<h4 id="Методы-с-получателем-значением"><a class="header" href="#Методы-с-получателем-значением">Методы с получателем-значением</a></h4>
-<p>Когда метод использует <strong>значение</strong> структуры как получатель, он работает с копией объекта, и любые изменения не затронут оригинал:</p>
-<pre><code class="language-go">func (p Person) Birthday() {
-    p.Age++
+
+func (d Dog) Speak() string {
+    return "Гав-гав!"
 }
 
 func main() {
-    person := Person{Name: "Bob", Age: 40}
-    person.Birthday()
-    fmt.Println(person.Age)  // Выведет 40, так как изменения произошли в копии
-}
-</code></pre>
-<h4 id="Методы-с-указателем"><a class="header" href="#Методы-с-указателем">Методы с указателем</a></h4>
-<p>Если метод использует <strong>указатель</strong> как получатель, он работает напрямую с оригиналом структуры, что позволяет изменять её поля:</p>
-<pre><code class="language-go">func (p *Person) Birthday() {
-    p.Age++
-}
-
-func main() {
-    person := Person{Name: "Bob", Age: 40}
-    person.Birthday()
-    fmt.Println(person.Age)  // Теперь выведет 41, т.к. изменения происходят в оригинале
-}
-</code></pre>
-<p>Использование указателей в методах предпочтительно, когда нужно изменять данные структуры или работать с большими объектами для улучшения производительности.</p>
-<h3 id="Вложенные-структуры"><a class="header" href="#Вложенные-структуры">Вложенные структуры</a></h3>
-<p>Go позволяет использовать структуры внутри других структур. Это полезно, когда нужно моделировать более сложные объекты, состоящие из нескольких уровней данных.</p>
-<p>Пример:</p>
-<pre><code class="language-go">type Address struct {
-    City  string
-    State string
-}
-
-type Person struct {
-    Name    string
-    Age     int
-    Address Address
-}
-</code></pre>
-<p>Теперь структура <code>Person</code> содержит внутри себя структуру <code>Address</code>, что позволяет создавать объекты с вложенными данными:</p>
-<pre><code class="language-go">func main() {
-    person := Person{
-        Name: "John",
-        Age:  30,
-        Address: Address{
-            City:  "New York",
-            State: "NY",
-        },
+    dog := Dog{
+        Animal: Animal{Name: "Рекс", Age: 3},
+        Breed:  "Овчарка",
     }
-    fmt.Println(person.Name)      // Выведет "John"
-    fmt.Println(person.Address.City) // Выведет "New York"
+    
+    fmt.Println(dog.Name)      // Доступ к встроенному полю
+    fmt.Println(dog.Speak())   // Вызов переопределённого метода
 }
 </code></pre>
-<h3 id="Задания-для-лучшего-понимания-структур"><a class="header" href="#Задания-для-лучшего-понимания-структур">Задания для лучшего понимания структур</a></h3>
+<h3 id="2-Интерфейсы-и-структуры"><a class="header" href="#2-Интерфейсы-и-структуры">2. Интерфейсы и структуры</a></h3>
+<pre><code class="language-go">type Speaker interface {
+    Speak() string
+}
+
+type Cat struct {
+    Name string
+}
+
+func (c Cat) Speak() string {
+    return "Мяу!"
+}
+
+func MakeSound(s Speaker) {
+    fmt.Println(s.Speak())
+}
+
+func main() {
+    cat := Cat{Name: "Мурзик"}
+    MakeSound(cat)
+}
+</code></pre>
+<h3 id="3-Теги-структур"><a class="header" href="#3-Теги-структур">3. Теги структур</a></h3>
+<pre><code class="language-go">type User struct {
+    ID        int    `json:"id"`
+    Username  string `json:"username"`
+    Password  string `json:"-"` // Поле будет пропущено при сериализации
+    CreatedAt time.Time `json:"created_at"`
+}
+
+func main() {
+    user := User{
+        ID:        1,
+        Username:  "admin",
+        Password:  "secret",
+        CreatedAt: time.Now(),
+    }
+    
+    data, _ := json.Marshal(user)
+    fmt.Println(string(data))
+}
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-Кэш-с-ttl"><a class="header" href="#1-Кэш-с-ttl">1. Кэш с TTL</a></h3>
+<pre><code class="language-go">type Cache struct {
+    mu    sync.RWMutex
+    items map[string]struct {
+        value      interface{}
+        expiration time.Time
+    }
+}
+
+func (c *Cache) Set(key string, value interface{}, ttl time.Duration) {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    
+    c.items[key] = struct {
+        value      interface{}
+        expiration time.Time
+    }{
+        value:      value,
+        expiration: time.Now().Add(ttl),
+    }
+}
+
+func (c *Cache) Get(key string) (interface{}, bool) {
+    c.mu.RLock()
+    defer c.mu.RUnlock()
+    
+    item, exists := c.items[key]
+    if !exists || time.Now().After(item.expiration) {
+        return nil, false
+    }
+    return item.value, true
+}
+</code></pre>
+<h3 id="2-Очередь-задач"><a class="header" href="#2-Очередь-задач">2. Очередь задач</a></h3>
+<pre><code class="language-go">type Task struct {
+    ID        string
+    Payload   interface{}
+    Priority  int
+    CreatedAt time.Time
+}
+
+type TaskQueue struct {
+    tasks chan Task
+    wg    sync.WaitGroup
+}
+
+func NewTaskQueue(workers int) *TaskQueue {
+    q := &amp;TaskQueue{
+        tasks: make(chan Task, 100),
+    }
+    
+    q.wg.Add(workers)
+    for i := 0; i &lt; workers; i++ {
+        go q.worker()
+    }
+    
+    return q
+}
+
+func (q *TaskQueue) worker() {
+    defer q.wg.Done()
+    for task := range q.tasks {
+        // Обработка задачи
+        fmt.Printf("Обработка задачи %s\n", task.ID)
+    }
+}
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Система-управления-библиотекой"><a class="header" href="#Задание-1-Система-управления-библиотекой">Задание 1: Система управления библиотекой</a></h3>
+<p>Создайте структуры для:</p>
 <ol>
-<li>
-<p><strong>Создайте структуру <code>Car</code>:</strong></p>
-<ul>
-<li>Добавьте поля <code>Brand</code>, <code>Model</code>, <code>Year</code> и <code>Price</code>.</li>
-<li>Реализуйте метод <code>Details()</code>, который выводит информацию о машине.</li>
-</ul>
-</li>
-<li>
-<p><strong>Методы с указателями:</strong></p>
-<ul>
-<li>Создайте структуру <code>Counter</code> с полем <code>Value</code>.</li>
-<li>Реализуйте метод <code>Increment</code> с получателем-указателем, который увеличивает значение счётчика.</li>
-</ul>
-</li>
-<li>
-<p><strong>Анонимные поля:</strong></p>
-<ul>
-<li>Создайте структуру <code>Manager</code>, которая включает поля из структуры <code>Employee</code> (анонимно) и добавьте дополнительное поле <code>Department</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Вложенные структуры:</strong></p>
-<ul>
-<li>Создайте структуру <code>Book</code>, которая включает поля <code>Title</code>, <code>Author</code> и вложенную структуру <code>Publisher</code>, содержащую <code>Name</code> и <code>Country</code>.</li>
-<li>Реализуйте метод <code>Info()</code>, который выводит полную информацию о книге и её издателе.</li>
-</ul>
-</li>
-<li>
-<p><strong>Создание методов:</strong></p>
-<ul>
-<li>Реализуйте структуру <code>Rectangle</code> с полями <code>Width</code> и <code>Height</code>.</li>
-<li>Добавьте метод для расчёта площади (<code>Area()</code>) и периметра (<code>Perimeter()</code>).</li>
-</ul>
-</li>
+<li>Книги (название, автор, год издания, статус)</li>
+<li>Читателя (имя, контакты, список взятых книг)</li>
+<li>Библиотеки (каталог книг, список читателей)
+Реализуйте методы для:</li>
 </ol>
+<ul>
+<li>Выдачи и возврата книг</li>
+<li>Поиска книг по различным критериям</li>
+<li>Отслеживания статуса книг</li>
+</ul>
+<h3 id="Задание-2-Система-управления-задачами"><a class="header" href="#Задание-2-Система-управления-задачами">Задание 2: Система управления задачами</a></h3>
+<p>Разработайте систему для:</p>
+<ol>
+<li>Создания и управления задачами</li>
+<li>Назначения задач пользователям</li>
+<li>Отслеживания прогресса</li>
+<li>Установки приоритетов и сроков
+Используйте:</li>
+</ol>
+<ul>
+<li>Вложенные структуры</li>
+<li>Методы с указателями</li>
+<li>Интерфейсы для разных типов задач</li>
+</ul>
+<h3 id="Задание-3-Система-мониторинга"><a class="header" href="#Задание-3-Система-мониторинга">Задание 3: Система мониторинга</a></h3>
+<p>Создайте систему для:</p>
+<ol>
+<li>Сбора метрик с серверов</li>
+<li>Хранения исторических данных</li>
+<li>Генерации отчётов</li>
+<li>Оповещения о проблемах
+Реализуйте:</li>
+</ol>
+<ul>
+<li>Потокобезопасные структуры данных</li>
+<li>Эффективное хранение временных рядов</li>
+<li>Гибкую систему оповещений</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим интерфейсы в Go</li>
+<li>Познакомимся с рефлексией</li>
+<li>Узнаем о тегах структур</li>
+<li>Начнём писать более сложные программы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать и использовать структуры</li>
+<li>Работать с методами и указателями</li>
+<li>Применять встраивание структур</li>
+<li>Использовать теги для сериализации</li>
+</ul>
+</blockquote>
 
                     </main>
 

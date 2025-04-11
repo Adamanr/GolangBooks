@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html" class="active"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,261 +155,187 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="slice-map-и-их-особенности"><a class="header" href="#slice-map-и-их-особенности">Slice, map и их особенности</a></h1>
-<p>В этом уроке мы познакомимся с двумя важными структурами данных в Go — <strong>slice</strong> и <strong>map</strong>. Оба инструмента широко используются в повседневной разработке и предоставляют гибкие возможности для работы с коллекциями данных.</p>
-<h3 id="slice-Срезы-в-go"><a class="header" href="#slice-Срезы-в-go">Slice: Срезы в Go</a></h3>
-<p><strong>Slice</strong> — это динамическая структура данных, которая представляет собой часть (срез) массива. В отличие от массивов, срезы не фиксированы по размеру, и их можно увеличивать или уменьшать по мере необходимости.</p>
-<h4 id="Создание-и-использование-slice"><a class="header" href="#Создание-и-использование-slice">Создание и использование Slice</a></h4>
-<p>Срезы можно создать разными способами:</p>
-<ol>
-<li>
-<p><strong>От массива</strong>:</p>
-<pre><code class="language-go">arr := [5]int{1, 2, 3, 4, 5}
-slice := arr[1:4] // Срез с элементами 2, 3, 4
-</code></pre>
-</li>
-<li>
-<p><strong>С помощью функции <code>make</code></strong>:</p>
-<pre><code class="language-go">slice := make([]int, 3) // Создаем срез длиной 3 и нулевыми значениями
-</code></pre>
-</li>
-<li>
-<p><strong>Литералы срезов</strong>:</p>
-<pre><code class="language-go">slice := []int{1, 2, 3, 4, 5} // Создаем срез из пяти элементов
-</code></pre>
-</li>
-</ol>
-<h4 id="Работа-с-срезами"><a class="header" href="#Работа-с-срезами">Работа с срезами</a></h4>
-<p>Срезы имеют следующие важные свойства:</p>
+                        <h1 id="Срезы-и-карты-в-go-мощные-структуры-данных"><a class="header" href="#Срезы-и-карты-в-go-мощные-структуры-данных">Срезы и карты в Go: мощные структуры данных</a></h1>
+<p>В этом уроке мы изучим две фундаментальные структуры данных в Go — срезы (slices) и карты (maps). Эти инструменты являются основой для работы с коллекциями данных и широко используются в реальных проектах.</p>
+<h2 id="Почему-срезы-и-карты-важны"><a class="header" href="#Почему-срезы-и-карты-важны">Почему срезы и карты важны?</a></h2>
+<p>Срезы и карты — это ключевые структуры данных в Go, которые:</p>
 <ul>
-<li><strong>Длина (len)</strong>: Количество элементов в срезе.</li>
-<li><strong>Ёмкость (cap)</strong>: Количество элементов, которые могут быть помещены в срез до необходимости расширения.</li>
+<li>Позволяют эффективно работать с коллекциями</li>
+<li>Предоставляют гибкость в управлении данными</li>
+<li>Оптимизированы для производительности</li>
+<li>Используются в большинстве Go-программ</li>
 </ul>
-<p>Пример работы с длиной и ёмкостью:</p>
-<pre><code class="language-go">slice := []int{1, 2, 3, 4, 5}
-fmt.Println(len(slice)) // 5
-fmt.Println(cap(slice)) // 5
-</code></pre>
-<p>Чтобы добавить элементы в срез, используется функция <strong><code>append</code></strong>:</p>
-<pre><code class="language-go">slice = append(slice, 6)
-fmt.Println(slice) // [1, 2, 3, 4, 5, 6]
-</code></pre>
 <blockquote>
-<p>Когда срез выходит за границы своей начальной ёмкости, Go автоматически расширяет его, удваивая ёмкость.</p>
+<p>💡 <strong>Интересный факт</strong>: В Go нет встроенных динамических массивов, но срезы предоставляют всю необходимую функциональность и даже больше.</p>
 </blockquote>
-<p>Чтобы удалить последний элемент из среза мы тоже используем <strong><code>append</code></strong>:</p>
-<pre><code class="language-go">func main(){
-   slice := []int{1,2,3,4}
-   s := 2 // Мы хотим удалить 2 элемент
-   slice = append(slice[:s], slice[s+1:]...)
-   fmt.Println(slice) // [1, 2, 4]
-}
+<h2 id="Срезы-slices"><a class="header" href="#Срезы-slices">Срезы (Slices)</a></h2>
+<h3 id="1-Что-такое-срез"><a class="header" href="#1-Что-такое-срез">1. Что такое срез?</a></h3>
+<p>Срез — это динамическая обёртка над массивом, которая предоставляет:</p>
+<ul>
+<li>Гибкий размер</li>
+<li>Эффективное управление памятью</li>
+<li>Удобные операции с данными</li>
+</ul>
+<pre><code class="language-go">// Создание среза разными способами
+slice1 := []int{1, 2, 3}           // Литерал среза
+slice2 := make([]int, 3)           // С помощью make
+slice3 := make([]int, 3, 5)        // С указанием длины и ёмкости
 </code></pre>
-<h4 id="Особенности-slice"><a class="header" href="#Особенности-slice">Особенности Slice:</a></h4>
-<ol>
-<li>
-<p><strong>Срезы ссылаются на тот же массив</strong>: Срезы "под капотом" являются ссылками на массив. Это значит, что изменение среза может изменить исходный массив.</p>
-<pre><code class="language-go">arr := [5]int{1, 2, 3, 4, 5}
-slice := arr[1:4]
-slice[0] = 10 // Изменим первый элемент среза
-fmt.Println(arr) // [1, 10, 3, 4, 5]
-</code></pre>
-</li>
-<li>
-<p><strong>Срезы могут быть нулевыми</strong>: Если срез не был инициализирован, его значение — <code>nil</code>, и длина такого среза равна нулю.</p>
-<pre><code class="language-go">var slice []int
-fmt.Println(slice == nil) // true
-</code></pre>
-</li>
-<li>
-<p><strong>Копирование срезов</strong>: Для копирования элементов одного среза в другой можно использовать функцию <strong><code>copy</code></strong>.</p>
-<pre><code class="language-go">slice1 := []int{1, 2, 3}
-slice2 := make([]int, len(slice1))
-copy(slice2, slice1)
-fmt.Println(slice2) // [1, 2, 3]
-</code></pre>
-</li>
-</ol>
-<h2 id="map-Отображения-в-go"><a class="header" href="#map-Отображения-в-go">Map: Отображения в Go</a></h2>
-<p><strong>Map</strong> — это структура данных, которая представляет собой коллекцию пар "ключ-значение". Ключи должны быть уникальными, и каждое значение связано с определённым ключом.</p>
-<h4 id="Создание-и-использование-map"><a class="header" href="#Создание-и-использование-map">Создание и использование Map</a></h4>
-<p>Создать карту можно несколькими способами:</p>
-<ol>
-<li>
-<p><strong>С помощью функции <code>make</code></strong>:</p>
-<pre><code class="language-go">m := make(map[string]int) // Создаем карту с ключами типа string и значениями типа int
-</code></pre>
-</li>
-<li>
-<p><strong>Литерал карты</strong>:</p>
-<pre><code class="language-go">m := map[string]int{
-    "apple":  2,
-    "banana": 3,
-}
-</code></pre>
-</li>
-</ol>
-<h4 id="Работа-с-map"><a class="header" href="#Работа-с-map">Работа с map</a></h4>
-<p>Карта работает с операциями добавления, обновления, удаления и поиска значений:</p>
-<ol>
-<li>
-<p><strong>Добавление и обновление значений</strong>:</p>
-<pre><code class="language-go">m := make(map[string]int)
-m["apple"] = 5 // Добавляем пару "ключ-значение"
-m["apple"] = 10 // Обновляем значение для ключа "apple"
-</code></pre>
-</li>
-<li>
-<p><strong>Получение значения по ключу</strong>:</p>
-<pre><code class="language-go">value := m["apple"]
-fmt.Println(value) // 10
-</code></pre>
-</li>
-<li>
-<p><strong>Проверка наличия ключа</strong>:
-При получении значения по ключу можно также проверить, существует ли данный ключ в карте:</p>
-<pre><code class="language-go">value, ok := m["banana"]
-if ok {
-    fmt.Println("Ключ найден, значение:", value)
-} else {
-    fmt.Println("Ключ не найден")
-}
-</code></pre>
-</li>
-<li>
-<p><strong>Удаление элемента</strong>:
-Используйте функцию <strong><code>delete</code></strong>, чтобы удалить элемент из карты:</p>
-<pre><code class="language-go">delete(m, "apple")
-fmt.Println(m) // Карта больше не содержит ключ "apple"
-</code></pre>
-</li>
-</ol>
-<h4 id="Особенности-map"><a class="header" href="#Особенности-map">Особенности Map:</a></h4>
-<ol>
-<li>
-<p><strong>Порядок элементов не гарантируется</strong>: В <strong>map</strong> элементы не упорядочены, и при каждой итерации по карте порядок может отличаться.</p>
-<pre><code class="language-go">m := map[string]int{"apple": 2, "banana": 3}
-for key, value := range m {
-    fmt.Println(key, value)
-}
-</code></pre>
-</li>
-<li>
-<p><strong>Ключи могут быть только сравниваемыми типами</strong>: Это означает, что такие типы как срезы нельзя использовать в качестве ключей, но строки, числа и даже структуры — можно. Разрешённые типы ключей: bool, int, float, string, pointer, channel, interface, struct (если все типы полей можно сравнить), массивы (если тип данных можно сравнить) т.е. типы которые поддерживают сравнение.</p>
-</li>
-<li>
-<p><strong>Нулевые значения</strong>: При попытке доступа к несуществующему ключу карта вернёт нулевое значение для типа данных (например, <code>0</code> для int, <code>""</code> для string).</p>
-<pre><code class="language-go">m := make(map[string]int)
-fmt.Println(m["unknown"]) // 0
-</code></pre>
-</li>
-<li>
-<p><strong>Инициализация с нулевым значением</strong>: Как и срезы, карты могут быть нулевыми (<code>nil</code>), если они не инициализированы.</p>
-<pre><code class="language-go">var m map[string]int
-fmt.Println(m == nil) // true
-</code></pre>
-</li>
-</ol>
-<h2 id="Фишки-работы-с-map"><a class="header" href="#Фишки-работы-с-map">Фишки работы с map</a></h2>
-<h3 id="maptypestruct"><a class="header" href="#maptypestruct">map[Type]struct</a></h3>
-<p>Указание struct{} в качестве значения для уменьшения объёма мапы. Например, если вам нужно сделать простую проверку, существует ли какое-то значение в мапе и для этого вы хотите создать мапу <strong><code>map[string]bool</code></strong>, то это не лучший вариант. В Go т.к. мы можем ставить ещё и структуры в мапу, то лучше было бы сделать такой пример <strong><code>map[string]struct{}</code></strong> т.к. пустая структура ничего не весит в отличии от типа bool.</p>
-<pre><code class="language-go">aqua = make(map[string]struct{}, 0)
-aqua["hello"] = struct{}{} 
-</code></pre>
-<h3 id="map-в-алгоритмах"><a class="header" href="#map-в-алгоритмах">Map в алгоритмах</a></h3>
-<p>Использование типа map для различных алгоритмов. Т.к. по map поиск будет константный (Не учитываем коллизии), то данный тип часто используется для написания алгоритмов разной сложности. Например:</p>
-<p><strong>Two sum (LeetCode)</strong> : Учитывая массив целых чисел nums и целое число target, нужно вернуть индексы двух чисел так, чтобы их сумма составляла target.  Вы можете попробовать сделать так, что каждый вход будет иметь ровно одно решение, и вы не можете использовать один и тот же элемент дважды.  Вы можете вернуть ответ в любом порядке.</p>
-<p>Пример 1: <br>
-input:  числа = [2,7,11,15] <br>
-target = 9 <br>
-output:  [0,1] <br></p>
-<p><em><strong>Объяснение:  Поскольку nums[0] + nums[1] == 9, мы возвращаем [0, 1]</strong></em></p>
-<p>Пример 2: <br>
-input: nums = [3,2,4] <br>
-target = 6 <br>
-output:  [1,2] <br></p>
-<p>Пример 3: <br>
-input: nums = [3,3]
-target = 6 <br>
-output:  [0,1]</p>
-<h4 id="Решение"><a class="header" href="#Решение">Решение</a></h4>
-<pre><code class="language-go">func twoSum(nums []int, target int) []int {
-    numMap := make(map[int]int)
+<h3 id="2-Основные-операции-со-срезами"><a class="header" href="#2-Основные-операции-со-срезами">2. Основные операции со срезами</a></h3>
+<pre><code class="language-go">// Добавление элементов
+numbers := []int{1, 2, 3}
+numbers = append(numbers, 4, 5)    // [1, 2, 3, 4, 5]
 
-    for k, num := range nums {
-        comp := target - num 
+// Удаление элемента
+numbers = append(numbers[:2], numbers[3:]...) // [1, 2, 4, 5]
 
-        if field, ok := numMap[comp]; ok {
-            return []int{k, field}
+// Копирование среза
+copySlice := make([]int, len(numbers))
+copy(copySlice, numbers)
+</code></pre>
+<h3 id="3-Длина-и-ёмкость"><a class="header" href="#3-Длина-и-ёмкость">3. Длина и ёмкость</a></h3>
+<pre><code class="language-go">slice := make([]int, 3, 5)
+fmt.Println(len(slice))  // 3 (текущая длина)
+fmt.Println(cap(slice))  // 5 (максимальная ёмкость)
+
+// При превышении ёмкости Go автоматически увеличивает срез
+slice = append(slice, 1, 2, 3)
+fmt.Println(cap(slice))  // 10 (удвоенная ёмкость)
+</code></pre>
+<h2 id="Карты-maps"><a class="header" href="#Карты-maps">Карты (Maps)</a></h2>
+<h3 id="1-Что-такое-карта"><a class="header" href="#1-Что-такое-карта">1. Что такое карта?</a></h3>
+<p>Карта — это коллекция пар "ключ-значение", которая:</p>
+<ul>
+<li>Обеспечивает быстрый доступ к данным</li>
+<li>Поддерживает уникальные ключи</li>
+<li>Позволяет эффективно искать значения</li>
+</ul>
+<pre><code class="language-go">// Создание карты
+ages := map[string]int{
+    "Иван": 25,
+    "Пётр": 30,
+}
+
+// Добавление элемента
+ages["Анна"] = 28
+
+// Проверка существования ключа
+if age, exists := ages["Иван"]; exists {
+    fmt.Printf("Возраст: %d\n", age)
+}
+</code></pre>
+<h3 id="2-Операции-с-картами"><a class="header" href="#2-Операции-с-картами">2. Операции с картами</a></h3>
+<pre><code class="language-go">// Удаление элемента
+delete(ages, "Пётр")
+
+// Итерация по карте
+for name, age := range ages {
+    fmt.Printf("%s: %d лет\n", name, age)
+}
+
+// Очистка карты
+for key := range ages {
+    delete(ages, key)
+}
+</code></pre>
+<h3 id="3-Особенности-карт"><a class="header" href="#3-Особенности-карт">3. Особенности карт</a></h3>
+<pre><code class="language-go">// Нулевая карта
+var emptyMap map[string]int
+fmt.Println(emptyMap == nil) // true
+
+// Создание карты с начальной ёмкостью
+scores := make(map[string]int, 100)
+
+// Использование struct{} для множеств
+unique := make(map[string]struct{})
+unique["value"] = struct{}{}
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-Фильтрация-данных"><a class="header" href="#1-Фильтрация-данных">1. Фильтрация данных</a></h3>
+<pre><code class="language-go">func filterEven(numbers []int) []int {
+    result := []int{}
+    for _, num := range numbers {
+        if num%2 == 0 {
+            result = append(result, num)
         }
-        
-        numMap[num] = k 
     }
-
-    return []int{}
+    return result
+}
+</code></pre>
+<h3 id="2-Подсчёт-частоты-слов"><a class="header" href="#2-Подсчёт-частоты-слов">2. Подсчёт частоты слов</a></h3>
+<pre><code class="language-go">func countWords(text string) map[string]int {
+    words := strings.Fields(text)
+    frequency := make(map[string]int)
+    
+    for _, word := range words {
+        frequency[word]++
+    }
+    
+    return frequency
+}
+</code></pre>
+<h3 id="3-Кэширование-результатов"><a class="header" href="#3-Кэширование-результатов">3. Кэширование результатов</a></h3>
+<pre><code class="language-go">type Cache struct {
+    data map[string]interface{}
+    mu   sync.RWMutex
 }
 
+func (c *Cache) Get(key string) (interface{}, bool) {
+    c.mu.RLock()
+    defer c.mu.RUnlock()
+    value, exists := c.data[key]
+    return value, exists
+}
 </code></pre>
-<h2 id="Задания-для-работы-со-слайсами"><a class="header" href="#Задания-для-работы-со-слайсами">Задания для работы со слайсами</a></h2>
-<h3 id="Задание-1-Увеличение-слайса"><a class="header" href="#Задание-1-Увеличение-слайса">Задание 1: Увеличение слайса</a></h3>
-<p>Создайте функцию, которая принимает слайс чисел и добавляет к каждому элементу слайса число, равное его индексу. Функция должна возвращать новый слайс.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := []int{1, 2, 3, 4}
-output := AddIndexToElements(input) // Ожидается: [1, 3, 5, 7]
-</code></pre>
-<h3 id="Задание-2-Фильтрация-слайса"><a class="header" href="#Задание-2-Фильтрация-слайса">Задание 2: Фильтрация слайса</a></h3>
-<p>Напишите функцию, которая принимает слайс строк и возвращает новый слайс, в который попадают только строки длиной больше 3 символов.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := []string{"go", "slice", "map", "func"}
-output := FilterLongStrings(input) // Ожидается: ["slice", "func"]
-</code></pre>
-<h3 id="Задание-3-Удаление-элемента-из-слайса"><a class="header" href="#Задание-3-Удаление-элемента-из-слайса">Задание 3: Удаление элемента из слайса</a></h3>
-<p>Напишите функцию, которая удаляет элемент с определённым индексом из слайса целых чисел и возвращает новый слайс.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := []int{10, 20, 30, 40, 50}
-output := RemoveElement(input, 2) // Ожидается: [10, 20, 40, 50]
-</code></pre>
-<h3 id="Задание-4-Объединение-слайсов"><a class="header" href="#Задание-4-Объединение-слайсов">Задание 4: Объединение слайсов</a></h3>
-<p>Напишите функцию, которая принимает два слайса и возвращает новый слайс, содержащий элементы обоих слайсов (конкатенация).</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">slice1 := []int{1, 2, 3}
-slice2 := []int{4, 5, 6}
-result := ConcatSlices(slice1, slice2) // Ожидается: [1, 2, 3, 4, 5, 6]
-</code></pre>
-<h3 id="Усложнённое-задание-Сортировка-слайса"><a class="header" href="#Усложнённое-задание-Сортировка-слайса">Усложнённое задание: Сортировка слайса</a></h3>
-<p>Напишите программу, которая сортирует слайс целых чисел по возрастанию без использования встроенных функций сортировки (sort.Slice и т.п.).</p>
-<h2 id="Задания-для-работы-с-мапами"><a class="header" href="#Задания-для-работы-с-мапами">Задания для работы с мапами</a></h2>
-<h3 id="Задание-1-Подсчёт-частоты-элементов"><a class="header" href="#Задание-1-Подсчёт-частоты-элементов">Задание 1: Подсчёт частоты элементов</a></h3>
-<p>Напишите функцию, которая принимает слайс строк и возвращает мапу, где ключами являются строки, а значениями — количество их повторений в слайсе.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := []string{"apple", "banana", "apple", "orange", "banana", "apple"}
-output := CountFrequencies(input) // Ожидается: {"apple": 3, "banana": 2, "orange": 1}
-</code></pre>
-<h3 id="Задание-2-Переворачивание-мапы"><a class="header" href="#Задание-2-Переворачивание-мапы">Задание 2: Переворачивание мапы</a></h3>
-<p>Создайте функцию, которая принимает мапу вида <code>map[string]int</code> и возвращает новую мапу, где ключами являются значения исходной мапы, а значениями — ключи.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := map[string]int{"one": 1, "two": 2, "three": 3}
-output := ReverseMap(input) // Ожидается: {1: "one", 2: "two", 3: "three"}
-</code></pre>
-<h3 id="Задание-3-Объединение-мап"><a class="header" href="#Задание-3-Объединение-мап">Задание 3: Объединение мап</a></h3>
-<p>Напишите функцию, которая объединяет два мапы <code>map[string]int</code>. Если ключи совпадают, их значения должны суммироваться.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">map1 := map[string]int{"a": 1, "b": 2}
-map2 := map[string]int{"b": 3, "c": 4}
-result := MergeMaps(map1, map2) // Ожидается: {"a": 1, "b": 5, "c": 4}
-</code></pre>
-<h3 id="Задание-4-Поиск-ключа-по-значению"><a class="header" href="#Задание-4-Поиск-ключа-по-значению">Задание 4: Поиск ключа по значению</a></h3>
-<p>Напишите функцию, которая принимает мапу и значение, и возвращает ключ, которому это значение соответствует. Если ключ не найден, возвращайте пустую строку.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := map[string]int{"apple": 5, "banana": 10, "orange": 15}
-key := FindKeyByValue(input, 10) // Ожидается: "banana"
-</code></pre>
-<h3 id="Задание-5-Удаление-элементов"><a class="header" href="#Задание-5-Удаление-элементов">Задание 5: Удаление элементов</a></h3>
-<p>Напишите функцию, которая удаляет из мапы все элементы, чьи значения меньше определённого порога.</p>
-<p><strong>Пример:</strong></p>
-<pre><code class="language-go">input := map[string]int{"a": 1, "b": 5, "c": 10, "d": 0}
-output := RemoveLowValues(input, 3) // Ожидается: {"b": 5, "c": 10}
-</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Анализатор-текста"><a class="header" href="#Задание-1-Анализатор-текста">Задание 1: Анализатор текста</a></h3>
+<p>Создайте программу, которая:</p>
+<ol>
+<li>Принимает текст от пользователя</li>
+<li>Подсчитывает частоту каждого слова</li>
+<li>Выводит топ-5 самых часто встречающихся слов</li>
+<li>Сохраняет результаты в карту</li>
+</ol>
+<h3 id="Задание-2-Система-управления-задачами"><a class="header" href="#Задание-2-Система-управления-задачами">Задание 2: Система управления задачами</a></h3>
+<p>Напишите программу, которая:</p>
+<ol>
+<li>Позволяет добавлять задачи</li>
+<li>Отмечать задачи как выполненные</li>
+<li>Удалять задачи</li>
+<li>Показывать список всех задач</li>
+<li>Использует срезы для хранения задач</li>
+</ol>
+<h3 id="Задание-3-Калькулятор-статистики"><a class="header" href="#Задание-3-Калькулятор-статистики">Задание 3: Калькулятор статистики</a></h3>
+<p>Создайте программу, которая:</p>
+<ol>
+<li>Принимает список чисел</li>
+<li>Вычисляет:
+<ul>
+<li>Среднее значение</li>
+<li>Медиану</li>
+<li>Моду</li>
+<li>Стандартное отклонение</li>
+</ul>
+</li>
+<li>Использует срезы для хранения и обработки данных</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим указатели в Go</li>
+<li>Познакомимся с интерфейсами</li>
+<li>Узнаем о методах и получателях</li>
+<li>Начнём писать более сложные программы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Эффективно работать со срезами и картами</li>
+<li>Применять их в реальных задачах</li>
+<li>Понимать особенности их реализации</li>
+<li>Оптимизировать работу с коллекциями данных</li>
+</ul>
+</blockquote>
 
                     </main>
 

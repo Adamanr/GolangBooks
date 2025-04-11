@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html" class="active"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,11 +155,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Горутины"><a class="header" href="#Горутины">Горутины</a></h1>
-<p>Горутины — это одна из самых мощных и популярных функций в Go. Это лёгкие потоки, которые позволяют запускать функции параллельно (Параллели́зм — это свойство систем, при котором несколько вычислений выполняются одновременно, и при этом, возможно, взаимодействуют друг с другом), делая программы более эффективными и быстрыми. Основное преимущество горутин — их простота и низкая стоимость создания по сравнению с традиционными потоками в других языках программирования.</p>
-<h2 id="Что-такое-горутина"><a class="header" href="#Что-такое-горутина">Что такое горутина?</a></h2>
-<p>Горутина — это функция, которая выполняется параллельно с другими функциями в той же программе. Чтобы запустить функцию как горутину, достаточно перед её вызовом написать ключевое слово <code>go</code>.</p>
-<h3 id="Пример-запуска-горутины"><a class="header" href="#Пример-запуска-горутины">Пример запуска горутины:</a></h3>
+                        <h1 id="Горутины-параллельное-программирование-в-go"><a class="header" href="#Горутины-параллельное-программирование-в-go">Горутины: параллельное программирование в Go</a></h1>
+<p>В этом уроке мы изучим одну из самых мощных возможностей Go — горутины. Это лёгкие потоки выполнения, которые позволяют создавать высокопроизводительные параллельные программы.</p>
+<h2 id="Почему-горутины-важны"><a class="header" href="#Почему-горутины-важны">Почему горутины важны?</a></h2>
+<p>Горутины — это фундаментальная концепция в Go, которая:</p>
+<ul>
+<li>Позволяет эффективно использовать многоядерные процессоры</li>
+<li>Упрощает написание параллельного кода</li>
+<li>Обеспечивает высокую производительность</li>
+<li>Уменьшает накладные расходы на создание потоков</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go можно запустить миллионы горутин на обычном компьютере, в то время как традиционные потоки обычно ограничены тысячами.</p>
+</blockquote>
+<h2 id="Основы-горутин"><a class="header" href="#Основы-горутин">Основы горутин</a></h2>
+<h3 id="1-Создание-горутины"><a class="header" href="#1-Создание-горутины">1. Создание горутины</a></h3>
 <pre><code class="language-go">package main
 
 import (
@@ -185,118 +177,212 @@ import (
     "time"
 )
 
-func printMessage(message string) {
-    fmt.Println(message)
+func worker(id int) {
+    fmt.Printf("Работник %d начал работу\n", id)
+    time.Sleep(time.Second)
+    fmt.Printf("Работник %d закончил работу\n", id)
 }
 
 func main() {
-    go printMessage("Привет от горутины!") // Запускаем функцию как горутину
-    time.Sleep(1 * time.Second)            // Даем время для завершения горутины
-    fmt.Println("Привет от main!")
-}
-</code></pre>
-<p>В этом примере функция <code>printMessage</code> выполняется как горутина. Если бы мы не использовали <code>time.Sleep()</code>, то программа завершилась бы до того, как горутина успела бы выполнить своё задание.</p>
-<h3 id="Особенности-горутин"><a class="header" href="#Особенности-горутин">Особенности горутин:</a></h3>
-<ol>
-<li><strong>Лёгкость</strong>: Создание горутин обходится значительно дешевле, чем создание системных потоков.</li>
-<li><strong>Совместимость с каналами</strong>: Для синхронизации между горутинами используются каналы, что позволяет безопасно передавать данные между ними.</li>
-<li><strong>Автоматическое управление планированием</strong>: Go-рантайм автоматически управляет планированием горутин на основе количества доступных системных потоков.</li>
-</ol>
-<h2 id="Пример-работы-с-несколькими-горутинами"><a class="header" href="#Пример-работы-с-несколькими-горутинами">Пример работы с несколькими горутинами</a></h2>
-<p>Давайте посмотрим, как можно запустить несколько горутин одновременно:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func printNumber(number int) {
-    fmt.Printf("Число: %d\n", number)
-}
-
-func main() {
-    for i := 1; i &lt;= 5; i++ {
-        go printNumber(i) // Запуск горутин в цикле
-    }
-    time.Sleep(1 * time.Second) // Даём время для завершения всех горутин
-}
-</code></pre>
-<p>В данном примере мы запускаем несколько горутин в цикле, каждая из которых печатает своё число. Опять же, <code>time.Sleep()</code> даёт возможность горутинам завершить выполнение перед завершением программы.</p>
-<h2 id="Работа-с-анонимными-горутинами"><a class="header" href="#Работа-с-анонимными-горутинами">Работа с анонимными горутинами</a></h2>
-<p>В Go также можно создавать анонимные функции, которые выполняются как горутины:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
-    go func() {
-        fmt.Println("Анонимная горутина")
-    }()
+    // Запуск горутины
+    go worker(1)
     
-    time.Sleep(1 * time.Second) // Ждем завершения анонимной горутины
+    // Даём время на выполнение
+    time.Sleep(2 * time.Second)
 }
 </code></pre>
-<p>Это полезно, когда вам нужно выполнить несложное действие параллельно, не создавая отдельную именованную функцию.</p>
-<h2 id="Синхронизация-горутин-с-помощью-waitgroup"><a class="header" href="#Синхронизация-горутин-с-помощью-waitgroup">Синхронизация горутин с помощью <code>WaitGroup</code></a></h2>
-<p>Когда у нас несколько горутин, иногда нам нужно дождаться, пока все они завершат свою работу, прежде чем программа продолжит выполнение. Для этого используется структура <code>sync.WaitGroup</code>.</p>
-<h3 id="Пример-с-использованием-waitgroup"><a class="header" href="#Пример-с-использованием-waitgroup">Пример с использованием <code>WaitGroup</code>:</a></h3>
+<h3 id="2-Анонимные-горутины"><a class="header" href="#2-Анонимные-горутины">2. Анонимные горутины</a></h3>
+<pre><code class="language-go">func main() {
+    // Запуск анонимной горутины
+    go func(id int) {
+        fmt.Printf("Анонимный работник %d начал работу\n", id)
+        time.Sleep(time.Second)
+        fmt.Printf("Анонимный работник %d закончил работу\n", id)
+    }(1)
+    
+    time.Sleep(2 * time.Second)
+}
+</code></pre>
+<h2 id="Синхронизация-горутин"><a class="header" href="#Синхронизация-горутин">Синхронизация горутин</a></h2>
+<h3 id="1-waitgroup"><a class="header" href="#1-waitgroup">1. WaitGroup</a></h3>
 <pre><code class="language-go">package main
 
 import (
     "fmt"
     "sync"
+    "time"
 )
 
-func printMessage(message string, wg *sync.WaitGroup) {
-    defer wg.Done() // Сообщаем, что горутина завершила работу
-    fmt.Println(message)
+func worker(id int, wg *sync.WaitGroup) {
+    defer wg.Done() // Уменьшаем счётчик при завершении
+    
+    fmt.Printf("Работник %d начал\n", id)
+    time.Sleep(time.Second)
+    fmt.Printf("Работник %d закончил\n", id)
 }
 
 func main() {
     var wg sync.WaitGroup
-
-    messages := []string{"Hello", "from", "multiple", "goroutines"}
-
-    for _, msg := range messages {
-        wg.Add(1) // Увеличиваем счётчик горутин
-        go printMessage(msg, &amp;wg)
+    
+    // Запускаем 5 работников
+    for i := 1; i &lt;= 5; i++ {
+        wg.Add(1) // Увеличиваем счётчик
+        go worker(i, &amp;wg)
     }
-
-    wg.Wait() // Ожидаем завершения всех горутин
-    fmt.Println("Все горутины завершены.")
+    
+    wg.Wait() // Ждём завершения всех работников
+    fmt.Println("Все работники завершили работу")
 }
 </code></pre>
-<p>В этом примере мы используем <code>sync.WaitGroup</code>, чтобы подождать, пока все горутины завершат выполнение. Каждая горутина сообщает о своём завершении с помощью метода <code>Done()</code>, а <code>wg.Wait()</code> блокирует выполнение основной функции до тех пор, пока все горутины не завершат работу.</p>
-<h2 id="Общие-ошибки-при-работе-с-горутинами"><a class="header" href="#Общие-ошибки-при-работе-с-горутинами">Общие ошибки при работе с горутинами</a></h2>
+<h3 id="2-Каналы-для-синхронизации"><a class="header" href="#2-Каналы-для-синхронизации">2. Каналы для синхронизации</a></h3>
+<pre><code class="language-go">func worker(id int, done chan bool) {
+    fmt.Printf("Работник %d начал\n", id)
+    time.Sleep(time.Second)
+    fmt.Printf("Работник %d закончил\n", id)
+    done &lt;- true // Сигнализируем о завершении
+}
+
+func main() {
+    done := make(chan bool, 5) // Буферизованный канал
+    
+    // Запускаем работников
+    for i := 1; i &lt;= 5; i++ {
+        go worker(i, done)
+    }
+    
+    // Ждём завершения всех работников
+    for i := 1; i &lt;= 5; i++ {
+        &lt;-done
+    }
+}
+</code></pre>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Обработка-ошибок-в-горутинах"><a class="header" href="#1-Обработка-ошибок-в-горутинах">1. Обработка ошибок в горутинах</a></h3>
+<pre><code class="language-go">func worker(id int, errChan chan error) {
+    defer func() {
+        if r := recover(); r != nil {
+            errChan &lt;- fmt.Errorf("паника в работнике %d: %v", id, r)
+        }
+    }()
+    
+    // Работа, которая может вызвать панику
+    if id == 3 {
+        panic("что-то пошло не так")
+    }
+    
+    fmt.Printf("Работник %d выполнил работу\n", id)
+    errChan &lt;- nil
+}
+</code></pre>
+<h3 id="2-Ограничение-количества-горутин"><a class="header" href="#2-Ограничение-количества-горутин">2. Ограничение количества горутин</a></h3>
+<pre><code class="language-go">func processTasks(tasks []string, maxWorkers int) {
+    semaphore := make(chan struct{}, maxWorkers)
+    var wg sync.WaitGroup
+    
+    for _, task := range tasks {
+        wg.Add(1)
+        semaphore &lt;- struct{}{} // Занимаем слот
+        
+        go func(t string) {
+            defer func() {
+                &lt;-semaphore // Освобождаем слот
+                wg.Done()
+            }()
+            
+            // Обработка задачи
+            fmt.Printf("Обработка: %s\n", t)
+            time.Sleep(time.Second)
+        }(task)
+    }
+    
+    wg.Wait()
+}
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-Параллельная-обработка-данных"><a class="header" href="#1-Параллельная-обработка-данных">1. Параллельная обработка данных</a></h3>
+<pre><code class="language-go">func processData(data []int) []int {
+    result := make([]int, len(data))
+    var wg sync.WaitGroup
+    
+    for i, v := range data {
+        wg.Add(1)
+        go func(idx int, value int) {
+            defer wg.Done()
+            // Тяжёлые вычисления
+            result[idx] = value * value
+        }(i, v)
+    }
+    
+    wg.Wait()
+    return result
+}
+</code></pre>
+<h3 id="2-Пул-воркеров"><a class="header" href="#2-Пул-воркеров">2. Пул воркеров</a></h3>
+<pre><code class="language-go">type WorkerPool struct {
+    tasks chan func()
+    wg    sync.WaitGroup
+}
+
+func NewWorkerPool(size int) *WorkerPool {
+    pool := &amp;WorkerPool{
+        tasks: make(chan func()),
+    }
+    
+    pool.wg.Add(size)
+    for i := 0; i &lt; size; i++ {
+        go func() {
+            defer pool.wg.Done()
+            for task := range pool.tasks {
+                task()
+            }
+        }()
+    }
+    
+    return pool
+}
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Параллельный-поиск"><a class="header" href="#Задание-1-Параллельный-поиск">Задание 1: Параллельный поиск</a></h3>
+<p>Создайте программу, которая:</p>
 <ol>
-<li>
-<p><strong>Преждевременное завершение программы</strong>: Основная программа может завершиться до того, как горутины успеют выполнить своё задание. Поэтому всегда важно правильно синхронизировать завершение горутин с помощью <code>WaitGroup</code> или других механизмов.</p>
-</li>
-<li>
-<p><strong>Параллельный доступ к данным</strong>: Если несколько горутин одновременно изменяют общие данные без синхронизации, это может привести к гонкам данных. Для избежания этого используйте каналы или <code>sync.Mutex</code>.</p>
-</li>
-<li>
-<p><strong>Сложности с отладкой</strong>: Ошибки, связанные с параллельным выполнением, иногда трудно отследить. Будьте внимательны при работе с горутинами и старайтесь минимизировать доступ к общим данным.</p>
-</li>
+<li>Принимает список чисел</li>
+<li>Запускает несколько горутин для поиска заданного числа</li>
+<li>Возвращает результат, как только число найдено</li>
+<li>Использует каналы для синхронизации</li>
 </ol>
-<h2 id="Заключение"><a class="header" href="#Заключение">Заключение</a></h2>
-<p>Горутины — это мощный инструмент для создания высокоэффективных и параллельных программ в Go. Они просты в использовании, но требуют внимательного подхода к синхронизации и управлению общими ресурсами. Теперь, когда вы знаете основы горутин, вы можете использовать их для ускорения ваших программ и эффективного решения задач, требующих параллелизма.</p>
-<h2 id="Задания-для-практики"><a class="header" href="#Задания-для-практики">Задания для практики</a></h2>
+<h3 id="Задание-2-Веб-скрапер"><a class="header" href="#Задание-2-Веб-скрапер">Задание 2: Веб-скрапер</a></h3>
+<p>Напишите программу, которая:</p>
 <ol>
-<li>
-<p>Напишите программу, которая запускает 10 горутин, каждая из которых печатает своё число. Убедитесь, что все горутины завершили выполнение перед завершением программы.</p>
-</li>
-<li>
-<p>Модифицируйте программу так, чтобы горутины передавали свои результаты в основной поток через канал, и программа выводила результат по мере завершения каждой горутины.</p>
-</li>
-<li>
-<p>Напишите программу, которая запускает несколько горутин для обработки элементов из списка, а затем собирает результаты в новый слайс.</p>
-</li>
+<li>Принимает список URL</li>
+<li>Параллельно скачивает содержимое страниц</li>
+<li>Извлекает определённую информацию</li>
+<li>Сохраняет результаты в структурированном виде</li>
 </ol>
+<h3 id="Задание-3-Система-обработки-заказов"><a class="header" href="#Задание-3-Система-обработки-заказов">Задание 3: Система обработки заказов</a></h3>
+<p>Создайте программу, которая:</p>
+<ol>
+<li>Принимает поток заказов</li>
+<li>Обрабатывает их параллельно</li>
+<li>Учитывает ограничения ресурсов</li>
+<li>Предоставляет статус обработки</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим каналы в Go</li>
+<li>Познакомимся с паттернами параллельного программирования</li>
+<li>Узнаем о конкурентных структурах данных</li>
+<li>Начнём писать более сложные параллельные программы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать и управлять горутинами</li>
+<li>Синхронизировать параллельные операции</li>
+<li>Обрабатывать ошибки в горутинах</li>
+<li>Оптимизировать параллельные программы</li>
+</ul>
+</blockquote>
 
                     </main>
 

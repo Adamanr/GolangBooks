@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html" class="active"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,135 +155,350 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Работа-с-паникой-и-defer"><a class="header" href="#Работа-с-паникой-и-defer">Работа с паникой и defer</a></h1>
-<p><strong>Go</strong> — это язык, который обеспечивает простой и понятный механизм обработки ошибок, а также предоставляет разработчикам контроль над обработкой исключительных ситуаций через использование <strong>panic</strong>, <strong>recover</strong>, и <strong>defer</strong>. Эти инструменты помогают грамотно управлять ошибками и обеспечивать корректное завершение программы.</p>
-<h3 id="Что-такое-panic"><a class="header" href="#Что-такое-panic">Что такое <code>panic</code>?</a></h3>
-<p><strong><code>panic</code></strong> — это встроенная функция в Go, которая используется для создания исключительных ситуаций в программе. Когда вызывается <code>panic</code>, программа немедленно прекращает выполнение и начинает поиск функций для завершения (происходит <strong>unwinding stack</strong>, то есть разворачивание стека вызовов). Если функция <strong><code>recover</code></strong> не найдётся, программа завершится с ошибкой и сообщит об этом.</p>
-<h4 id="Когда-использовать-panic"><a class="header" href="#Когда-использовать-panic">Когда использовать <code>panic</code>?</a></h4>
+                        <h1 id="Обработка-ошибок-в-go-panic-defer-и-recover"><a class="header" href="#Обработка-ошибок-в-go-panic-defer-и-recover">Обработка ошибок в Go: panic, defer и recover</a></h1>
+<p>В этом уроке мы изучим механизмы обработки ошибок в Go, включая панику, отложенные вызовы и восстановление. Эти инструменты позволяют создавать надёжные программы, которые могут корректно обрабатывать исключительные ситуации.</p>
+<h2 id="Почему-важна-обработка-ошибок"><a class="header" href="#Почему-важна-обработка-ошибок">Почему важна обработка ошибок?</a></h2>
+<p>Правильная обработка ошибок необходима для:</p>
 <ul>
-<li>В критических ситуациях, когда продолжение выполнения программы невозможно.</li>
-<li>Внутри пакетов и библиотек, где ошибка должна быть фатальной (например, критическая ошибка инициализации).</li>
+<li>Предотвращения аварийного завершения программ</li>
+<li>Корректного освобождения ресурсов</li>
+<li>Обеспечения предсказуемого поведения</li>
+<li>Улучшения отладки</li>
+<li>Создания надёжных систем</li>
 </ul>
-<p>Пример использования <code>panic</code>:</p>
-<pre><code class="language-go">func divide(a, b int) int {
-    if b == 0 {
-        panic("Деление на ноль!")
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go нет традиционных исключений (try-catch). Вместо этого используются возврат ошибок и механизм panic/recover.</p>
+</blockquote>
+<h2 id="Основы-обработки-ошибок"><a class="header" href="#Основы-обработки-ошибок">Основы обработки ошибок</a></h2>
+<h3 id="1-Паника-panic"><a class="header" href="#1-Паника-panic">1. Паника (panic)</a></h3>
+<pre><code class="language-go">func SafeOperation() {
+    // Отложенная функция для восстановления после паники
+    defer func() {
+        if r := recover(); r != nil {
+            fmt.Printf("Восстановлено после паники: %v\n", r)
+        }
+    }()
+
+    // Критическая операция
+    if err := CriticalOperation(); err != nil {
+        panic(fmt.Sprintf("Критическая ошибка: %v", err))
     }
-    return a / b
+}
+
+func CriticalOperation() error {
+    // Имитация критической ошибки
+    return fmt.Errorf("недостаточно ресурсов")
 }
 
 func main() {
-    fmt.Println(divide(4, 2)) // Выведет 2
-    fmt.Println(divide(4, 0)) // Вызовет панику: "Деление на ноль!"
+    SafeOperation()
 }
 </code></pre>
-<h3 id="Что-такое-defer"><a class="header" href="#Что-такое-defer">Что такое <code>defer</code>?</a></h3>
-<p><strong><code>defer</code></strong> — это специальная конструкция в Go, которая позволяет отложить выполнение функции до того момента, когда текущая функция завершит выполнение (нормально или через панику). Это удобно для освобождения ресурсов, закрытия файлов, разблокировки мьютексов и т.д. А ещё defer выполнится после return</p>
-<h4 id="Пример-использования-defer"><a class="header" href="#Пример-использования-defer">Пример использования <code>defer</code>:</a></h4>
-<pre><code class="language-go">func main() {
-    fmt.Println("Начало программы")
-    
-    defer fmt.Println("Эта строка выполнится в самом конце")
-    
-    fmt.Println("Завершение программы")
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Функция <code>SafeOperation</code> демонстрирует безопасное выполнение критических операций</li>
+<li><code>defer</code> с <code>recover</code> гарантирует, что даже при панике программа не завершится аварийно</li>
+<li><code>CriticalOperation</code> имитирует возникновение критической ошибки</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Восстановлено после паники: Критическая ошибка: недостаточно ресурсов
+</code></pre>
+<h3 id="2-Отложенные-вызовы-defer"><a class="header" href="#2-Отложенные-вызовы-defer">2. Отложенные вызовы (defer)</a></h3>
+<pre><code class="language-go">func ProcessFile(filename string) error {
+    // Открытие файла с обработкой ошибок
+    file, err := os.Open(filename)
+    if err != nil {
+        return fmt.Errorf("ошибка открытия файла: %v", err)
+    }
+    // Гарантированное закрытие файла при выходе из функции
+    defer file.Close()
+
+    // Чтение данных из файла
+    data, err := io.ReadAll(file)
+    if err != nil {
+        return fmt.Errorf("ошибка чтения файла: %v", err)
+    }
+
+    fmt.Printf("Прочитано %d байт из файла\n", len(data))
+    return nil
+}
+
+func main() {
+    if err := ProcessFile("example.txt"); err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+    }
 }
 </code></pre>
-<p>Результат выполнения программы:</p>
-<pre><code>Начало программы
-Завершение программы
-Эта строка выполнится в самом конце
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Функция <code>ProcessFile</code> демонстрирует безопасную работу с файлами</li>
+<li><code>defer file.Close()</code> гарантирует закрытие файла даже при возникновении ошибок</li>
+<li>Обработка ошибок на каждом этапе работы с файлом</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Прочитано 1024 байт из файла
 </code></pre>
-<h3 id="Что-такое-recover"><a class="header" href="#Что-такое-recover">Что такое <code>recover</code>?</a></h3>
-<p><strong><code>recover</code></strong> — это функция, которая используется внутри отложенной функции для восстановления программы после паники. <code>recover</code> позволяет поймать панику и продолжить выполнение программы, не завершив её аварийно.</p>
-<h4 id="Пример-использования-recover"><a class="header" href="#Пример-использования-recover">Пример использования <code>recover</code>:</a></h4>
-<pre><code class="language-go">func safeDivide(a, b int) {
+<p>или при ошибке:</p>
+<pre><code>Ошибка: ошибка открытия файла: файл не найден
+</code></pre>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Множественные-defer"><a class="header" href="#1-Множественные-defer">1. Множественные defer</a></h3>
+<pre><code class="language-go">func ComplexOperation() {
+    fmt.Println("Начало операции")
+    
+    // Отложенные операции выполняются в обратном порядке
+    defer fmt.Println("Очистка ресурсов")
+    defer fmt.Println("Закрытие соединений")
+    defer fmt.Println("Завершение транзакций")
+    
+    // Основная логика
+    fmt.Println("Выполнение операции")
+}
+
+func main() {
+    ComplexOperation()
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Демонстрирует порядок выполнения множественных <code>defer</code></li>
+<li>Показывает, как организовать последовательность очистки ресурсов</li>
+<li>Важен порядок объявления <code>defer</code> - последний объявленный выполняется первым</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Начало операции
+Выполнение операции
+Завершение транзакций
+Закрытие соединений
+Очистка ресурсов
+</code></pre>
+<h3 id="2-Восстановление-с-контекстом"><a class="header" href="#2-Восстановление-с-контекстом">2. Восстановление с контекстом</a></h3>
+<pre><code class="language-go">func SafeOperationWithContext() {
     defer func() {
         if r := recover(); r != nil {
-            fmt.Println("Восстановлено после паники:", r)
+            // Добавление контекста к ошибке
+            err := fmt.Errorf("операция завершилась с ошибкой: %v", r)
+            // Логирование ошибки
+            log.Printf("Ошибка: %v", err)
+            // Возврат ошибки выше
+            panic(err)
+        }
+    }()
+
+    // Опасная операция
+    DangerousOperation()
+}
+
+func DangerousOperation() {
+    panic("критическая ошибка в DangerousOperation")
+}
+
+func main() {
+    SafeOperationWithContext()
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Показывает, как добавить контекст к ошибке при восстановлении</li>
+<li>Демонстрирует многоуровневую обработку ошибок</li>
+<li>Включает логирование для отладки</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>2023/01/01 12:00:00 Ошибка: операция завершилась с ошибкой: критическая ошибка в DangerousOperation
+</code></pre>
+<h3 id="3-Отложенные-функции-с-параметрами"><a class="header" href="#3-Отложенные-функции-с-параметрами">3. Отложенные функции с параметрами</a></h3>
+<pre><code class="language-go">func DeferredParameters() {
+    value := "начальное значение"
+    
+    // Параметры функции в defer фиксируются в момент объявления
+    defer func(v string) {
+        fmt.Printf("Отложенное значение: %s\n", v)
+    }(value)
+    
+    // Изменение значения не влияет на отложенную функцию
+    value = "новое значение"
+    fmt.Printf("Текущее значение: %s\n", value)
+}
+
+func main() {
+    DeferredParameters()
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Демонстрирует, как параметры фиксируются в момент объявления <code>defer</code></li>
+<li>Показывает разницу между текущим и отложенным значением</li>
+<li>Важно для понимания времени выполнения отложенных функций</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Текущее значение: новое значение
+Отложенное значение: начальное значение
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-Транзакции-в-базе-данных"><a class="header" href="#1-Транзакции-в-базе-данных">1. Транзакции в базе данных</a></h3>
+<pre><code class="language-go">type Transaction struct {
+    db *sql.DB
+}
+
+func (t *Transaction) Execute() error {
+    // Начало транзакции
+    tx, err := t.db.Begin()
+    if err != nil {
+        return fmt.Errorf("ошибка начала транзакции: %v", err)
+    }
+    
+    // Гарантированный откат при панике
+    defer func() {
+        if r := recover(); r != nil {
+            tx.Rollback()
+            panic(r)
         }
     }()
     
-    fmt.Println("Результат:", a/b)
+    // Выполнение операций
+    if err := t.performOperations(tx); err != nil {
+        tx.Rollback()
+        return err
+    }
+    
+    // Подтверждение транзакции
+    return tx.Commit()
 }
 
 func main() {
-    safeDivide(4, 2) // Выведет "Результат: 2"
-    safeDivide(4, 0) // Выведет "Восстановлено после паники: Деление на ноль!"
-}
-</code></pre>
-<p>В этом примере мы вызвали <code>recover</code> внутри отложенной функции. Это позволило нам поймать панику и продолжить выполнение программы.</p>
-<h3 id="Порядок-выполнения-defer"><a class="header" href="#Порядок-выполнения-defer">Порядок выполнения <code>defer</code></a></h3>
-<p>Все отложенные вызовы с помощью <code>defer</code> выполняются в обратном порядке — от последнего к первому.</p>
-<p>Пример:</p>
-<pre><code class="language-go">func main() {
-    defer fmt.Println("Первый")
-    defer fmt.Println("Второй")
-    defer fmt.Println("Третий")
+    db := connectToDB()
+    tx := &amp;Transaction{db: db}
     
-    fmt.Println("Программа завершается")
-}
-</code></pre>
-<p>Результат выполнения:</p>
-<pre><code>Программа завершается
-Третий
-Второй
-Первый
-</code></pre>
-<h3 id="Частые-сценарии-использования-defer"><a class="header" href="#Частые-сценарии-использования-defer">Частые сценарии использования <code>defer</code></a></h3>
-<ol>
-<li>
-<p><strong>Закрытие файлов и освобождение ресурсов</strong>:
-Использование <code>defer</code> удобно для закрытия файлов после их использования.</p>
-<pre><code class="language-go">func readFile(filename string) {
-    file, err := os.Open(filename)
-    if err != nil {
-        panic(err)
+    if err := tx.Execute(); err != nil {
+        fmt.Printf("Ошибка транзакции: %v\n", err)
     }
-    defer file.Close() // Файл автоматически закроется после завершения функции
-    // Чтение файла
 }
 </code></pre>
-</li>
-<li>
-<p><strong>Откат транзакций</strong>:
-В работе с транзакциями в базах данных <code>defer</code> помогает отменить или подтвердить транзакцию.</p>
-<pre><code class="language-go">func executeTransaction() {
-    tx := db.Begin()
-    defer tx.Rollback() // Если произойдёт ошибка, транзакция откатится
-    // Выполнение действий с транзакцией
-    tx.Commit() // Если всё успешно, транзакция подтверждается
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Демонстрирует атомарность транзакций</li>
+<li>Показывает безопасное выполнение операций с БД</li>
+<li>Гарантирует откат при ошибках</li>
+</ul>
+<p><strong>Ожидаемый вывод при успехе:</strong></p>
+<pre><code>Транзакция успешно выполнена
+</code></pre>
+<p>или при ошибке:</p>
+<pre><code>Ошибка транзакции: ошибка выполнения операций: недостаточно средств
+</code></pre>
+<h3 id="2-Управление-ресурсами"><a class="header" href="#2-Управление-ресурсами">2. Управление ресурсами</a></h3>
+<pre><code class="language-go">type ResourceManager struct {
+    resources []Resource
+    mu        sync.Mutex
+}
+
+func (rm *ResourceManager) Acquire() (Resource, error) {
+    rm.mu.Lock()
+    // Гарантированное освобождение мьютекса
+    defer rm.mu.Unlock()
+    
+    if len(rm.resources) == 0 {
+        return nil, fmt.Errorf("нет доступных ресурсов")
+    }
+    
+    resource := rm.resources[0]
+    rm.resources = rm.resources[1:]
+    
+    return resource, nil
+}
+
+func (rm *ResourceManager) Release(resource Resource) {
+    rm.mu.Lock()
+    defer rm.mu.Unlock()
+    
+    rm.resources = append(rm.resources, resource)
+}
+
+func main() {
+    rm := &amp;ResourceManager{
+        resources: make([]Resource, 5),
+    }
+    
+    res, err := rm.Acquire()
+    if err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+        return
+    }
+    
+    defer rm.Release(res)
+    // Использование ресурса
 }
 </code></pre>
-</li>
-</ol>
-<h3 id="Задания-для-лучшего-понимания"><a class="header" href="#Задания-для-лучшего-понимания">Задания для лучшего понимания</a></h3>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Демонстрирует безопасное управление пулом ресурсов</li>
+<li>Показывает использование мьютексов для синхронизации</li>
+<li>Гарантирует освобождение ресурсов</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Ресурс успешно получен
+Ресурс освобождён
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Система-обработки-транзакций"><a class="header" href="#Задание-1-Система-обработки-транзакций">Задание 1: Система обработки транзакций</a></h3>
+<p>Создайте систему для обработки финансовых транзакций:</p>
 <ol>
-<li>
-<p><strong>Задание с паникой</strong>:</p>
-<ul>
-<li>Напишите функцию, которая делит два числа. Если делитель равен нулю, вызывайте панику с сообщением об ошибке. Обработайте панику с помощью <code>recover</code> и выведите сообщение об успешном восстановлении.</li>
-</ul>
-</li>
-<li>
-<p><strong>Работа с <code>defer</code></strong>:</p>
-<ul>
-<li>Создайте программу, которая открывает файл, читает из него данные и закрывает файл с помощью <code>defer</code>.</li>
-<li>Дополните программу функцией, которая вызывает панику, если файл не удалось открыть, и восстанавливается с помощью <code>recover</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Использование <code>defer</code> для упорядочивания действий</strong>:</p>
-<ul>
-<li>Создайте функцию, которая выводит несколько строк текста с помощью нескольких операторов <code>defer</code>. Проверьте, в каком порядке они будут выполняться.</li>
-</ul>
-</li>
-<li>
-<p><strong>Расширенное задание</strong>:</p>
-<ul>
-<li>Напишите функцию для работы с массивом чисел, которая удаляет элементы массива. В случае ошибки вызовите панику. Используйте <code>defer</code> для освобождения ресурсов и <code>recover</code> для продолжения работы программы после паники.</li>
-</ul>
-</li>
+<li>Реализуйте механизм отката транзакций</li>
+<li>Добавьте обработку критических ошибок</li>
+<li>Обеспечьте атомарность операций</li>
+<li>Реализуйте логирование ошибок</li>
 </ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Безопасное выполнение транзакций</li>
+<li>Корректный откат при ошибках</li>
+<li>Подробное логирование всех операций</li>
+</ul>
+<h3 id="Задание-2-Менеджер-соединений"><a class="header" href="#Задание-2-Менеджер-соединений">Задание 2: Менеджер соединений</a></h3>
+<p>Разработайте систему управления сетевыми соединениями:</p>
+<ol>
+<li>Создайте пул соединений</li>
+<li>Реализуйте безопасное освобождение ресурсов</li>
+<li>Добавьте обработку разрывов соединений</li>
+<li>Обеспечьте переподключение при ошибках</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Эффективное использование соединений</li>
+<li>Автоматическое восстановление при сбоях</li>
+<li>Мониторинг состояния соединений</li>
+</ul>
+<h3 id="Задание-3-Система-обработки-файлов"><a class="header" href="#Задание-3-Система-обработки-файлов">Задание 3: Система обработки файлов</a></h3>
+<p>Создайте систему для безопасной работы с файлами:</p>
+<ol>
+<li>Реализуйте безопасное открытие/закрытие файлов</li>
+<li>Добавьте обработку ошибок доступа</li>
+<li>Обеспечьте корректное освобождение ресурсов</li>
+<li>Реализуйте механизм восстановления после сбоев</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Надёжная работа с файлами</li>
+<li>Корректная обработка ошибок доступа</li>
+<li>Автоматическое освобождение ресурсов</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим работу с горутинами</li>
+<li>Познакомимся с каналами</li>
+<li>Узнаем о синхронизации</li>
+<li>Начнём писать параллельные программы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Использовать panic и recover</li>
+<li>Применять defer для управления ресурсами</li>
+<li>Обрабатывать критические ошибки</li>
+<li>Создавать надёжные системы</li>
+</ul>
+</blockquote>
 
                     </main>
 

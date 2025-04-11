@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html" class="active"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,7 +155,427 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="scheduler-и-уникальность-горутин"><a class="header" href="#scheduler-и-уникальность-горутин">Scheduler и уникальность горутин</a></h1>
+                        <h1 id="Продвинутые-паттерны-проектирования-и-архитектура-в-go"><a class="header" href="#Продвинутые-паттерны-проектирования-и-архитектура-в-go">Продвинутые паттерны проектирования и архитектура в Go</a></h1>
+<p>В этой главе мы изучим продвинутые паттерны проектирования и архитектурные подходы, которые помогут создавать масштабируемые и поддерживаемые приложения на Go. Мы рассмотрим как классические паттерны, адаптированные под Go, так и специфичные для Go подходы.</p>
+<h2 id="Почему-важны-паттерны-и-архитектура"><a class="header" href="#Почему-важны-паттерны-и-архитектура">Почему важны паттерны и архитектура?</a></h2>
+<p>Правильно выбранные паттерны и архитектура позволяют:</p>
+<ul>
+<li>Создавать гибкие и расширяемые системы</li>
+<li>Упрощать поддержку кода</li>
+<li>Повышать тестируемость</li>
+<li>Улучшать производительность</li>
+<li>Упрощать масштабирование</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: Go, в отличие от многих других языков, не требует строгого следования классическим паттернам ООП, что позволяет создавать более простые и эффективные решения.</p>
+</blockquote>
+<h2 id="Основные-паттерны"><a class="header" href="#Основные-паттерны">Основные паттерны</a></h2>
+<h3 id="1-Фабрика-с-опциями"><a class="header" href="#1-Фабрика-с-опциями">1. Фабрика с опциями</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// Опции для конфигурации сервера
+type ServerOptions struct {
+    Host        string
+    Port        int
+    Timeout     time.Duration
+    MaxConn     int
+    EnableTLS   bool
+}
+
+// Функция-опция для изменения конфигурации
+type Option func(*ServerOptions)
+
+// Конструкторы опций
+func WithHost(host string) Option {
+    return func(o *ServerOptions) {
+        o.Host = host
+    }
+}
+
+func WithPort(port int) Option {
+    return func(o *ServerOptions) {
+        o.Port = port
+    }
+}
+
+func WithTimeout(timeout time.Duration) Option {
+    return func(o *ServerOptions) {
+        o.Timeout = timeout
+    }
+}
+
+// Создание сервера с опциями
+func NewServer(opts ...Option) *ServerOptions {
+    // Значения по умолчанию
+    server := &amp;ServerOptions{
+        Host:      "localhost",
+        Port:      8080,
+        Timeout:   time.Second * 30,
+        MaxConn:   100,
+        EnableTLS: false,
+    }
+
+    // Применяем опции
+    for _, opt := range opts {
+        opt(server)
+    }
+
+    return server
+}
+
+func main() {
+    // Создаём сервер с кастомными опциями
+    server := NewServer(
+        WithHost("api.example.com"),
+        WithPort(443),
+        WithTimeout(time.Second * 60),
+    )
+
+    fmt.Printf("Сервер: %+v\n", server)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Паттерн "Фабрика с опциями" позволяет гибко конфигурировать объекты</li>
+<li>Каждая опция - это функция, модифицирующая конфигурацию</li>
+<li>Значения по умолчанию обеспечивают работоспособность без явной конфигурации</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Сервер: {Host:api.example.com Port:443 Timeout:1m0s MaxConn:100 EnableTLS:false}
+</code></pre>
+<h3 id="2-middleware"><a class="header" href="#2-middleware">2. Middleware</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "net/http"
+    "time"
+)
+
+// Тип для middleware
+type Middleware func(http.HandlerFunc) http.HandlerFunc
+
+// Логирование запросов
+func Logging() Middleware {
+    return func(next http.HandlerFunc) http.HandlerFunc {
+        return func(w http.ResponseWriter, r *http.Request) {
+            start := time.Now()
+            defer func() {
+                fmt.Printf("Запрос: %s %s, время: %v\n",
+                    r.Method, r.URL.Path, time.Since(start))
+            }()
+            next(w, r)
+        }
+    }
+}
+
+// Проверка аутентификации
+func Auth() Middleware {
+    return func(next http.HandlerFunc) http.HandlerFunc {
+        return func(w http.ResponseWriter, r *http.Request) {
+            token := r.Header.Get("Authorization")
+            if token == "" {
+                http.Error(w, "Unauthorized", http.StatusUnauthorized)
+                return
+            }
+            next(w, r)
+        }
+    }
+}
+
+// Применение middleware
+func Chain(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
+    for i := len(middlewares) - 1; i &gt;= 0; i-- {
+        f = middlewares[i](f)
+    }
+    return f
+}
+
+// Обработчик
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, World!")
+}
+
+func main() {
+    // Создаём обработчик с middleware
+    http.HandleFunc("/", Chain(handler, Logging(), Auth()))
+    
+    // Запускаем сервер
+    fmt.Println("Сервер запущен на :8080")
+    http.ListenAndServe(":8080", nil)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Middleware позволяет добавлять функциональность к обработчикам</li>
+<li>Каждый middleware - это функция, принимающая и возвращающая HandlerFunc</li>
+<li>Chain применяет middleware в правильном порядке</li>
+</ul>
+<h2 id="Архитектурные-паттерны"><a class="header" href="#Архитектурные-паттерны">Архитектурные паттерны</a></h2>
+<h3 id="1-clean-architecture"><a class="header" href="#1-clean-architecture">1. Clean Architecture</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "time"
+)
+
+// Domain layer
+type User struct {
+    ID        int
+    Name      string
+    Email     string
+    CreatedAt time.Time
+}
+
+// Repository interface
+type UserRepository interface {
+    FindByID(id int) (*User, error)
+    Save(user *User) error
+}
+
+// Use case
+type UserService struct {
+    repo UserRepository
+}
+
+func NewUserService(repo UserRepository) *UserService {
+    return &amp;UserService{repo: repo}
+}
+
+func (s *UserService) GetUser(id int) (*User, error) {
+    return s.repo.FindByID(id)
+}
+
+// Infrastructure layer
+type InMemoryUserRepository struct {
+    users map[int]*User
+}
+
+func NewInMemoryUserRepository() *InMemoryUserRepository {
+    return &amp;InMemoryUserRepository{
+        users: make(map[int]*User),
+    }
+}
+
+func (r *InMemoryUserRepository) FindByID(id int) (*User, error) {
+    user, exists := r.users[id]
+    if !exists {
+        return nil, fmt.Errorf("user not found")
+    }
+    return user, nil
+}
+
+func (r *InMemoryUserRepository) Save(user *User) error {
+    r.users[user.ID] = user
+    return nil
+}
+
+func main() {
+    // Создаём зависимости
+    repo := NewInMemoryUserRepository()
+    service := NewUserService(repo)
+
+    // Создаём тестового пользователя
+    user := &amp;User{
+        ID:        1,
+        Name:      "Иван",
+        Email:     "ivan@example.com",
+        CreatedAt: time.Now(),
+    }
+    repo.Save(user)
+
+    // Получаем пользователя
+    foundUser, err := service.GetUser(1)
+    if err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+        return
+    }
+    fmt.Printf("Найден пользователь: %+v\n", foundUser)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Clean Architecture разделяет код на слои</li>
+<li>Каждый слой зависит только от внутренних слоёв</li>
+<li>Интерфейсы определяют контракты между слоями</li>
+<li>Легко тестировать и модифицировать</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Найден пользователь: &amp;{ID:1 Name:Иван Email:ivan@example.com CreatedAt:2024-03-21 10:00:00 +0000 UTC}
+</code></pre>
+<h3 id="2-cqrs-command-query-responsibility-segregation"><a class="header" href="#2-cqrs-command-query-responsibility-segregation">2. CQRS (Command Query Responsibility Segregation)</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+// Команды
+type CreateUserCommand struct {
+    Name  string
+    Email string
+}
+
+type UpdateUserCommand struct {
+    ID    int
+    Name  string
+    Email string
+}
+
+// Запросы
+type GetUserQuery struct {
+    ID int
+}
+
+// Модель
+type User struct {
+    ID    int
+    Name  string
+    Email string
+}
+
+// Command Handler
+type CommandHandler struct {
+    mu    sync.RWMutex
+    users map[int]*User
+}
+
+func NewCommandHandler() *CommandHandler {
+    return &amp;CommandHandler{
+        users: make(map[int]*User),
+    }
+}
+
+func (h *CommandHandler) HandleCreate(cmd CreateUserCommand) (*User, error) {
+    h.mu.Lock()
+    defer h.mu.Unlock()
+
+    id := len(h.users) + 1
+    user := &amp;User{
+        ID:    id,
+        Name:  cmd.Name,
+        Email: cmd.Email,
+    }
+    h.users[id] = user
+    return user, nil
+}
+
+// Query Handler
+type QueryHandler struct {
+    commandHandler *CommandHandler
+}
+
+func NewQueryHandler(ch *CommandHandler) *QueryHandler {
+    return &amp;QueryHandler{commandHandler: ch}
+}
+
+func (h *QueryHandler) HandleGet(query GetUserQuery) (*User, error) {
+    h.commandHandler.mu.RLock()
+    defer h.commandHandler.mu.RUnlock()
+
+    user, exists := h.commandHandler.users[query.ID]
+    if !exists {
+        return nil, fmt.Errorf("user not found")
+    }
+    return user, nil
+}
+
+func main() {
+    // Создаём обработчики
+    cmdHandler := NewCommandHandler()
+    queryHandler := NewQueryHandler(cmdHandler)
+
+    // Создаём пользователя
+    user, err := cmdHandler.HandleCreate(CreateUserCommand{
+        Name:  "Иван",
+        Email: "ivan@example.com",
+    })
+    if err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+        return
+    }
+
+    // Получаем пользователя
+    foundUser, err := queryHandler.HandleGet(GetUserQuery{ID: user.ID})
+    if err != nil {
+        fmt.Printf("Ошибка: %v\n", err)
+        return
+    }
+    fmt.Printf("Найден пользователь: %+v\n", foundUser)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>CQRS разделяет операции на команды и запросы</li>
+<li>Команды изменяют состояние</li>
+<li>Запросы только читают данные</li>
+<li>Разделение упрощает масштабирование</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Найден пользователь: &amp;{ID:1 Name:Иван Email:ivan@example.com}
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Микросервисная-архитектура"><a class="header" href="#Задание-1-Микросервисная-архитектура">Задание 1: Микросервисная архитектура</a></h3>
+<p>Создайте базовую структуру микросервиса, которая:</p>
+<ol>
+<li>Использует Clean Architecture</li>
+<li>Поддерживает CQRS</li>
+<li>Включает middleware для логирования и мониторинга</li>
+<li>Имеет конфигурацию через опции</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Масштабируемая архитектура</li>
+<li>Чёткое разделение ответственности</li>
+<li>Гибкая конфигурация</li>
+<li>Лёгкость тестирования</li>
+</ul>
+<h3 id="Задание-2-event-sourcing"><a class="header" href="#Задание-2-event-sourcing">Задание 2: Event Sourcing</a></h3>
+<p>Реализуйте систему с Event Sourcing, которая:</p>
+<ol>
+<li>Хранит все изменения как события</li>
+<li>Восстанавливает состояние из событий</li>
+<li>Поддерживает проекции для быстрого чтения</li>
+<li>Обеспечивает атомарность операций</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Надёжное хранение данных</li>
+<li>Возможность аудита</li>
+<li>Высокая производительность</li>
+<li>Масштабируемость</li>
+</ul>
+<h3 id="Задание-3-Шаблон-repository"><a class="header" href="#Задание-3-Шаблон-repository">Задание 3: Шаблон Repository</a></h3>
+<p>Создайте универсальный репозиторий, который:</p>
+<ol>
+<li>Работает с любыми типами данных</li>
+<li>Поддерживает CRUD операции</li>
+<li>Включает кэширование</li>
+<li>Обеспечивает транзакционность</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Универсальный доступ к данным</li>
+<li>Эффективное кэширование</li>
+<li>Надёжные транзакции</li>
+<li>Чистый интерфейс</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель главы</strong>: К концу этой главы вы должны уметь:</p>
+<ul>
+<li>Применять продвинутые паттерны проектирования</li>
+<li>Создавать масштабируемые архитектуры</li>
+<li>Разделять ответственность в коде</li>
+<li>Писать поддерживаемые системы</li>
+</ul>
+</blockquote>
 
                     </main>
 

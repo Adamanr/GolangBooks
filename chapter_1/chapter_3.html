@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html" class="active"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -174,127 +156,188 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="Переменные-и-типы-данных-в-go-просто-и-эффективно"><a class="header" href="#Переменные-и-типы-данных-в-go-просто-и-эффективно">Переменные и типы данных в Go: просто и эффективно</a></h1>
-<p>Переменные — это основа любой программы. Если вы уже работали с другими языками программирования, то вам понравится минималистичный и строгий подход Go к объявлению и использованию переменных, а также к работе с типами данных.</p>
-<h2 id="Что-такое-переменная"><a class="header" href="#Что-такое-переменная">Что такое переменная?</a></h2>
-<p>Переменная — это контейнер для хранения данных, которые могут изменяться в процессе выполнения программы. В Go все переменные имеют <strong>явный тип</strong>, что означает, что их тип нужно либо явно указать при объявлении, либо он будет выведен компилятором на основе значения переменной.</p>
-<h3 id="Пример-объявления-переменной"><a class="header" href="#Пример-объявления-переменной">Пример объявления переменной:</a></h3>
-<pre><code class="language-go">var age int
-age = 30
-</code></pre>
-<p>В этом примере мы объявляем переменную <strong>age</strong> типа <strong>int</strong> (целое число) и присваиваем ей значение <strong>30</strong>. Go требует, чтобы каждая переменная имела конкретный тип, и вы не сможете присвоить переменной значение другого типа без явного преобразования.</p>
-<h2 id="Способы-объявления-переменных"><a class="header" href="#Способы-объявления-переменных">Способы объявления переменных</a></h2>
-<p>Go предлагает несколько способов объявления переменных, в зависимости от ситуации:</p>
-<h3 id="1-Объявление-через-var"><a class="header" href="#1-Объявление-через-var">1. <strong>Объявление через <code>var</code></strong></a></h3>
-<p>Классический способ — использовать ключевое слово <strong><code>var</code></strong>:</p>
-<pre><code class="language-go">var name string
-name = "Иван"
-</code></pre>
-<p>Здесь мы явно указываем тип переменной <strong><code>string</code></strong> и затем присваиваем ей значение. Можно сделать это всё в одной строке:</p>
-<pre><code class="language-go">var name string = "Иван"
-</code></pre>
-<p>Этот способ полезен, когда вам нужно заранее определить переменную и возможно присвоить значение позже.</p>
-<h3 id="2-Краткая-форма-объявления"><a class="header" href="#2-Краткая-форма-объявления">2. <strong>Краткая форма объявления</strong></a></h3>
-<p>Одной из фишек Go является так называемое <strong>короткое объявление переменных</strong>. С помощью оператора <strong><code>:=</code></strong> вы можете объявлять переменные без явного указания типа:</p>
-<pre><code class="language-go">age := 30
-</code></pre>
-<p>В этом случае Go самостоятельно выводит тип переменной на основе присваиваемого значения. Здесь тип переменной будет <strong><code>int</code></strong>, так как 30 — это целое число.</p>
-<h2 id="Множественное-объявление-переменных"><a class="header" href="#Множественное-объявление-переменных">Множественное объявление переменных</a></h2>
-<p>Go также поддерживает множественное объявление переменных в одной строке:</p>
-<pre><code class="language-go">var x, y, z int
-</code></pre>
-<p>Или даже присвоение значений сразу нескольким переменным:</p>
-<pre><code class="language-go">var a, b = 10, "Hello"
-</code></pre>
-<p>Здесь переменная <strong><code>a</code></strong> получает значение <strong><code>10</code></strong> (int), а <strong><code>b</code></strong> — строку <strong>"Hello"</strong>. Это удобно, когда вам нужно создать несколько переменных с разными типами данных в одной строке.</p>
-<h2 id="Типы-данных-в-go"><a class="header" href="#Типы-данных-в-go">Типы данных в Go</a></h2>
-<p>Go — это язык со строгой типизацией, и все переменные имеют чётко определённый тип данных. Давайте рассмотрим основные типы, которые используются в Go:</p>
-<h3 id="1-Целые-числа-int"><a class="header" href="#1-Целые-числа-int">1. <strong>Целые числа (int)</strong></a></h3>
-<p>Целые числа в Go могут быть знаковыми и беззнаковыми. Основной тип — <strong>int</strong>, который соответствует разрядности платформы (32 или 64 бита).</p>
-<p>Пример:</p>
-<pre><code class="language-go">var age int = 25
-</code></pre>
-<p>Также есть такие типы как:</p>
+<p>В этом уроке мы погрузимся в мир переменных и типов данных в Go. Вы узнаете, как Go делает работу с данными простой, безопасной и эффективной. Мы разберём не только базовые концепции, но и рассмотрим интересные особенности, которые делают Go уникальным языком.</p>
+<h2 id="Почему-типизация-в-go-особенная"><a class="header" href="#Почему-типизация-в-go-особенная">Почему типизация в Go особенная?</a></h2>
+<p>Go — это язык со строгой статической типизацией, что означает:</p>
 <ul>
-<li><strong>int8</strong>, <strong>int16</strong>, <strong>int32</strong>, <strong>int64</strong> — для знаковых целых чисел разного размера.</li>
-<li><strong>uint8</strong>, <strong>uint16</strong>, <strong>uint32</strong>, <strong>uint64</strong> — для беззнаковых целых чисел.</li>
+<li>Типы проверяются на этапе компиляции</li>
+<li>Нет неявных преобразований типов</li>
+<li>Каждая переменная имеет чётко определённый тип</li>
+<li>Типы помогают писать более надёжный код</li>
 </ul>
-<h3 id="2-Вещественные-числа-float"><a class="header" href="#2-Вещественные-числа-float">2. <strong>Вещественные числа (float)</strong></a></h3>
-<p>Для работы с числами с плавающей запятой используются типы <strong>float32</strong> и <strong>float64</strong>. В большинстве случаев достаточно <strong>float64</strong> из-за его большей точности.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var pi float64 = 3.14159
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go нет классов и наследования, но есть мощная система типов, которая обеспечивает безопасность и производительность.</p>
+</blockquote>
+<h2 id="Объявление-переменных"><a class="header" href="#Объявление-переменных">Объявление переменных</a></h2>
+<h3 id="1-Классический-способ-var"><a class="header" href="#1-Классический-способ-var">1. Классический способ (var)</a></h3>
+<pre><code class="language-go">var name string = "Иван"
+var age int = 25
 </code></pre>
-<h3 id="3-Комплексные-числа-complex"><a class="header" href="#3-Комплексные-числа-complex">3. <strong>Комплексные числа (complex)</strong></a></h3>
-<p>Go поддерживает комплексные числа с типами <strong>complex64</strong> и <strong>complex128</strong>. Комплексные числа состоят из вещественной и мнимой частей.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var z complex128 = 1 + 2i
+<h3 id="2-Краткая-форма-"><a class="header" href="#2-Краткая-форма-">2. Краткая форма (:=)</a></h3>
+<pre><code class="language-go">name := "Иван"  // Go сам определит тип string
+age := 25       // Go сам определит тип int
 </code></pre>
-<h3 id="4-Строки-string"><a class="header" href="#4-Строки-string">4. <strong>Строки (string)</strong></a></h3>
-<p>Строки — это последовательности символов (Т.е. массив байт). В Go строки неизменяемы, а символы в строках кодируются в формате <strong>UTF-8</strong>.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var greeting string = "Hello, World!"
-</code></pre>
-<h3 id="5-Булевы-значения-bool"><a class="header" href="#5-Булевы-значения-bool">5. <strong>Булевы значения (bool)</strong></a></h3>
-<p>Тип <strong>bool</strong> может принимать два значения: <strong>true</strong> или <strong>false</strong>. Используется для логических операций.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var isAvailable bool = true
-</code></pre>
-<h3 id="6-Указатели"><a class="header" href="#6-Указатели">6. <strong>Указатели</strong></a></h3>
-<p>Указатели хранят адреса переменных. В Go указатели имеют тип <strong><code>*T</code></strong>, где <strong>T</strong> — это тип значения, на которое ссылается указатель.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var ptr *int
+<h3 id="3-Множественное-объявление"><a class="header" href="#3-Множественное-объявление">3. Множественное объявление</a></h3>
+<pre><code class="language-go">var (
+    name string = "Иван"
+    age  int    = 25
+)
+
+// Или краткая форма
+name, age := "Иван", 25
 </code></pre>
 <blockquote>
-<p>Чуть позже этот тип данных мы заденем глубже</p>
+<p>⚡ <strong>Важно</strong>: Оператор <code>:=</code> можно использовать только внутри функций!</p>
 </blockquote>
+<h2 id="Основные-типы-данных"><a class="header" href="#Основные-типы-данных">Основные типы данных</a></h2>
+<h3 id="1-Числовые-типы"><a class="header" href="#1-Числовые-типы">1. Числовые типы</a></h3>
+<h4 id="Целые-числа"><a class="header" href="#Целые-числа">Целые числа</a></h4>
+<pre><code class="language-go">var (
+    a int   = 42        // Зависит от платформы (32/64 бита)
+    b int8  = 127       // -128 до 127
+    c int16 = 32767     // -32768 до 32767
+    d int32 = 2147483647 // -2147483648 до 2147483647
+    e int64 = 9223372036854775807
+)
+</code></pre>
+<h4 id="Беззнаковые-целые-числа"><a class="header" href="#Беззнаковые-целые-числа">Беззнаковые целые числа</a></h4>
+<pre><code class="language-go">var (
+    a uint   = 42
+    b uint8  = 255      // 0 до 255
+    c uint16 = 65535    // 0 до 65535
+    d uint32 = 4294967295
+    e uint64 = 18446744073709551615
+)
+</code></pre>
+<h4 id="Числа-с-плавающей-точкой"><a class="header" href="#Числа-с-плавающей-точкой">Числа с плавающей точкой</a></h4>
+<pre><code class="language-go">var (
+    pi float32 = 3.14159
+    e  float64 = 2.718281828459045
+)
+</code></pre>
+<h3 id="2-Строки-и-символы"><a class="header" href="#2-Строки-и-символы">2. Строки и символы</a></h3>
+<pre><code class="language-go">var (
+    name string = "Иван"
+    char rune   = 'Я'  // Unicode символ
+)
+</code></pre>
+<blockquote>
+<p>🚀 <strong>Совет</strong>: В Go строки неизменяемы и используют UTF-8 кодировку. Для работы с отдельными символами используйте тип <code>rune</code>.</p>
+</blockquote>
+<h3 id="3-Логические-значения"><a class="header" href="#3-Логические-значения">3. Логические значения</a></h3>
+<pre><code class="language-go">var (
+    isActive bool = true
+    isAdmin  bool = false
+)
+</code></pre>
 <h2 id="Сложные-типы-данных"><a class="header" href="#Сложные-типы-данных">Сложные типы данных</a></h2>
-<p>Кроме примитивных типов, Go поддерживает и более сложные структуры данных.</p>
-<h3 id="1-Массивы"><a class="header" href="#1-Массивы">1. <strong>Массивы</strong></a></h3>
-<p>Массивы — это фиксированные по размеру последовательности однотипных элементов.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var numbers [5]int = [5]int{1, 2, 3, 4, 5}
+<h3 id="1-Массивы"><a class="header" href="#1-Массивы">1. Массивы</a></h3>
+<pre><code class="language-go">// Фиксированный массив из 5 элементов
+var numbers [5]int = [5]int{1, 2, 3, 4, 5}
+
+// Массив можно инициализировать так
+primes := [...]int{2, 3, 5, 7, 11, 13}
 </code></pre>
-<h3 id="2-Срезы-slices"><a class="header" href="#2-Срезы-slices">2. <strong>Срезы (slices)</strong></a></h3>
-<p>Срезы — это динамические массивы, которые могут изменять свою длину. Это основной инструмент работы с последовательностями данных в Go.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var nums []int = []int{1, 2, 3, 4, 5}
+<h3 id="2-Срезы-динамические-массивы"><a class="header" href="#2-Срезы-динамические-массивы">2. Срезы (динамические массивы)</a></h3>
+<pre><code class="language-go">// Создание среза
+numbers := []int{1, 2, 3, 4, 5}
+
+// Добавление элементов
+numbers = append(numbers, 6, 7)
+
+// Создание среза из массива
+arr := [5]int{1, 2, 3, 4, 5}
+slice := arr[1:4] // [2, 3, 4]
 </code></pre>
-<h3 id="3-Карты-maps"><a class="header" href="#3-Карты-maps">3. <strong>Карты (maps)</strong></a></h3>
-<p>Карты — это структуры данных типа "ключ-значение". Ключи должны быть уникальными, а значения могут быть любого типа.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var dict map[string]int = map[string]int{"apple": 2, "banana": 3}
-</code></pre>
-<h3 id="4-Структуры-structs"><a class="header" href="#4-Структуры-structs">4. <strong>Структуры (structs)</strong></a></h3>
-<p>Структуры позволяют группировать переменные разных типов в одну сущность. Это аналог классов в других языках.</p>
-<p>Пример:</p>
-<pre><code class="language-go">type Person struct {
-    Name string
-    Age  int
+<h3 id="3-Карты-ассоциативные-массивы"><a class="header" href="#3-Карты-ассоциативные-массивы">3. Карты (ассоциативные массивы)</a></h3>
+<pre><code class="language-go">// Создание карты
+ages := map[string]int{
+    "Иван": 25,
+    "Пётр": 30,
 }
 
-var p = Person{Name: "Иван", Age: 30}
+// Добавление элемента
+ages["Анна"] = 28
+
+// Проверка существования ключа
+age, exists := ages["Иван"]
+if exists {
+    fmt.Printf("Возраст: %d\n", age)
+}
+</code></pre>
+<h3 id="4-Структуры"><a class="header" href="#4-Структуры">4. Структуры</a></h3>
+<pre><code class="language-go">type Person struct {
+    Name    string
+    Age     int
+    Address string
+}
+
+// Создание экземпляра структуры
+person := Person{
+    Name:    "Иван",
+    Age:     25,
+    Address: "Москва",
+}
 </code></pre>
 <h2 id="Константы"><a class="header" href="#Константы">Константы</a></h2>
-<p>Кроме переменных, Go поддерживает <strong>константы</strong> — значения, которые нельзя изменить после их объявления. Константы создаются с помощью ключевого слова <strong><code>const</code></strong> и могут быть числами, строками, логическими значениями.</p>
-<p>Пример:</p>
-<pre><code class="language-go">const Pi = 3.14
-const Version = "1.0.0"
+<pre><code class="language-go">const (
+    Pi       = 3.14159
+    Version  = "1.0.0"
+    MaxUsers = 1000
+)
 </code></pre>
-<h2 id="Инициализация-переменных-по-умолчанию"><a class="header" href="#Инициализация-переменных-по-умолчанию">Инициализация переменных по умолчанию</a></h2>
-<p>Если вы не присвоите переменной значение при объявлении, Go автоматически инициализирует её <strong>нулевым значением</strong> для её типа. Это значит, что для <strong>int</strong> это будет <strong>0</strong>, для <strong>string</strong> — пустая строка, для <strong>bool</strong> — <strong>false</strong>, а для <strong>указателей</strong> — <strong>nil</strong>.</p>
-<p>Пример:</p>
-<pre><code class="language-go">var price int  // price = 0
-var title string  // title = ""
-var isAvailable bool  // isAvailable = false
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go есть специальный тип <code>iota</code> для создания последовательностей констант:</p>
+</blockquote>
+<pre><code class="language-go">const (
+    Monday = iota + 1
+    Tuesday
+    Wednesday
+    Thursday
+    Friday
+    Saturday
+    Sunday
+)
 </code></pre>
-<h2 id="Подводим-итог"><a class="header" href="#Подводим-итог">Подводим итог</a></h2>
-<p>Переменные в Go и работа с типами данных — это основа, на которой строятся более сложные программы. Go делает работу с переменными и типами данных простой и интуитивной, благодаря строгой типизации и минималистичному синтаксису. Этот строгий подход помогает избежать множества ошибок и сделать код предсказуемым и эффективным.</p>
-<h3 id="Задания-для-закрепления"><a class="header" href="#Задания-для-закрепления">Задания для закрепления:</a></h3>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Калькулятор-ИМТ"><a class="header" href="#Задание-1-Калькулятор-ИМТ">Задание 1: Калькулятор ИМТ</a></h3>
+<p>Создайте программу, которая:</p>
 <ol>
-<li>Объявите переменные с типами int, float, string и bool, присвойте им значения.</li>
-<li>Попробуйте создать массив из 5 элементов, а затем срез на его основе.</li>
-<li>Создайте карту с ключами типа string и значениями типа int, добавьте несколько элементов и выведите их на экран.</li>
-<li>Создайте структуру для описания книги с полями "Название", "Автор", "Цена", и создайте переменную для книги.</li>
+<li>Запрашивает рост и вес пользователя</li>
+<li>Вычисляет индекс массы тела (ИМТ)</li>
+<li>Выводит результат с интерпретацией (недостаточный вес, норма, избыточный вес)</li>
 </ol>
+<h3 id="Задание-2-Конвертер-валют"><a class="header" href="#Задание-2-Конвертер-валют">Задание 2: Конвертер валют</a></h3>
+<p>Напишите программу, которая:</p>
+<ol>
+<li>Хранит курсы валют в константах</li>
+<li>Запрашивает сумму и валюту для конвертации</li>
+<li>Выводит результат в выбранной валюте</li>
+</ol>
+<h3 id="Задание-3-Учёт-книг"><a class="header" href="#Задание-3-Учёт-книг">Задание 3: Учёт книг</a></h3>
+<p>Создайте программу для учета книг в библиотеке:</p>
+<ol>
+<li>Определите структуру Book с полями: название, автор, год издания, жанр</li>
+<li>Создайте срез книг</li>
+<li>Реализуйте функции для добавления и поиска книг</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим операторы и выражения</li>
+<li>Познакомимся с условными операторами</li>
+<li>Начнём писать более сложные программы</li>
+<li>Узнаем о приведении типов</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Работать с разными типами данных в Go</li>
+<li>Использовать различные способы объявления переменных</li>
+<li>Создавать и использовать сложные типы данных</li>
+<li>Понимать особенности типизации в Go</li>
+</ul>
+</blockquote>
 
                     </main>
 

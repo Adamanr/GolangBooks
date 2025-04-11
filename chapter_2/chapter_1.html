@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html" class="active"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,18 +155,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Рефлексия-в-go"><a class="header" href="#Рефлексия-в-go">Рефлексия в Go</a></h1>
-<p>В языке Go существует мощный механизм для работы с типами и значениями данных на этапе выполнения программы — <strong>рефлексия</strong>. Рефлексия позволяет программе динамически изучать свои собственные структуры, получать информацию о типах и работать с ними даже в тех случаях, когда типы не известны на этапе компиляции.</p>
-<h3 id="Основы-рефлексии"><a class="header" href="#Основы-рефлексии">Основы рефлексии</a></h3>
-<p>Go предоставляет рефлексию через пакет <code>reflect</code>, который содержит типы и функции для динамического анализа и манипуляции типами.</p>
-<p>Ключевыми типами в пакете <code>reflect</code> являются:</p>
+                        <h1 id="Метапрограммирование-и-рефлексия-в-go-Мощные-инструменты-для-профессионалов"><a class="header" href="#Метапрограммирование-и-рефлексия-в-go-Мощные-инструменты-для-профессионалов">Метапрограммирование и рефлексия в Go: Мощные инструменты для профессионалов</a></h1>
+<p>В этой главе мы погрузимся в мир метапрограммирования и рефлексии в Go - мощных инструментов, которые позволяют создавать гибкие и динамические программы. Эти концепции особенно полезны при разработке фреймворков, ORM и других сложных систем.</p>
+<h2 id="Почему-важны-метапрограммирование-и-рефлексия"><a class="header" href="#Почему-важны-метапрограммирование-и-рефлексия">Почему важны метапрограммирование и рефлексия?</a></h2>
+<p>Метапрограммирование и рефлексия позволяют:</p>
 <ul>
-<li><strong><code>reflect.Type</code></strong> — представляет тип значения.</li>
-<li><strong><code>reflect.Value</code></strong> — представляет само значение.</li>
+<li>Создавать универсальные решения</li>
+<li>Работать с типами во время выполнения</li>
+<li>Реализовывать сложные паттерны проектирования</li>
+<li>Строить гибкие API</li>
+<li>Автоматизировать рутинные задачи</li>
 </ul>
-<h4 id="Как-использовать-рефлексию"><a class="header" href="#Как-использовать-рефлексию">Как использовать рефлексию?</a></h4>
-<p>Для работы с рефлексией нужно получить информацию о типе и значении переменной с помощью функций <code>reflect.TypeOf()</code> и <code>reflect.ValueOf()</code> соответственно.</p>
-<p>Пример:</p>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В отличие от некоторых других языков, Go использует рефлексию осознанно и ограниченно, что помогает сохранять производительность и безопасность типов.</p>
+</blockquote>
+<h2 id="Основы-рефлексии"><a class="header" href="#Основы-рефлексии">Основы рефлексии</a></h2>
+<h3 id="1-Работа-с-типами"><a class="header" href="#1-Работа-с-типами">1. Работа с типами</a></h3>
 <pre><code class="language-go">package main
 
 import (
@@ -192,168 +178,272 @@ import (
     "reflect"
 )
 
-func main() {
-    var x int = 42
-    t := reflect.TypeOf(x)
-    v := reflect.ValueOf(x)
-
-    fmt.Println("Тип:", t)
-    fmt.Println("Значение:", v)
-}
-</code></pre>
-<p>Здесь мы используем <code>reflect.TypeOf()</code> для получения типа переменной <code>x</code> и <code>reflect.ValueOf()</code> для получения её значения.</p>
-<h3 id="Основные-функции-и-методы-рефлексии"><a class="header" href="#Основные-функции-и-методы-рефлексии">Основные функции и методы рефлексии</a></h3>
-<h4 id="reflecttypeof"><a class="header" href="#reflecttypeof"><code>reflect.TypeOf()</code></a></h4>
-<p>Функция <code>reflect.TypeOf()</code> возвращает объект типа <code>reflect.Type</code>, который описывает тип значения:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "reflect"
-)
-
-func main() {
-    var x float64 = 3.14
-    t := reflect.TypeOf(x)
-    fmt.Println("Тип:", t)
-}
-</code></pre>
-<h4 id="reflectvalueof"><a class="header" href="#reflectvalueof"><code>reflect.ValueOf()</code></a></h4>
-<p>Функция <code>reflect.ValueOf()</code> возвращает объект типа <code>reflect.Value</code>, который содержит само значение:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "reflect"
-)
-
-func main() {
-    var x float64 = 3.14
-    v := reflect.ValueOf(x)
-    fmt.Println("Значение:", v)
-    fmt.Println("Тип значения через Value:", v.Type())
-}
-</code></pre>
-<p>С помощью <code>reflect.Value</code> можно выполнять различные операции над значениями, такие как вызов методов, получение и изменение полей структур.</p>
-<h3 id="Манипуляции-с-переменными-через-рефлексию"><a class="header" href="#Манипуляции-с-переменными-через-рефлексию">Манипуляции с переменными через рефлексию</a></h3>
-<p>Go позволяет изменять значения переменных через рефлексию, но для этого необходимо передавать в функции не само значение, а его указатель, так как изменение значений возможно только у адресуемых (modifiable) переменных.</p>
-<p>Пример изменения значения переменной через рефлексию:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "reflect"
-)
-
-func main() {
-    var x int = 10
-    fmt.Println("До:", x)
-
-    v := reflect.ValueOf(&amp;x).Elem() // Получаем доступ к значению через указатель
-    v.SetInt(100)                   // Изменяем значение
-
-    fmt.Println("После:", x)
-}
-</code></pre>
-<p>Здесь <code>reflect.ValueOf(&amp;x)</code> получает указатель на переменную <code>x</code>, а метод <code>Elem()</code> позволяет получить доступ к значению, чтобы его изменить. Метод <code>SetInt()</code> позволяет установить новое значение для переменной типа <code>int</code>.</p>
-<h3 id="Работа-с-полями-и-методами-структур"><a class="header" href="#Работа-с-полями-и-методами-структур">Работа с полями и методами структур</a></h3>
-<p>Рефлексия позволяет динамически получать и изменять значения полей структур, а также вызывать их методы.</p>
-<h4 id="Получение-и-установка-полей-структур"><a class="header" href="#Получение-и-установка-полей-структур">Получение и установка полей структур</a></h4>
-<p>Пример работы с полями структур через рефлексию:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "reflect"
-)
-
-type Person struct {
-    Name string
-    Age  int
+type User struct {
+    ID        int
+    Name      string
+    Email     string
+    IsActive  bool
 }
 
 func main() {
-    person := Person{Name: "Alice", Age: 30}
-
-    v := reflect.ValueOf(&amp;person).Elem() // Получаем значение структуры через указатель
-
-    // Получаем поле "Name"
-    nameField := v.FieldByName("Name")
-    fmt.Println("Имя:", nameField)
-
-    // Устанавливаем новое значение для поля "Name"
-    if nameField.CanSet() {
-        nameField.SetString("Bob")
+    // Создаём экземпляр структуры
+    user := User{
+        ID:       1,
+        Name:     "Иван",
+        Email:    "ivan@example.com",
+        IsActive: true,
     }
-    fmt.Println("Новое имя:", person.Name)
-}
-</code></pre>
-<p>В этом примере через <code>FieldByName()</code> получаем доступ к полю структуры, а метод <code>CanSet()</code> проверяет, можно ли изменять значение этого поля.</p>
-<h4 id="Вызов-методов-через-рефлексию"><a class="header" href="#Вызов-методов-через-рефлексию">Вызов методов через рефлексию</a></h4>
-<p>Рефлексия также позволяет вызывать методы структур. Это полезно, если вы не знаете заранее, какой метод вам потребуется вызвать.</p>
-<p>Пример вызова метода через рефлексию:</p>
-<pre><code class="language-go">package main
 
-import (
-    "fmt"
-    "reflect"
-)
+    // Получаем тип структуры
+    t := reflect.TypeOf(user)
+    fmt.Printf("Тип: %s\n", t.Name())
 
-type Person struct {
-    Name string
-    Age  int
-}
-
-func (p Person) SayHello() {
-    fmt.Printf("Привет, меня зовут %s!\n", p.Name)
-}
-
-func main() {
-    person := Person{Name: "Alice", Age: 30}
-
-    v := reflect.ValueOf(person)
-    method := v.MethodByName("SayHello")
-
-    if method.IsValid() {
-        method.Call(nil) // Вызываем метод без аргументов
+    // Итерируемся по полям структуры
+    for i := 0; i &lt; t.NumField(); i++ {
+        field := t.Field(i)
+        fmt.Printf("Поле %d: %s (%s)\n", i, field.Name, field.Type)
     }
 }
 </code></pre>
-<p>Метод <code>MethodByName()</code> позволяет найти метод структуры по его имени, а метод <code>Call()</code> используется для вызова этого метода.</p>
-<h3 id="Частые-ошибки-при-работе-с-рефлексией"><a class="header" href="#Частые-ошибки-при-работе-с-рефлексией">Частые ошибки при работе с рефлексией</a></h3>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>reflect.TypeOf</code> получает тип значения</li>
+<li><code>NumField()</code> возвращает количество полей</li>
+<li><code>Field(i)</code> получает информацию о поле</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Тип: User
+Поле 0: ID (int)
+Поле 1: Name (string)
+Поле 2: Email (string)
+Поле 3: IsActive (bool)
+</code></pre>
+<h3 id="2-Работа-со-значениями"><a class="header" href="#2-Работа-со-значениями">2. Работа со значениями</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func main() {
+    // Создаём слайс
+    numbers := []int{1, 2, 3, 4, 5}
+
+    // Получаем значение
+    v := reflect.ValueOf(numbers)
+    fmt.Printf("Тип: %s\n", v.Type())
+    fmt.Printf("Длина: %d\n", v.Len())
+
+    // Изменяем значение
+    if v.Kind() == reflect.Slice {
+        // Создаём новый слайс
+        newSlice := reflect.MakeSlice(v.Type(), 0, v.Cap())
+        
+        // Добавляем элементы в обратном порядке
+        for i := v.Len() - 1; i &gt;= 0; i-- {
+            newSlice = reflect.Append(newSlice, v.Index(i))
+        }
+        
+        // Выводим результат
+        fmt.Printf("Обратный порядок: %v\n", newSlice.Interface())
+    }
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>reflect.ValueOf</code> получает значение</li>
+<li><code>Kind()</code> определяет базовый тип</li>
+<li><code>MakeSlice</code> создаёт новый слайс</li>
+<li><code>Append</code> добавляет элементы</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Тип: []int
+Длина: 5
+Обратный порядок: [5 4 3 2 1]
+</code></pre>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Динамическое-создание-структур"><a class="header" href="#1-Динамическое-создание-структур">1. Динамическое создание структур</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+func createStruct(fields map[string]interface{}) interface{} {
+    // Создаём слайс полей
+    structFields := make([]reflect.StructField, 0, len(fields))
+    
+    for name, value := range fields {
+        structFields = append(structFields, reflect.StructField{
+            Name: name,
+            Type: reflect.TypeOf(value),
+        })
+    }
+    
+    // Создаём тип структуры
+    structType := reflect.StructOf(structFields)
+    
+    // Создаём экземпляр структуры
+    structValue := reflect.New(structType).Elem()
+    
+    // Заполняем поля
+    for name, value := range fields {
+        field := structValue.FieldByName(name)
+        if field.IsValid() &amp;&amp; field.CanSet() {
+            field.Set(reflect.ValueOf(value))
+        }
+    }
+    
+    return structValue.Interface()
+}
+
+func main() {
+    // Создаём структуру динамически
+    dynamicStruct := createStruct(map[string]interface{}{
+        "ID":    1,
+        "Name":  "Иван",
+        "Score": 95.5,
+    })
+    
+    // Выводим результат
+    fmt.Printf("Динамическая структура: %+v\n", dynamicStruct)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>StructField</code> определяет поле структуры</li>
+<li><code>StructOf</code> создаёт тип структуры</li>
+<li><code>New</code> создаёт указатель на структуру</li>
+<li><code>Elem</code> получает значение</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Динамическая структура: {ID:1 Name:Иван Score:95.5}
+</code></pre>
+<h3 id="2-Вызов-методов-через-рефлексию"><a class="header" href="#2-Вызов-методов-через-рефлексию">2. Вызов методов через рефлексию</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "reflect"
+)
+
+type Calculator struct {
+    result float64
+}
+
+func (c *Calculator) Add(x float64) {
+    c.result += x
+}
+
+func (c *Calculator) Subtract(x float64) {
+    c.result -= x
+}
+
+func (c *Calculator) GetResult() float64 {
+    return c.result
+}
+
+func main() {
+    // Создаём калькулятор
+    calc := &amp;Calculator{}
+    
+    // Получаем тип и значение
+    t := reflect.TypeOf(calc)
+    v := reflect.ValueOf(calc)
+    
+    // Вызываем методы через рефлексию
+    methods := []struct {
+        name string
+        args []reflect.Value
+    }{
+        {"Add", []reflect.Value{reflect.ValueOf(10.0)}},
+        {"Add", []reflect.Value{reflect.ValueOf(5.0)}},
+        {"Subtract", []reflect.Value{reflect.ValueOf(3.0)}},
+    }
+    
+    for _, m := range methods {
+        method := v.MethodByName(m.name)
+        if method.IsValid() {
+            method.Call(m.args)
+        }
+    }
+    
+    // Получаем результат
+    result := v.MethodByName("GetResult").Call(nil)[0].Float()
+    fmt.Printf("Результат: %.2f\n", result)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>MethodByName</code> получает метод по имени</li>
+<li><code>Call</code> вызывает метод с аргументами</li>
+<li><code>Float</code> преобразует результат</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Результат: 12.00
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Универсальный-сериализатор"><a class="header" href="#Задание-1-Универсальный-сериализатор">Задание 1: Универсальный сериализатор</a></h3>
+<p>Создайте функцию, которая:</p>
 <ol>
-<li>
-<p><strong>Отсутствие проверки возможности изменения значения:</strong>
-Если вы пытаетесь изменить значение, но не проверяете с помощью <code>CanSet()</code>, это может привести к ошибке.</p>
-</li>
-<li>
-<p><strong>Работа с интерфейсами:</strong>
-Иногда при работе с рефлексией вы передаёте интерфейсное значение, и это может запутать, так как интерфейсы в Go хранят тип и значение отдельно. Для корректной работы с интерфейсами используйте метод <code>Interface()</code> у <code>reflect.Value</code>, чтобы получить исходное значение.</p>
-</li>
-<li>
-<p><strong>Прямое изменение значений:</strong>
-Рефлексия позволяет изменять значения только через указатели. Поэтому всегда проверяйте, работаете ли вы с адресуемыми (modifiable) значениями.</p>
-</li>
+<li>Принимает любой тип данных</li>
+<li>Сериализует его в JSON</li>
+<li>Поддерживает пользовательские теги</li>
+<li>Обрабатывает вложенные структуры</li>
 </ol>
-<h3 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h3>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Гибкий сериализатор</li>
+<li>Поддержка кастомных форматов</li>
+<li>Эффективная работа</li>
+</ul>
+<h3 id="Задание-2-Динамический-валидатор"><a class="header" href="#Задание-2-Динамический-валидатор">Задание 2: Динамический валидатор</a></h3>
+<p>Реализуйте систему валидации, которая:</p>
 <ol>
-<li>
-<p><strong>Изменение полей структуры:</strong>
-Напишите функцию, которая принимает на вход структуру с полями типа <code>int</code> и увеличивает все поля на заданное число с использованием рефлексии.</p>
-</li>
-<li>
-<p><strong>Вывод методов структуры:</strong>
-Напишите программу, которая с помощью рефлексии выводит все методы структуры и вызывает их по порядку.</p>
-</li>
-<li>
-<p><strong>Генерация экземпляра структуры по строке:</strong>
-Создайте программу, которая принимает имя типа структуры в виде строки и создаёт её экземпляр через рефлексию.</p>
-</li>
-<li>
-<p><strong>Валидация структуры:</strong>
-Напишите функцию валидации структуры, которая проверяет наличие и тип полей, основываясь на переданных метаданных. Если поле отсутствует или имеет неправильный тип, функция должна вернуть ошибку.</p>
-</li>
+<li>Принимает структуру и правила</li>
+<li>Проверяет поля на соответствие правилам</li>
+<li>Возвращает список ошибок</li>
+<li>Поддерживает пользовательские валидаторы</li>
 </ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Универсальная валидация</li>
+<li>Гибкие правила</li>
+<li>Чёткие сообщения об ошибках</li>
+</ul>
+<h3 id="Задание-3-orm-подобный-слой"><a class="header" href="#Задание-3-orm-подобный-слой">Задание 3: ORM-подобный слой</a></h3>
+<p>Создайте базовый ORM-слой, который:</p>
+<ol>
+<li>Работает с любой структурой</li>
+<li>Генерирует SQL-запросы</li>
+<li>Маппит результаты в структуры</li>
+<li>Поддерживает отношения</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Типобезопасный доступ к БД</li>
+<li>Гибкий маппинг</li>
+<li>Эффективные запросы</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующей главе мы:</p>
+<ul>
+<li>Изучим продвинутые паттерны проектирования</li>
+<li>Познакомимся с оптимизацией производительности</li>
+<li>Узнаем о работе с памятью</li>
+<li>Начнём писать высоконагруженные системы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель главы</strong>: К концу этой главы вы должны уметь:</p>
+<ul>
+<li>Использовать рефлексию для решения сложных задач</li>
+<li>Создавать динамические структуры</li>
+<li>Работать с типами во время выполнения</li>
+<li>Писать метапрограммы</li>
+</ul>
+</blockquote>
 
                     </main>
 

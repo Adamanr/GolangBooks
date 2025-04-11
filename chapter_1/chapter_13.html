@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html" class="active"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,200 +155,298 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Работа-с-ошибками"><a class="header" href="#Работа-с-ошибками">Работа с ошибками</a></h1>
-<p>В языке Go обработка ошибок — это важная часть программирования. Go не использует механизмы исключений, как в Java или Python, и вместо этого предлагает более прямолинейный подход — через возвращение ошибок в виде значений. Это делает код прозрачным и предсказуемым, поскольку ошибки проверяются и обрабатываются в критических местах программы.</p>
-<h3 id="Как-устроены-ошибки-в-go"><a class="header" href="#Как-устроены-ошибки-в-go">Как устроены ошибки в Go?</a></h3>
-<p>Ошибки в Go представлены через тип <code>error</code>. Этот тип является интерфейсом:</p>
-<pre><code class="language-go">type error interface {
-    Error() string
-}
-</code></pre>
-<p>Он определяет единственный метод <code>Error()</code>, который возвращает строку с описанием ошибки. Стандартная библиотека Go предоставляет множество ошибок, но вы также можете создавать свои собственные.</p>
-<h3 id="Основной-способ-работы-с-ошибками"><a class="header" href="#Основной-способ-работы-с-ошибками">Основной способ работы с ошибками</a></h3>
-<p>При вызове функций, которые могут вернуть ошибку, принято проверять возвращаемое значение и обрабатывать возможные ошибки.</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "os"
-)
-
-func main() {
-    file, err := os.Open("nonexistent_file.txt")
-    if err != nil {
-        fmt.Println("Error:", err)
-        return
-    }
-    defer file.Close()
-
-    fmt.Println("Файл открыт успешно")
-}
-</code></pre>
-<p>Здесь функция <code>os.Open</code> возвращает указатель на файл и ошибку. Если файл не удаётся открыть, возвращается ошибка, которую нужно проверить и обработать.</p>
-<h3 id="Создание-собственных-ошибок-через-errorsnew-и-fmterrorf"><a class="header" href="#Создание-собственных-ошибок-через-errorsnew-и-fmterrorf">Создание собственных ошибок через <code>errors.New</code> и <code>fmt.Errorf</code></a></h3>
-<p>Для создания своих ошибок в Go можно использовать стандартные методы <code>errors.New</code> и <code>fmt.Errorf</code>:</p>
-<pre><code class="language-go">package main
-
-import (
-    "errors"
-    "fmt"
-)
-
-func doSomething(val int) error {
-    if val &lt; 0 {
-        return errors.New("недопустимое значение")
-    }
-    return nil
-}
-
-func main() {
-    err := doSomething(-1)
-    if err != nil {
-        fmt.Println("Ошибка:", err)
-    }
-}
-</code></pre>
-<p>В примере выше мы используем <code>errors.New</code> для создания базовой ошибки.</p>
-<h4 id="Форматирование-ошибок-с-помощью-fmterrorf"><a class="header" href="#Форматирование-ошибок-с-помощью-fmterrorf">Форматирование ошибок с помощью <code>fmt.Errorf</code></a></h4>
-<p>Иногда полезно создавать ошибки с форматированными строками:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-)
-
-func doSomething(val int) error {
-    if val &lt; 0 {
-        return fmt.Errorf("недопустимое значение: %d", val)
-    }
-    return nil
-}
-
-func main() {
-    err := doSomething(-1)
-    if err != nil {
-        fmt.Println("Ошибка:", err)
-    }
-}
-</code></pre>
-<p>Здесь <code>fmt.Errorf</code> позволяет динамически добавить значение переменной в сообщение об ошибке.</p>
-<h3 id="Создание-собственных-ошибок-через-структуры"><a class="header" href="#Создание-собственных-ошибок-через-структуры">Создание собственных ошибок через структуры</a></h3>
-<p>Более продвинутый способ создания ошибок — это создание собственных типов ошибок с помощью структур. Это полезно, когда вам нужно передать дополнительную информацию через ошибки.</p>
-<p>Пример создания ошибки через структуру:</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-)
-
-type MyError struct {
-    Code    int
-    Message string
-}
-
-func (e *MyError) Error() string {
-    return fmt.Sprintf("код ошибки: %d, сообщение: %s", e.Code, e.Message)
-}
-
-func doSomething() error {
-    return &amp;MyError{Code: 404, Message: "страница не найдена"}
-}
-
-func main() {
-    err := doSomething()
-    if err != nil {
-        fmt.Println("Ошибка:", err)
-    }
-}
-</code></pre>
-<p>Здесь мы определяем структуру <code>MyError</code>, которая реализует метод <code>Error()</code>. Это позволяет нам использовать собственный тип ошибки с дополнительной информацией, такой как код ошибки.</p>
-<h3 id="Заворачивание-ошибок-wrap-error"><a class="header" href="#Заворачивание-ошибок-wrap-error">Заворачивание ошибок (<code>Wrap error</code>)</a></h3>
-<p>Go предоставляет возможность заворачивать ошибки, добавляя дополнительный контекст. Для этого используется механизм, появившийся с Go 1.13, где через функцию <code>fmt.Errorf</code> можно "оборачивать" ошибку с помощью специального формата <code>%w</code>.</p>
-<p>Пример:</p>
-<pre><code class="language-go">package main
-
-import (
-    "errors"
-    "fmt"
-)
-
-var ErrNotFound = errors.New("объект не найден")
-
-func doSomething() error {
-    return fmt.Errorf("ошибка при выполнении функции: %w", ErrNotFound)
-}
-
-func main() {
-    err := doSomething()
-    if errors.Is(err, ErrNotFound) {
-        fmt.Println("Произошла ошибка: объект не найден")
-    } else {
-        fmt.Println("Произошла другая ошибка:", err)
-    }
-}
-</code></pre>
-<p>Здесь мы "оборачиваем" исходную ошибку <code>ErrNotFound</code>, добавляя к ней дополнительный контекст. Позже с помощью <code>errors.Is</code> можно проверить, является ли ошибка завернутой внутри основной ошибки.</p>
-<h3 id="errorsis-и-errorsas"><a class="header" href="#errorsis-и-errorsas"><code>errors.Is</code> и <code>errors.As</code></a></h3>
-<p>Начиная с Go 1.13, появились функции <code>errors.Is</code> и <code>errors.As</code>, которые помогают работать с ошибками, завёрнутыми друг в друга:</p>
+                        <h1 id="Горутины-и-каналы-в-go-Параллельное-программирование"><a class="header" href="#Горутины-и-каналы-в-go-Параллельное-программирование">Горутины и каналы в Go: Параллельное программирование</a></h1>
+<p>В этом уроке мы изучим горутины и каналы - мощные инструменты Go для параллельного программирования. Эти концепции позволяют писать эффективные и масштабируемые программы.</p>
+<h2 id="Почему-важны-горутины-и-каналы"><a class="header" href="#Почему-важны-горутины-и-каналы">Почему важны горутины и каналы?</a></h2>
+<p>Горутины и каналы позволяют:</p>
 <ul>
-<li><strong><code>errors.Is</code></strong> проверяет, соответствует ли ошибка ожидаемой.</li>
-<li><strong><code>errors.As</code></strong> позволяет преобразовать ошибку в конкретный тип.</li>
+<li>Выполнять задачи параллельно</li>
+<li>Эффективно использовать ресурсы системы</li>
+<li>Создавать масштабируемые приложения</li>
+<li>Упрощать синхронизацию</li>
+<li>Писать чистый и понятный код</li>
 </ul>
-<p>Пример использования <code>errors.As</code>:</p>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: Горутины легче потоков операционной системы в 100-1000 раз, что позволяет создавать миллионы горутин без значительных накладных расходов.</p>
+</blockquote>
+<h2 id="Основы-горутин"><a class="header" href="#Основы-горутин">Основы горутин</a></h2>
+<h3 id="1-Простая-горутина"><a class="header" href="#1-Простая-горутина">1. Простая горутина</a></h3>
 <pre><code class="language-go">package main
 
 import (
-    "errors"
     "fmt"
+    "time"
 )
 
-type MyError struct {
-    Code    int
-    Message string
-}
-
-func (e *MyError) Error() string {
-    return fmt.Sprintf("код ошибки: %d, сообщение: %s", e.Code, e.Message)
-}
-
-func doSomething() error {
-    return &amp;MyError{Code: 500, Message: "внутренняя ошибка сервера"}
+// Функция, которая будет выполняться в горутине
+func printNumbers() {
+    for i := 1; i &lt;= 5; i++ {
+        fmt.Printf("Число: %d\n", i)
+        time.Sleep(time.Millisecond * 500)
+    }
 }
 
 func main() {
-    err := doSomething()
-    var myErr *MyError
-    if errors.As(err, &amp;myErr) {
-        fmt.Printf("Ошибка с кодом %d: %s\n", myErr.Code, myErr.Message)
-    } else {
-        fmt.Println("Произошла другая ошибка:", err)
+    // Запуск горутины
+    go printNumbers()
+
+    // Основной поток продолжает выполнение
+    fmt.Println("Основной поток продолжает работу...")
+    
+    // Ждём, чтобы горутина успела выполниться
+    time.Sleep(time.Second * 3)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Ключевое слово <code>go</code> запускает функцию в отдельной горутине</li>
+<li>Горутина выполняется параллельно с основным потоком</li>
+<li><code>time.Sleep</code> используется для демонстрации параллельного выполнения</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Основной поток продолжает работу...
+Число: 1
+Число: 2
+Число: 3
+Число: 4
+Число: 5
+</code></pre>
+<h3 id="2-Множественные-горутины"><a class="header" href="#2-Множественные-горутины">2. Множественные горутины</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func worker(id int) {
+    fmt.Printf("Работник %d начал работу\n", id)
+    time.Sleep(time.Second)
+    fmt.Printf("Работник %d закончил работу\n", id)
+}
+
+func main() {
+    // Запуск нескольких горутин
+    for i := 1; i &lt;= 3; i++ {
+        go worker(i)
+    }
+
+    // Ждём завершения всех горутин
+    time.Sleep(time.Second * 2)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Каждая горутина выполняет свою копию функции <code>worker</code></li>
+<li>Горутины выполняются параллельно</li>
+<li>Порядок вывода может варьироваться</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Работник 1 начал работу
+Работник 2 начал работу
+Работник 3 начал работу
+Работник 1 закончил работу
+Работник 2 закончил работу
+Работник 3 закончил работу
+</code></pre>
+<h2 id="Основы-каналов"><a class="header" href="#Основы-каналов">Основы каналов</a></h2>
+<h3 id="1-Простой-канал"><a class="header" href="#1-Простой-канал">1. Простой канал</a></h3>
+<pre><code class="language-go">package main
+
+import "fmt"
+
+func main() {
+    // Создание канала для передачи целых чисел
+    ch := make(chan int)
+
+    // Горутина для отправки данных
+    go func() {
+        ch &lt;- 42 // Отправка значения в канал
+    }()
+
+    // Получение данных из канала
+    value := &lt;-ch
+    fmt.Printf("Получено значение: %d\n", value)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>make(chan int)</code> создаёт канал для целых чисел</li>
+<li>Оператор <code>&lt;-</code> используется для отправки и получения данных</li>
+<li>Канал блокирует выполнение до получения данных</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Получено значение: 42
+</code></pre>
+<h3 id="2-Буферизованный-канал"><a class="header" href="#2-Буферизованный-канал">2. Буферизованный канал</a></h3>
+<pre><code class="language-go">package main
+
+import "fmt"
+
+func main() {
+    // Создание буферизованного канала с ёмкостью 3
+    ch := make(chan int, 3)
+
+    // Отправка нескольких значений
+    ch &lt;- 1
+    ch &lt;- 2
+    ch &lt;- 3
+
+    // Получение значений
+    fmt.Printf("Получено: %d\n", &lt;-ch)
+    fmt.Printf("Получено: %d\n", &lt;-ch)
+    fmt.Printf("Получено: %d\n", &lt;-ch)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li>Буферизованный канал может хранить несколько значений</li>
+<li>Отправка не блокируется, пока буфер не заполнен</li>
+<li>Получение происходит в порядке FIFO</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Получено: 1
+Получено: 2
+Получено: 3
+</code></pre>
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Закрытие-каналов"><a class="header" href="#1-Закрытие-каналов">1. Закрытие каналов</a></h3>
+<pre><code class="language-go">package main
+
+import "fmt"
+
+func main() {
+    ch := make(chan int)
+
+    // Горутина для отправки данных
+    go func() {
+        for i := 1; i &lt;= 5; i++ {
+            ch &lt;- i
+        }
+        close(ch) // Закрытие канала
+    }()
+
+    // Чтение данных до закрытия канала
+    for value := range ch {
+        fmt.Printf("Получено: %d\n", value)
     }
 }
 </code></pre>
-<p>Здесь <code>errors.As</code> позволяет преобразовать ошибку к типу <code>MyError</code>, чтобы получить доступ к её полям.</p>
-<h3 id="Полезные-задания-для-практики"><a class="header" href="#Полезные-задания-для-практики">Полезные задания для практики:</a></h3>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>close(ch)</code> закрывает канал</li>
+<li><code>range</code> автоматически завершается при закрытии канала</li>
+<li>Закрытие канала сигнализирует о завершении отправки</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Получено: 1
+Получено: 2
+Получено: 3
+Получено: 4
+Получено: 5
+</code></pre>
+<h3 id="2-select-для-множественных-каналов"><a class="header" href="#2-select-для-множественных-каналов">2. Select для множественных каналов</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "fmt"
+    "time"
+)
+
+func main() {
+    ch1 := make(chan string)
+    ch2 := make(chan string)
+
+    // Горутина для первого канала
+    go func() {
+        time.Sleep(time.Second)
+        ch1 &lt;- "Сообщение из первого канала"
+    }()
+
+    // Горутина для второго канала
+    go func() {
+        time.Sleep(time.Second * 2)
+        ch2 &lt;- "Сообщение из второго канала"
+    }()
+
+    // Ожидание сообщений из любого канала
+    select {
+    case msg1 := &lt;-ch1:
+        fmt.Println(msg1)
+    case msg2 := &lt;-ch2:
+        fmt.Println(msg2)
+    }
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>select</code> позволяет ждать сообщений из нескольких каналов</li>
+<li>Выполняется первый доступный case</li>
+<li>Полезно для таймаутов и обработки множественных каналов</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Сообщение из первого канала
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Параллельная-обработка-данных"><a class="header" href="#Задание-1-Параллельная-обработка-данных">Задание 1: Параллельная обработка данных</a></h3>
+<p>Создайте программу, которая:</p>
 <ol>
-<li>
-<p><strong>Создание пользовательских ошибок:</strong>
-Напишите структуру для кастомной ошибки, которая содержит код ошибки и текст. Реализуйте метод <code>Error()</code> для этой структуры. Создайте функцию, которая будет возвращать такую ошибку в зависимости от входных данных.</p>
-</li>
-<li>
-<p><strong>Работа с обёрнутыми ошибками:</strong>
-Напишите функцию, которая вызывает другую функцию и оборачивает её ошибку, добавляя контекст с помощью <code>%w</code>. Проверьте тип и исходную ошибку с помощью <code>errors.Is</code>.</p>
-</li>
-<li>
-<p><strong>Использование <code>errors.As</code>:</strong>
-Реализуйте программу, в которой генерируются ошибки разных типов. Используйте <code>errors.As</code> для проверки и обработки конкретных типов ошибок.</p>
-</li>
-<li>
-<p><strong>Паника и восстановление:</strong>
-Напишите функцию, которая вызывает панику при делении на ноль. Используйте <code>recover</code>, чтобы восстановить программу и вернуть осмысленную ошибку.</p>
-</li>
-<li>
-<p><strong>Цепочка ошибок:</strong>
-Реализуйте цепочку вызовов функций, где каждая функция может возвращать ошибку. Оборачивайте ошибки с дополнительным контекстом и проверяйте их тип с помощью <code>errors.Is</code>.</p>
-</li>
+<li>Читает данные из файла</li>
+<li>Обрабатывает каждую строку в отдельной горутине</li>
+<li>Собирает результаты через канал</li>
+<li>Выводит статистику обработки</li>
 </ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Эффективная обработка данных</li>
+<li>Корректная синхронизация</li>
+<li>Чёткая структура кода</li>
+</ul>
+<h3 id="Задание-2-Пул-горутин"><a class="header" href="#Задание-2-Пул-горутин">Задание 2: Пул горутин</a></h3>
+<p>Реализуйте пул горутин для:</p>
+<ol>
+<li>Обработки задач из очереди</li>
+<li>Ограничения количества одновременно работающих горутин</li>
+<li>Сбора результатов</li>
+<li>Обработки ошибок</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Контролируемое использование ресурсов</li>
+<li>Масштабируемость</li>
+<li>Надёжная обработка ошибок</li>
+</ul>
+<h3 id="Задание-3-Чат-сервер"><a class="header" href="#Задание-3-Чат-сервер">Задание 3: Чат-сервер</a></h3>
+<p>Создайте простой чат-сервер, который:</p>
+<ol>
+<li>Принимает подключения от клиентов</li>
+<li>Передаёт сообщения между клиентами</li>
+<li>Управляет подключениями</li>
+<li>Обрабатывает отключения</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Многопользовательский чат</li>
+<li>Устойчивость к ошибкам</li>
+<li>Эффективная работа с сетью</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим более сложные паттерны синхронизации</li>
+<li>Познакомимся с контекстами</li>
+<li>Узнаем о работе с таймаутами</li>
+<li>Начнём писать распределённые системы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать и управлять горутинами</li>
+<li>Работать с каналами</li>
+<li>Использовать select для множественных каналов</li>
+<li>Писать параллельные программы</li>
+</ul>
+</blockquote>
 
                     </main>
 

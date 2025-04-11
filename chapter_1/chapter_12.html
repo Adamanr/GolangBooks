@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html" class="active"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,125 +155,309 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="Дженерики-в-go"><a class="header" href="#Дженерики-в-go">Дженерики в Go</a></h3>
-<p>Дженерики (Generics) — это одна из наиболее ожидаемых функций в языке Go, которая была официально представлена в версии <strong>Go 1.18</strong>. Дженерики позволяют писать более гибкий и повторно используемый код, благодаря возможности создавать функции и структуры данных, которые могут работать с разными типами данных, сохраняя при этом безопасность типов.</p>
-<p>Ранее разработчики часто сталкивались с необходимостью дублирования кода для разных типов данных или использовали интерфейсы, что было менее эффективно. С введением дженериков эта проблема решена.</p>
-<h3 id="Основные-концепции-дженериков"><a class="header" href="#Основные-концепции-дженериков">Основные концепции дженериков</a></h3>
-<p>Основная идея дженериков заключается в том, что вы можете параметризировать функции и типы, передавая им параметры типов. Это позволяет одной функции или структуре работать с разными типами данных.</p>
-<h4 id="Объявление-дженериков"><a class="header" href="#Объявление-дженериков">Объявление дженериков</a></h4>
-<p>Для создания дженерик-функции или типа используются <strong>параметры типов</strong>, которые заключаются в квадратные скобки <code>[]</code>.</p>
-<h4 id="Пример-дженерик-функции"><a class="header" href="#Пример-дженерик-функции">Пример дженерик-функции:</a></h4>
+                        <h1 id="Дженерики-в-go-Гибкость-и-безопасность-типов"><a class="header" href="#Дженерики-в-go-Гибкость-и-безопасность-типов">Дженерики в Go: Гибкость и безопасность типов</a></h1>
+<p>В этом уроке мы изучим дженерики (Generics) в Go - мощный инструмент, который позволяет создавать гибкий и типобезопасный код. Дженерики были официально представлены в Go 1.18 и стали важной частью языка.</p>
+<h2 id="Почему-важны-дженерики"><a class="header" href="#Почему-важны-дженерики">Почему важны дженерики?</a></h2>
+<p>Дженерики позволяют:</p>
+<ul>
+<li>Создавать универсальный код для разных типов</li>
+<li>Избегать дублирования кода</li>
+<li>Сохранять безопасность типов</li>
+<li>Повышать производительность</li>
+<li>Улучшать читаемость кода</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: До появления дженериков в Go разработчики часто использовали интерфейсы <code>interface{}</code> или дублировали код для разных типов, что могло приводить к потере производительности и усложнению поддержки кода.</p>
+</blockquote>
+<h2 id="Основы-дженериков"><a class="header" href="#Основы-дженериков">Основы дженериков</a></h2>
+<h3 id="1-Простая-дженерик-функция"><a class="header" href="#1-Простая-дженерик-функция">1. Простая дженерик-функция</a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
 
-// Обобщенная функция для сложения двух элементов любого типа
-func Add[T:any](a, b T) T {
+// Обобщённая функция для сложения двух элементов
+func Add[T any](a, b T) T {
     return a + b
 }
 
 func main() {
-    fmt.Println(Add(3, 4))           // Работает с int
-    fmt.Println(Add(3.5, 2.1))       // Работает с float64
+    // Работа с целыми числами
+    sumInt := Add(3, 4)
+    fmt.Printf("Сумма целых чисел: %d\n", sumInt)
+
+    // Работа с числами с плавающей точкой
+    sumFloat := Add(3.5, 2.1)
+    fmt.Printf("Сумма чисел с плавающей точкой: %.2f\n", sumFloat)
 }
 </code></pre>
-<p>Здесь:</p>
+<p><strong>Объяснение:</strong></p>
 <ul>
-<li><code>T</code> — это параметр типа, который может быть любым типом, но не выведет панику только если тип будет иметь возможность складываться</li>
+<li><code>[T any]</code> объявляет параметр типа <code>T</code>, который может быть любым типом</li>
+<li>Функция <code>Add</code> принимает два параметра типа <code>T</code> и возвращает значение типа <code>T</code></li>
+<li>Компилятор автоматически определяет тип на основе аргументов</li>
 </ul>
-<h3 id="Ограничения-на-типы-type-constraints"><a class="header" href="#Ограничения-на-типы-type-constraints">Ограничения на типы (Type Constraints)</a></h3>
-<p>Параметры типов могут быть ограничены для использования только определённых типов. Для этого используется <strong>Type Constraints</strong> (ограничения на типы).</p>
-<h4 id="Пример-с-ограничениями"><a class="header" href="#Пример-с-ограничениями">Пример с ограничениями:</a></h4>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Сумма целых чисел: 7
+Сумма чисел с плавающей точкой: 5.60
+</code></pre>
+<h3 id="2-Ограничения-типов"><a class="header" href="#2-Ограничения-типов">2. Ограничения типов</a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
 
-// Ограничиваем типы для функции до числовых типов
+// Ограничиваем типы до числовых
 func Multiply[T int | float64](a, b T) T {
     return a * b
 }
 
 func main() {
-    fmt.Println(Multiply(3, 4))          // int
-    fmt.Println(Multiply(3.5, 2.5))      // float64
+    // Умножение целых чисел
+    productInt := Multiply(3, 4)
+    fmt.Printf("Произведение целых чисел: %d\n", productInt)
+
+    // Умножение чисел с плавающей точкой
+    productFloat := Multiply(3.5, 2.5)
+    fmt.Printf("Произведение чисел с плавающей точкой: %.2f\n", productFloat)
 }
 </code></pre>
-<p>В данном примере параметр типа <code>T</code> ограничен значениями <code>int</code> и <code>float64</code>, то есть функция <code>Multiply</code> может работать только с этими типами.</p>
-<h3 id="Дженерики-в-структурах"><a class="header" href="#Дженерики-в-структурах">Дженерики в структурах</a></h3>
-<p>Дженерики также могут быть использованы в структурах для создания универсальных структур данных.</p>
-<h4 id="Пример"><a class="header" href="#Пример">Пример:</a></h4>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>[T int | float64]</code> ограничивает тип <code>T</code> только целыми числами и числами с плавающей точкой</li>
+<li>Функция <code>Multiply</code> может работать только с этими типами</li>
+<li>Попытка использовать другие типы вызовет ошибку компиляции</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Произведение целых чисел: 12
+Произведение чисел с плавающей точкой: 8.75
+</code></pre>
+<h2 id="Дженерики-в-структурах"><a class="header" href="#Дженерики-в-структурах">Дженерики в структурах</a></h2>
+<h3 id="1-Универсальный-контейнер"><a class="header" href="#1-Универсальный-контейнер">1. Универсальный контейнер</a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
 
-// Универсальная структура для хранения любых данных
-type Box[T any] struct {
+// Универсальная структура для хранения данных
+type Container[T any] struct {
     value T
 }
 
-func (b Box[T]) GetValue() T {
-    return b.value
+// Метод для получения значения
+func (c Container[T]) GetValue() T {
+    return c.value
+}
+
+// Метод для установки значения
+func (c *Container[T]) SetValue(value T) {
+    c.value = value
 }
 
 func main() {
-    intBox := Box[int]{value: 42}
-    fmt.Println(intBox.GetValue()) // Выводит 42
+    // Контейнер для целых чисел
+    intContainer := Container[int]{value: 42}
+    fmt.Printf("Целочисленное значение: %d\n", intContainer.GetValue())
 
-    stringBox := Box[string]{value: "Привет"}
-    fmt.Println(stringBox.GetValue()) // Выводит "Привет"
+    // Контейнер для строк
+    stringContainer := Container[string]{value: "Привет, мир!"}
+    fmt.Printf("Строковое значение: %s\n", stringContainer.GetValue())
+
+    // Изменение значения
+    intContainer.SetValue(100)
+    fmt.Printf("Новое значение: %d\n", intContainer.GetValue())
 }
 </code></pre>
+<p><strong>Объяснение:</strong></p>
 <ul>
-<li>В этом примере структура <code>Box</code> может хранить данные любого типа, который передан через параметр типа <code>T</code>.</li>
+<li><code>Container[T]</code> - универсальная структура, которая может хранить значение любого типа</li>
+<li>Методы <code>GetValue</code> и <code>SetValue</code> работают с типом <code>T</code></li>
+<li>Структура может быть использована с разными типами данных</li>
 </ul>
-<h3 id="Применение-дженериков-с-интерфейсами"><a class="header" href="#Применение-дженериков-с-интерфейсами">Применение дженериков с интерфейсами</a></h3>
-<p>Go поддерживает использование дженериков вместе с интерфейсами для создания ещё более гибких решений.</p>
-<h4 id="Пример-1"><a class="header" href="#Пример-1">Пример:</a></h4>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Целочисленное значение: 42
+Строковое значение: Привет, мир!
+Новое значение: 100
+</code></pre>
+<h3 id="2-Пара-значений-разных-типов"><a class="header" href="#2-Пара-значений-разных-типов">2. Пара значений разных типов</a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
 
-// Интерфейс, ограничивающий типы до чего-то, что поддерживает операцию сложения
-type Summable interface {
-    int | float64
-}
-
-// Обобщённая функция сложения
-func Sum[T Summable](a, b T) T {
-    return a + b
+// Структура для хранения пары значений разных типов
+type Pair[T, U any] struct {
+    First  T
+    Second U
 }
 
 func main() {
-    fmt.Println(Sum(10, 20))       // Работает с int
-    fmt.Println(Sum(5.5, 2.3))     // Работает с float64
+    // Пара целое число и строка
+    pair1 := Pair[int, string]{
+        First:  42,
+        Second: "Ответ",
+    }
+    fmt.Printf("Пара 1: %d - %s\n", pair1.First, pair1.Second)
+
+    // Пара строка и число с плавающей точкой
+    pair2 := Pair[string, float64]{
+        First:  "Пи",
+        Second: 3.14159,
+    }
+    fmt.Printf("Пара 2: %s - %.5f\n", pair2.First, pair2.Second)
 }
 </code></pre>
+<p><strong>Объяснение:</strong></p>
 <ul>
-<li>В данном примере используется интерфейс <strong>Summable</strong>, который ограничивает типы до <code>int</code> и <code>float64</code>.</li>
+<li><code>Pair[T, U]</code> принимает два параметра типа</li>
+<li>Каждое поле структуры может быть своего типа</li>
+<li>Позволяет создавать типобезопасные пары значений</li>
 </ul>
-<h3 id="Полезные-задания"><a class="header" href="#Полезные-задания">Полезные задания</a></h3>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Пара 1: 42 - Ответ
+Пара 2: Пи - 3.14159
+</code></pre>
+<h2 id="Дженерики-с-интерфейсами"><a class="header" href="#Дженерики-с-интерфейсами">Дженерики с интерфейсами</a></h2>
+<h3 id="1-Сравнимые-типы"><a class="header" href="#1-Сравнимые-типы">1. Сравнимые типы</a></h3>
+<pre><code class="language-go">package main
+
+import "fmt"
+
+// Интерфейс для типов, поддерживающих сравнение
+type Comparable interface {
+    int | float64 | string
+}
+
+// Функция для нахождения минимального значения
+func Min[T Comparable](a, b T) T {
+    if a &lt; b {
+        return a
+    }
+    return b
+}
+
+func main() {
+    // Сравнение целых чисел
+    minInt := Min(3, 4)
+    fmt.Printf("Минимальное целое число: %d\n", minInt)
+
+    // Сравнение чисел с плавающей точкой
+    minFloat := Min(3.5, 2.1)
+    fmt.Printf("Минимальное число с плавающей точкой: %.2f\n", minFloat)
+
+    // Сравнение строк
+    minString := Min("яблоко", "банан")
+    fmt.Printf("Минимальная строка: %s\n", minString)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>Comparable</code> ограничивает типы до тех, которые поддерживают операцию сравнения</li>
+<li>Функция <code>Min</code> может работать с любым типом, реализующим <code>Comparable</code></li>
+<li>Обеспечивает типобезопасное сравнение</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Минимальное целое число: 3
+Минимальное число с плавающей точкой: 2.10
+Минимальная строка: банан
+</code></pre>
+<h3 id="2-Суммирование-элементов"><a class="header" href="#2-Суммирование-элементов">2. Суммирование элементов</a></h3>
+<pre><code class="language-go">package main
+
+import "fmt"
+
+// Интерфейс для числовых типов
+type Number interface {
+    int | float64
+}
+
+// Функция для суммирования элементов слайса
+func Sum[T Number](numbers []T) T {
+    var sum T
+    for _, num := range numbers {
+        sum += num
+    }
+    return sum
+}
+
+func main() {
+    // Суммирование целых чисел
+    ints := []int{1, 2, 3, 4, 5}
+    sumInt := Sum(ints)
+    fmt.Printf("Сумма целых чисел: %d\n", sumInt)
+
+    // Суммирование чисел с плавающей точкой
+    floats := []float64{1.1, 2.2, 3.3, 4.4, 5.5}
+    sumFloat := Sum(floats)
+    fmt.Printf("Сумма чисел с плавающей точкой: %.2f\n", sumFloat)
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>Number</code> ограничивает типы до числовых</li>
+<li>Функция <code>Sum</code> работает со слайсами любого числового типа</li>
+<li>Обеспечивает типобезопасное суммирование</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Сумма целых чисел: 15
+Сумма чисел с плавающей точкой: 16.50
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Универсальный-стек"><a class="header" href="#Задание-1-Универсальный-стек">Задание 1: Универсальный стек</a></h3>
+<p>Создайте структуру стека с дженериками, которая:</p>
 <ol>
-<li>
-<p><strong>Задание на базовые дженерики:</strong>
-Напишите функцию, которая принимает два параметра любого типа и возвращает их в обратном порядке.</p>
-</li>
-<li>
-<p><strong>Задание с ограничениями типов:</strong>
-Реализуйте функцию, которая принимает слайс чисел (<code>int</code> или <code>float64</code>) и возвращает их сумму.</p>
-</li>
-<li>
-<p><strong>Задание на структуры с дженериками:</strong>
-Создайте структуру с дженериками для хранения пары значений разного типа (например, <code>string</code> и <code>int</code>). Реализуйте методы для установки и получения этих значений.</p>
-</li>
-<li>
-<p><strong>Задание на интерфейсы с дженериками:</strong>
-Реализуйте интерфейс, который ограничивает типы до тех, которые поддерживают операцию сравнения. Затем создайте функцию для поиска минимального элемента в слайсе.</p>
-</li>
-<li>
-<p><strong>Задание на вложенные дженерики:</strong>
-Напишите функцию, которая принимает два слайса любого типа и возвращает слайс, содержащий все элементы первого и второго слайсов.</p>
-</li>
+<li>Поддерживает любые типы данных</li>
+<li>Имеет методы Push и Pop</li>
+<li>Предоставляет информацию о размере</li>
+<li>Поддерживает проверку на пустоту</li>
 </ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Типобезопасный стек</li>
+<li>Эффективные операции</li>
+<li>Чистый интерфейс</li>
+</ul>
+<h3 id="Задание-2-Фильтрация-слайсов"><a class="header" href="#Задание-2-Фильтрация-слайсов">Задание 2: Фильтрация слайсов</a></h3>
+<p>Реализуйте функцию для фильтрации слайсов:</p>
+<ol>
+<li>Принимает слайс любого типа</li>
+<li>Принимает функцию-предикат</li>
+<li>Возвращает новый слайс с отфильтрованными элементами</li>
+<li>Сохраняет порядок элементов</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Универсальная функция фильтрации</li>
+<li>Гибкие критерии фильтрации</li>
+<li>Эффективная работа</li>
+</ul>
+<h3 id="Задание-3-Карта-с-дженериками"><a class="header" href="#Задание-3-Карта-с-дженериками">Задание 3: Карта с дженериками</a></h3>
+<p>Создайте структуру карты с дженериками:</p>
+<ol>
+<li>Поддерживает любые типы ключей и значений</li>
+<li>Имеет методы для добавления и получения элементов</li>
+<li>Поддерживает удаление элементов</li>
+<li>Предоставляет информацию о размере</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Типобезопасная карта</li>
+<li>Эффективные операции</li>
+<li>Гибкое использование</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим работу с горутинами</li>
+<li>Познакомимся с каналами</li>
+<li>Узнаем о синхронизации</li>
+<li>Начнём писать параллельные программы</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать дженерик-функции</li>
+<li>Использовать ограничения типов</li>
+<li>Работать с дженерик-структурами</li>
+<li>Применять дженерики с интерфейсами</li>
+</ul>
+</blockquote>
 
                     </main>
 

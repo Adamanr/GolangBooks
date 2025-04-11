@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html" class="active"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -174,10 +156,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="Основные-конструкции-управления-в-go"><a class="header" href="#Основные-конструкции-управления-в-go">Основные конструкции управления в Go</a></h1>
-<p>В этом уроке мы познакомимся с базовыми управляющими конструкциями языка Go: <strong><code>if</code></strong>, <strong><code>else if</code></strong>, <strong><code>else</code></strong>, <strong><code>switch</code></strong> и <strong><code>for</code></strong>. Эти конструкции позволяют создавать логику в программе, управлять потоком выполнения и организовывать циклы.</p>
-<h2 id="Условные-операторы-if-else-if-else"><a class="header" href="#Условные-операторы-if-else-if-else">Условные операторы: <code>if</code>, <code>else if</code>, <code>else</code></a></h2>
-<p>if в Go — это оператор условного выполнения кода, который позволяет выполнять определённый блок кода, если условие истинно (то есть результат выражения — true). Это один из основных инструментов для управления потоком программы.</p>
-<h3 id="Пример-с-if-и-else"><a class="header" href="#Пример-с-if-и-else">Пример с <code>if</code> и <code>else</code>:</a></h3>
+<p>В этом уроке мы изучим, как управлять потоком выполнения программы в Go. Вы узнаете о мощных инструментах, которые помогут вам создавать сложную логику и эффективные алгоритмы.</p>
+<h2 id="Почему-управляющие-конструкции-важны"><a class="header" href="#Почему-управляющие-конструкции-важны">Почему управляющие конструкции важны?</a></h2>
+<p>Управляющие конструкции — это основа любого алгоритма. В Go они:</p>
+<ul>
+<li>Позволяют принимать решения</li>
+<li>Управляют повторением действий</li>
+<li>Делают код более гибким и мощным</li>
+<li>Помогают обрабатывать различные сценарии</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go нет цикла <code>while</code>, но его можно эмулировать с помощью <code>for</code>. Это сделано для упрощения языка и уменьшения количества ключевых слов.</p>
+</blockquote>
+<h2 id="Условные-операторы"><a class="header" href="#Условные-операторы">Условные операторы</a></h2>
+<h3 id="1-Оператор-if"><a class="header" href="#1-Оператор-if">1. Оператор <code>if</code></a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
@@ -192,482 +184,193 @@ func main() {
     }
 }
 </code></pre>
-<p>Здесь мы проверяем значение переменной <strong><code>age</code></strong>. Если возраст больше или равен 18, программа выводит "Вы совершеннолетний", иначе — "Вы несовершеннолетний".</p>
-<h3 id="Пример-с-else-if"><a class="header" href="#Пример-с-else-if">Пример с <code>else if</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    age := 16
-
+<blockquote>
+<p>⚡ <strong>Важно</strong>: В Go условие в <code>if</code> должно быть булевым выражением. Нельзя использовать числа или другие типы напрямую.</p>
+</blockquote>
+<h3 id="2-Расширенный-if-с-else-if"><a class="header" href="#2-Расширенный-if-с-else-if">2. Расширенный <code>if</code> с <code>else if</code></a></h3>
+<pre><code class="language-go">func checkAge(age int) {
     if age &lt; 13 {
         fmt.Println("Вы ребёнок.")
     } else if age &gt;= 13 &amp;&amp; age &lt; 18 {
         fmt.Println("Вы подросток.")
-    } else {
+    } else if age &gt;= 18 &amp;&amp; age &lt; 60 {
         fmt.Println("Вы взрослый.")
+    } else {
+        fmt.Println("Вы пожилой человек.")
     }
 }
 </code></pre>
-<p>В этом примере добавлена конструкция <strong><code>else if</code></strong>, которая проверяет промежуточные условия.</p>
+<h3 id="3-Инициализация-в-условии"><a class="header" href="#3-Инициализация-в-условии">3. Инициализация в условии</a></h3>
+<pre><code class="language-go">if age := getUserAge(); age &gt;= 18 {
+    fmt.Printf("Возраст: %d, доступ разрешён\n", age)
+} else {
+    fmt.Printf("Возраст: %d, доступ запрещён\n", age)
+}
+</code></pre>
 <h2 id="Оператор-switch"><a class="header" href="#Оператор-switch">Оператор <code>switch</code></a></h2>
-<p>Оператор <strong><code>switch</code></strong> в Go позволяет упростить проверки, если нужно сравнить одно значение с несколькими вариантами.</p>
-<h3 id="Пример-использования-switch"><a class="header" href="#Пример-использования-switch">Пример использования <code>switch</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    day := "понедельник"
-
+<h3 id="1-Базовый-switch"><a class="header" href="#1-Базовый-switch">1. Базовый <code>switch</code></a></h3>
+<pre><code class="language-go">func getDayName(day int) string {
     switch day {
-    case "понедельник":
-        fmt.Println("Сегодня понедельник.")
-    case "вторник":
-        fmt.Println("Сегодня вторник.")
-    case "среда":
-        fmt.Println("Сегодня среда.")
+    case 1:
+        return "Понедельник"
+    case 2:
+        return "Вторник"
+    case 3:
+        return "Среда"
+    case 4:
+        return "Четверг"
+    case 5:
+        return "Пятница"
+    case 6:
+        return "Суббота"
+    case 7:
+        return "Воскресенье"
     default:
-        fmt.Println("Сегодня другой день.")
+        return "Неизвестный день"
     }
 }
 </code></pre>
-<p>В этом примере <strong><code>switch</code></strong> сравнивает переменную <strong><code>day</code></strong> с несколькими значениями, и при совпадении выполняет соответствующий код.</p>
-<ul>
-<li><strong><code>default</code></strong> выполняется, если ни одно из условий не подошло.</li>
-</ul>
-<h3 id="Несколько-значений-для-одного-case"><a class="header" href="#Несколько-значений-для-одного-case">Несколько значений для одного case:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    day := "суббота"
-
+<h3 id="2-switch-без-выражения"><a class="header" href="#2-switch-без-выражения">2. <code>switch</code> без выражения</a></h3>
+<pre><code class="language-go">func checkTime(hour int) {
+    switch {
+    case hour &gt;= 5 &amp;&amp; hour &lt; 12:
+        fmt.Println("Утро")
+    case hour &gt;= 12 &amp;&amp; hour &lt; 17:
+        fmt.Println("День")
+    case hour &gt;= 17 &amp;&amp; hour &lt; 22:
+        fmt.Println("Вечер")
+    default:
+        fmt.Println("Ночь")
+    }
+}
+</code></pre>
+<h3 id="3-Множественные-значения-в-case"><a class="header" href="#3-Множественные-значения-в-case">3. Множественные значения в <code>case</code></a></h3>
+<pre><code class="language-go">func isWeekend(day int) bool {
     switch day {
-    case "суббота", "воскресенье":
-        fmt.Println("Выходной!")
+    case 6, 7:
+        return true
     default:
-        fmt.Println("Рабочий день.")
+        return false
     }
 }
 </code></pre>
-<p>Здесь <strong><code>case "суббота", "воскресенье"</code></strong> означает, что для любого из этих двух значений будет выполнен один и тот же код.</p>
-<h2 id="Циклы-for"><a class="header" href="#Циклы-for">Циклы: <code>for</code></a></h2>
-<p>В Go есть только один оператор цикла — <strong><code>for</code></strong>, но его можно использовать для разных типов итераций. Давайте рассмотрим несколько примеров.</p>
-<h3 id="Стандартный-цикл-for"><a class="header" href="#Стандартный-цикл-for">Стандартный цикл <code>for</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    for i := 0; i &lt; 5; i++ {
-        fmt.Println(i)
-    }
+<h2 id="Циклы"><a class="header" href="#Циклы">Циклы</a></h2>
+<h3 id="1-Классический-цикл-for"><a class="header" href="#1-Классический-цикл-for">1. Классический цикл <code>for</code></a></h3>
+<pre><code class="language-go">// Вывод чисел от 1 до 10
+for i := 1; i &lt;= 10; i++ {
+    fmt.Println(i)
 }
 </code></pre>
-<p>Этот цикл выводит числа от 0 до 4. Здесь:</p>
-<ul>
-<li><strong><code>i := 0</code></strong> — инициализация переменной.</li>
-<li><strong><code>i &lt; 5</code></strong> — условие, по которому цикл продолжается.</li>
-<li><strong><code>i++</code></strong> — шаг цикла, увеличивает <strong><code>i</code></strong> на 1.</li>
-</ul>
-<h3 id="Цикл-с-условием"><a class="header" href="#Цикл-с-условием">Цикл с условием:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    i := 0
-    for i &lt; 5 {
-        fmt.Println(i)
-        i++
-    }
+<h3 id="2-Цикл-с-условием-аналог-while"><a class="header" href="#2-Цикл-с-условием-аналог-while">2. Цикл с условием (аналог while)</a></h3>
+<pre><code class="language-go">// Вывод чисел, пока они меньше 10
+i := 1
+for i &lt; 10 {
+    fmt.Println(i)
+    i++
 }
 </code></pre>
-<p>Этот цикл выполняется, пока <strong><code>i</code></strong> меньше 5. Это аналог цикла <strong><code>while</code></strong> в других языках.</p>
-<h3 id="Бесконечный-цикл"><a class="header" href="#Бесконечный-цикл">Бесконечный цикл:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    for {
-        fmt.Println("Бесконечный цикл")
+<h3 id="3-Бесконечный-цикл"><a class="header" href="#3-Бесконечный-цикл">3. Бесконечный цикл</a></h3>
+<pre><code class="language-go">// Бесконечный цикл с выходом по условию
+for {
+    if someCondition() {
+        break
     }
+    // Действия
 }
 </code></pre>
-<p>Цикл <strong><code>for {}</code></strong> без условий будет выполняться бесконечно. Обычно такие циклы используют с операторами <strong><code>break</code></strong> для выхода.</p>
-<h3 id="Пример-с-break-и-continue"><a class="header" href="#Пример-с-break-и-continue">Пример с <code>break</code> и <code>continue</code>:</a></h3>
-<ul>
-<li><strong><code>break</code></strong> завершает цикл досрочно.</li>
-<li><strong><code>continue</code></strong> пропускает текущую итерацию и переходит к следующей.</li>
-</ul>
-<pre><code class="language-go">package main
+<h3 id="4-range-для-итерации"><a class="header" href="#4-range-для-итерации">4. <code>range</code> для итерации</a></h3>
+<pre><code class="language-go">// Итерация по массиву
+numbers := []int{1, 2, 3, 4, 5}
+for index, value := range numbers {
+    fmt.Printf("Индекс: %d, Значение: %d\n", index, value)
+}
 
-import "fmt"
+// Итерация по карте
+ages := map[string]int{
+    "Иван": 25,
+    "Пётр": 30,
+}
+for name, age := range ages {
+    fmt.Printf("%s: %d лет\n", name, age)
+}
+</code></pre>
+<h2 id="Управление-циклом"><a class="header" href="#Управление-циклом">Управление циклом</a></h2>
+<h3 id="1-break-и-continue"><a class="header" href="#1-break-и-continue">1. <code>break</code> и <code>continue</code></a></h3>
+<pre><code class="language-go">// Пример с break
+for i := 1; i &lt;= 10; i++ {
+    if i == 5 {
+        break // Выход из цикла
+    }
+    fmt.Println(i)
+}
 
-func main() {
-    for i := 0; i &lt; 10; i++ {
-        if i == 5 {
-            break // Останавливает цикл
+// Пример с continue
+for i := 1; i &lt;= 10; i++ {
+    if i%2 == 0 {
+        continue // Пропуск чётных чисел
+    }
+    fmt.Println(i)
+}
+</code></pre>
+<h3 id="2-Метки-для-вложенных-циклов"><a class="header" href="#2-Метки-для-вложенных-циклов">2. Метки для вложенных циклов</a></h3>
+<pre><code class="language-go">outerLoop:
+for i := 1; i &lt;= 3; i++ {
+    for j := 1; j &lt;= 3; j++ {
+        if i*j == 6 {
+            break outerLoop // Выход из обоих циклов
         }
-        if i%2 == 0 {
-            continue // Пропускает текущую итерацию
-        }
-        fmt.Println(i)
+        fmt.Printf("%d * %d = %d\n", i, j, i*j)
     }
 }
 </code></pre>
-<p>В этом примере:</p>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Калькулятор-с-меню"><a class="header" href="#Задание-1-Калькулятор-с-меню">Задание 1: Калькулятор с меню</a></h3>
+<p>Создайте программу-калькулятор, которая:</p>
+<ol>
+<li>Выводит меню с операциями (+, -, *, /)</li>
+<li>Запрашивает два числа</li>
+<li>Выполняет выбранную операцию</li>
+<li>Позволяет продолжить или выйти</li>
+</ol>
+<h3 id="Задание-2-Игра-Угадай-число"><a class="header" href="#Задание-2-Игра-Угадай-число">Задание 2: Игра "Угадай число"</a></h3>
+<p>Напишите игру, где:</p>
+<ol>
+<li>Компьютер загадывает число от 1 до 100</li>
+<li>Игрок пытается угадать число</li>
+<li>Программа подсказывает "больше" или "меньше"</li>
+<li>Считает количество попыток</li>
+</ol>
+<h3 id="Задание-3-Анализатор-текста"><a class="header" href="#Задание-3-Анализатор-текста">Задание 3: Анализатор текста</a></h3>
+<p>Создайте программу, которая:</p>
+<ol>
+<li>Принимает текст от пользователя</li>
+<li>Подсчитывает количество:
 <ul>
-<li>При <strong><code>i == 5</code></strong> цикл завершится из-за <strong><code>break</code></strong>.</li>
-<li>При чётных значениях <strong><code>i</code></strong> будет выполнена команда <strong><code>continue</code></strong>, пропускающая вывод.</li>
+<li>Слов</li>
+<li>Букв</li>
+<li>Цифр</li>
+<li>Специальных символов</li>
 </ul>
-<p>Оператор <strong><code>goto</code></strong> и <strong>метки</strong> в Go предоставляют низкоуровневый способ управления потоком выполнения программы. Они позволяют перемещать выполнение программы между различными частями кода, что делает логику гибче, но использование этих конструкций редко рекомендуется, так как может ухудшить читаемость кода.</p>
-<h2 id="Оператор-goto"><a class="header" href="#Оператор-goto">Оператор <code>goto</code></a></h2>
-<p><strong><code>goto</code></strong> позволяет программе перейти к определённой метке в коде. Метка — это идентификатор, за которым следует двоеточие. Как правило, использование <code>goto</code> стараются избегать, так как это усложняет логику программы, но в некоторых случаях (например, при выходе из вложенных циклов или для улучшения читаемости аварийного завершения программы) оно может быть полезным.</p>
-<h3 id="Пример-с-goto"><a class="header" href="#Пример-с-goto">Пример с <code>goto</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    count := 0
-
-    fmt.Println("Начало программы")
-
-loop:
-    if count &lt; 3 {
-        fmt.Println("Цикл:", count)
-        count++
-        goto loop // Переход к метке loop
-    }
-
-    fmt.Println("Конец программы")
-}
-</code></pre>
-<p>В этом примере <strong><code>goto</code></strong> передаёт управление к метке <strong><code>loop</code></strong>, что позволяет повторять цикл. Программа выводит "Цикл: 0", "Цикл: 1", "Цикл: 2", а затем завершает цикл и выводит "Конец программы".</p>
-<h3 id="Когда-использовать-goto"><a class="header" href="#Когда-использовать-goto">Когда использовать <code>goto</code>:</a></h3>
+</li>
+<li>Выводит статистику</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
 <ul>
-<li>Для упрощённого выхода из сложных вложенных конструкций.</li>
-<li>Для обработки ошибок и аварийного завершения программы (например, в функциях с множеством проверок ошибок).</li>
-</ul>
-<h2 id="Метки-для-break-и-continue"><a class="header" href="#Метки-для-break-и-continue">Метки для <code>break</code> и <code>continue</code></a></h2>
-<p>Go также поддерживает <strong>метки</strong> для операторов <strong><code>break</code></strong> и <strong><code>continue</code></strong>, которые помогают управлять выходом из вложенных циклов или переходом к следующей итерации внешнего цикла.</p>
-<h3 id="Пример-с-метками-для-break"><a class="header" href="#Пример-с-метками-для-break">Пример с метками для <code>break</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-outerLoop:
-    for i := 0; i &lt; 3; i++ {
-        for j := 0; j &lt; 3; j++ {
-            if i == 2 &amp;&amp; j == 2 {
-                break outerLoop // Прерываем внешний цикл
-            }
-            fmt.Println(i, j)
-        }
-    }
-    fmt.Println("Вышли из обоих циклов.")
-}
-</code></pre>
-<p>Здесь метка <strong><code>outerLoop</code></strong> привязана к внешнему циклу. Когда условие <strong><code>i == 2 &amp;&amp; j == 2</code></strong> выполняется, <strong><code>break outerLoop</code></strong> прерывает внешний цикл, а не внутренний.</p>
-<h3 id="Пример-с-метками-для-continue"><a class="header" href="#Пример-с-метками-для-continue">Пример с метками для <code>continue</code>:</a></h3>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-outerLoop:
-    for i := 0; i &lt; 3; i++ {
-        for j := 0; j &lt; 3; j++ {
-            if j == 1 {
-                continue outerLoop // Переходим к следующей итерации внешнего цикла
-            }
-            fmt.Println(i, j)
-        }
-    }
-}
-</code></pre>
-<p>В этом примере <strong><code>continue outerLoop</code></strong> пропускает оставшуюся часть внутреннего цикла и немедленно переходит к следующей итерации внешнего цикла.</p>
-<h2 id="Особенности"><a class="header" href="#Особенности">Особенности:</a></h2>
-<ul>
-<li><strong><code>goto</code></strong> и метки не должны использоваться для замены более простых и понятных управляющих конструкций.</li>
-<li><strong><code>break</code></strong> и <strong><code>continue</code></strong> с метками полезны в ситуациях, когда нужно контролировать поведение нескольких вложенных циклов.</li>
+<li>Изучим функции в Go</li>
+<li>Познакомимся с методами</li>
+<li>Узнаем о замыканиях</li>
+<li>Начнём писать более сложные программы</li>
 </ul>
 <blockquote>
-<p>Оператор <strong><code>goto</code></strong> и метки с <strong><code>break</code></strong> и <strong><code>continue</code></strong> могут быть полезны для сложных ситуаций с вложенными циклами, но их следует использовать с осторожностью. В большинстве случаев более читаемым решением будут стандартные управляющие конструкции, такие как <code>if</code>, <code>for</code>, и <code>switch</code>.</p>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Использовать все управляющие конструкции Go</li>
+<li>Писать эффективные циклы</li>
+<li>Применять условные операторы</li>
+<li>Управлять потоком выполнения программы</li>
+</ul>
 </blockquote>
-<p>Операторы <strong><code>goto</code></strong> и метки с <strong><code>continue</code>/<code>break</code></strong> в Go имеют схожую функциональность в том, что они позволяют контролировать выполнение программы и перемещать управление в нужные части кода. Однако у них есть несколько ключевых отличий, связанных с тем, как и когда они могут использоваться.</p>
-<h3 id="1-Назначение-и-использование"><a class="header" href="#1-Назначение-и-использование">1. <strong>Назначение и использование</strong></a></h3>
-<ul>
-<li>
-<p><strong><code>goto</code></strong>:</p>
-<ul>
-<li>Основное предназначение <strong><code>goto</code></strong> — это передача управления к произвольной метке в коде.</li>
-<li>Оно позволяет перемещаться не только в пределах циклов, но и между любыми блоками кода в функции.</li>
-<li><strong><code>goto</code></strong> может перемещать выполнение вперёд и назад по коду, что делает его более гибким, но также может ухудшать читаемость программы.</li>
-</ul>
-<p>Пример с <strong><code>goto</code></strong>:</p>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-    count := 0
-
-start:
-    fmt.Println("Счёт:", count)
-    count++
-    if count &lt; 3 {
-        goto start // Переход к метке start
-    }
-    fmt.Println("Конец")
-}
-</code></pre>
-<p>Здесь <strong><code>goto</code></strong> позволяет выполнять код от метки <code>start</code> повторно.</p>
-</li>
-<li>
-<p><strong><code>continue</code>/<code>break</code> с меткой</strong>:</p>
-<ul>
-<li>Метки с <strong><code>continue</code></strong> и <strong><code>break</code></strong> предназначены для управления циклами, особенно вложенными. С их помощью можно прервать или пропустить итерации внешнего цикла.</li>
-<li><strong><code>continue</code></strong> с меткой возвращает управление к следующей итерации метки цикла, а <strong><code>break</code></strong> с меткой завершает выполнение обозначенного цикла.</li>
-</ul>
-<p>Пример с <strong><code>break</code></strong> с меткой:</p>
-<pre><code class="language-go">package main
-
-import "fmt"
-
-func main() {
-outerLoop:
-    for i := 0; i &lt; 3; i++ {
-        for j := 0; j &lt; 3; j++ {
-            if i == 1 &amp;&amp; j == 2 {
-                break outerLoop // Прерывание внешнего цикла
-            }
-            fmt.Println(i, j)
-        }
-    }
-    fmt.Println("Конец")
-}
-</code></pre>
-<p>В этом примере <strong><code>break outerLoop</code></strong> прерывает выполнение внешнего цикла.</p>
-</li>
-</ul>
-<h3 id="2-Контекст-использования"><a class="header" href="#2-Контекст-использования">2. <strong>Контекст использования</strong></a></h3>
-<ul>
-<li>
-<p><strong><code>goto</code></strong> может использоваться в любом месте внутри функции, как для перехода вперёд, так и назад по коду. Он не ограничен циклами.</p>
-</li>
-<li>
-<p><strong><code>break</code></strong> и <strong><code>continue</code></strong> с меткой работают <strong>только в контексте циклов</strong>. Они позволяют управлять выходом из одного или нескольких циклов или переходом к следующей итерации внешнего цикла.</p>
-</li>
-</ul>
-<h3 id="3-Читаемость-и-структура-кода"><a class="header" href="#3-Читаемость-и-структура-кода">3. <strong>Читаемость и структура кода</strong></a></h3>
-<ul>
-<li>
-<p><strong><code>goto</code></strong>:</p>
-<ul>
-<li>Может создавать "нелинейный" код, что снижает его читаемость.</li>
-<li>Если используется неосторожно, может запутать логику программы (появляются "прыжки" в коде).</li>
-<li>Однако полезен для обработки ошибок или выхода из глубоко вложенных конструкций.</li>
-</ul>
-</li>
-<li>
-<p><strong><code>continue</code>/<code>break</code> с меткой</strong>:</p>
-<ul>
-<li>Более структурированный способ управления циклами.</li>
-<li>Применяется для управления потоками в циклах, что делает код более читаемым и предсказуемым в таких сценариях.</li>
-</ul>
-</li>
-</ul>
-<h3 id="4-Семантика-выполнения"><a class="header" href="#4-Семантика-выполнения">4. <strong>Семантика выполнения</strong></a></h3>
-<ul>
-<li><strong><code>goto</code></strong> немедленно передаёт управление к указанной метке, обходя все последующие инструкции до метки.</li>
-<li><strong><code>break</code></strong> с меткой завершает выполнение цикла, к которому привязана метка.</li>
-<li><strong><code>continue</code></strong> с меткой завершает текущую итерацию и немедленно возвращает управление на начало указанного цикла.</li>
-</ul>
-<h3 id="Итоговые-различия"><a class="header" href="#Итоговые-различия">Итоговые различия:</a></h3>
-<ul>
-<li>
-<p><strong><code>goto</code></strong> — это более универсальный оператор, который может переносить выполнение программы в любое место в рамках функции, но может снижать читаемость и усложнять логику.</p>
-</li>
-<li>
-<p><strong><code>continue</code>/<code>break</code> с меткой</strong> — это инструменты для работы с циклами, которые помогают управлять потоком вложенных циклов, сохраняя при этом более понятную и структурированную логику программы.</p>
-</li>
-</ul>
-<h2 id="Заключение"><a class="header" href="#Заключение">Заключение</a></h2>
-<p>Мы рассмотрели основные управляющие конструкции Go: <strong><code>if/else</code></strong>, <strong><code>switch</code></strong>, <strong>goto</strong>, метки для <strong>break/continue</strong> и различные виды циклов с <strong><code>for</code></strong>. Это фундаментальные элементы, которые позволяют создавать логику и управлять выполнением программы.</p>
-<h2 id="Задания-для-for"><a class="header" href="#Задания-для-for">Задания для <strong><code>for</code></strong>:</a></h2>
-<h3 id="Задание-1-Вывод-чисел"><a class="header" href="#Задание-1-Вывод-чисел">Задание 1: Вывод чисел</a></h3>
-<p>Напишите программу, которая с помощью цикла <strong><code>for</code></strong> выводит числа от 1 до 10.</p>
-<h3 id="Пример-вывода"><a class="header" href="#Пример-вывода">Пример вывода:</a></h3>
-<pre><code>1
-2
-3
-...
-10
-</code></pre>
-<h3 id="Задание-2-Сумма-чисел"><a class="header" href="#Задание-2-Сумма-чисел">Задание 2: Сумма чисел</a></h3>
-<p>Используя цикл <strong><code>for</code></strong>, напишите программу, которая вычисляет и выводит сумму чисел от 1 до 100.</p>
-<h3 id="Пример-вывода-1"><a class="header" href="#Пример-вывода-1">Пример вывода:</a></h3>
-<pre><code>Сумма чисел от 1 до 100: 5050
-</code></pre>
-<h3 id="Задание-3-Бесконечный-цикл"><a class="header" href="#Задание-3-Бесконечный-цикл">Задание 3: Бесконечный цикл</a></h3>
-<p>Создайте бесконечный цикл с <strong><code>for</code></strong>, который выводит случайные числа от 1 до 100. Прекратите выполнение программы, если число окажется больше 90.</p>
-<h3 id="Пример-вывода-2"><a class="header" href="#Пример-вывода-2">Пример вывода:</a></h3>
-<pre><code>32
-47
-...
-93
-Цикл завершён.
-</code></pre>
-<h3 id="Задание-4-Таблица-умножения"><a class="header" href="#Задание-4-Таблица-умножения">Задание 4: Таблица умножения</a></h3>
-<p>Напишите программу, которая с помощью вложенного цикла <strong><code>for</code></strong> выводит таблицу умножения от 1 до 9.</p>
-<h3 id="Пример-вывода-3"><a class="header" href="#Пример-вывода-3">Пример вывода:</a></h3>
-<pre><code>1 * 1 = 1
-1 * 2 = 2
-...
-9 * 9 = 81
-</code></pre>
-<h2 id="Задания-для-if"><a class="header" href="#Задания-для-if">Задания для <strong><code>if</code></strong>:</a></h2>
-<h3 id="Задание-1-Чётное-или-нечётное"><a class="header" href="#Задание-1-Чётное-или-нечётное">Задание 1: Чётное или нечётное</a></h3>
-<p>Напишите программу, которая с помощью <strong><code>if</code></strong> проверяет, является ли введённое число чётным или нечётным, и выводит соответствующее сообщение.</p>
-<h3 id="Пример"><a class="header" href="#Пример">Пример:</a></h3>
-<pre><code class="language-go">Введите число: 7
-</code></pre>
-<h3 id="Пример-вывода-4"><a class="header" href="#Пример-вывода-4">Пример вывода:</a></h3>
-<pre><code>Число 7 нечётное.
-</code></pre>
-<blockquote>
-<p>Для заданий с if вы можете использовать fmt.Scan() или обычные переменные</p>
-</blockquote>
-<h3 id="Задание-2-Проверка-возраста"><a class="header" href="#Задание-2-Проверка-возраста">Задание 2: Проверка возраста</a></h3>
-<p>Напишите программу, которая спрашивает у пользователя его возраст. Если возраст меньше 18, программа должна выводить сообщение, что доступ к контенту ограничен. Если 18 и больше — доступ разрешён.</p>
-<h3 id="Пример-1"><a class="header" href="#Пример-1">Пример:</a></h3>
-<pre><code class="language-go">Введите возраст: 17
-</code></pre>
-<h3 id="Пример-вывода-5"><a class="header" href="#Пример-вывода-5">Пример вывода:</a></h3>
-<pre><code>Доступ запрещён.
-</code></pre>
-<h3 id="Задание-3-Определение-максимального-числа"><a class="header" href="#Задание-3-Определение-максимального-числа">Задание 3: Определение максимального числа</a></h3>
-<p>Напишите программу, которая принимает три числа от пользователя и выводит максимальное из них, используя вложенные операторы <strong><code>if</code></strong>.</p>
-<h3 id="Пример-2"><a class="header" href="#Пример-2">Пример:</a></h3>
-<pre><code class="language-go">Введите три числа: 5, 12, 9
-</code></pre>
-<h3 id="Пример-вывода-6"><a class="header" href="#Пример-вывода-6">Пример вывода:</a></h3>
-<pre><code>Максимальное число: 12
-</code></pre>
-<h3 id="Задание-4-Простая-авторизация"><a class="header" href="#Задание-4-Простая-авторизация">Задание 4: Простая авторизация</a></h3>
-<p>Напишите программу, которая проверяет введённый пользователем логин и пароль. Если логин — "admin", а пароль — "1234", программа должна вывести "Добро пожаловать!", в противном случае — "Неверный логин или пароль".</p>
-<h3 id="Пример-3"><a class="header" href="#Пример-3">Пример:</a></h3>
-<pre><code class="language-go">Введите логин: admin
-Введите пароль: 1234
-</code></pre>
-<h3 id="Пример-вывода-7"><a class="header" href="#Пример-вывода-7">Пример вывода:</a></h3>
-<pre><code>Добро пожаловать!
-</code></pre>
-<h2 id="Задания-для-switch"><a class="header" href="#Задания-для-switch">Задания для <strong><code>switch</code></strong>:</a></h2>
-<h3 id="Задание-1-Определение-дня-недели"><a class="header" href="#Задание-1-Определение-дня-недели">Задание 1: Определение дня недели</a></h3>
-<p>Напишите программу, которая с помощью <strong><code>switch</code></strong> принимает от пользователя число от 1 до 7 и выводит название дня недели (1 — Понедельник, 2 — Вторник и т.д.).</p>
-<h3 id="Пример-4"><a class="header" href="#Пример-4">Пример:</a></h3>
-<pre><code class="language-go">Введите число: 3
-</code></pre>
-<h3 id="Пример-вывода-8"><a class="header" href="#Пример-вывода-8">Пример вывода:</a></h3>
-<pre><code>Среда
-</code></pre>
-<h3 id="Задание-2-Калькулятор"><a class="header" href="#Задание-2-Калькулятор">Задание 2: Калькулятор</a></h3>
-<p>Напишите простую программу-калькулятор, которая спрашивает у пользователя два числа и оператор (+, -, *, /). В зависимости от введённого оператора, программа должна выполнить соответствующую операцию с числами, используя <strong><code>switch</code></strong>.</p>
-<h3 id="Пример-5"><a class="header" href="#Пример-5">Пример:</a></h3>
-<pre><code class="language-go">Введите первое число: 8
-Введите оператор: +
-Введите второе число: 5
-</code></pre>
-<h3 id="Пример-вывода-9"><a class="header" href="#Пример-вывода-9">Пример вывода:</a></h3>
-<pre><code>8 + 5 = 13
-</code></pre>
-<h3 id="Задание-3-Определение-времени-суток"><a class="header" href="#Задание-3-Определение-времени-суток">Задание 3: Определение времени суток</a></h3>
-<p>Напишите программу, которая принимает от пользователя текущее время в часах (например, 14 для 14:00) и выводит, какое это время суток — утро, день, вечер или ночь — используя <strong><code>switch</code></strong>.</p>
-<h3 id="Пример-6"><a class="header" href="#Пример-6">Пример:</a></h3>
-<pre><code class="language-go">Введите текущий час: 18
-</code></pre>
-<h3 id="Пример-вывода-10"><a class="header" href="#Пример-вывода-10">Пример вывода:</a></h3>
-<pre><code>Это вечер.
-</code></pre>
-<h2 id="Задания-с-goto"><a class="header" href="#Задания-с-goto">Задания с <strong><code>goto</code></strong>:</a></h2>
-<h3 id="Задание-1-Простая-петля"><a class="header" href="#Задание-1-Простая-петля">Задание 1: Простая петля</a></h3>
-<p>Напишите программу, которая будет выводить числа от 1 до 10 с помощью оператора <strong><code>goto</code></strong>. После вывода числа 5, программа должна перейти к метке и завершить выполнение.</p>
-<h3 id="Пример-вывода-11"><a class="header" href="#Пример-вывода-11">Пример вывода:</a></h3>
-<pre><code>1
-2
-3
-4
-5
-Программа завершена.
-</code></pre>
-<h3 id="Задание-2-Обработка-ошибок-с-goto"><a class="header" href="#Задание-2-Обработка-ошибок-с-goto">Задание 2: Обработка ошибок с <code>goto</code></a></h3>
-<p>Напишите программу, которая пытается выполнить деление двух чисел. Если второе число равно нулю, программа должна перейти к метке для обработки ошибки и вывести сообщение о недопустимой операции деления на ноль.</p>
-<h3 id="Пример-7"><a class="header" href="#Пример-7">Пример:</a></h3>
-<pre><code class="language-go">var a, b int
-a = 10
-b = 0
-</code></pre>
-<h3 id="Пример-вывода-12"><a class="header" href="#Пример-вывода-12">Пример вывода:</a></h3>
-<pre><code>Ошибка: деление на ноль.
-</code></pre>
-<h3 id="Задание-3-Вложенные-условия"><a class="header" href="#Задание-3-Вложенные-условия">Задание 3: Вложенные условия</a></h3>
-<p>Используйте <strong><code>goto</code></strong> для реализации цикла, который будет увеличивать число от 0 до 20. Когда число кратно 7, выполните переход к метке, которая завершает цикл.</p>
-<h3 id="Пример-вывода-13"><a class="header" href="#Пример-вывода-13">Пример вывода:</a></h3>
-<pre><code>0
-1
-2
-...
-6
-Цикл завершён.
-</code></pre>
-<h2 id="Задания-с-breakcontinue-с-метками"><a class="header" href="#Задания-с-breakcontinue-с-метками">Задания с <strong><code>break/continue</code></strong> с метками:</a></h2>
-<h3 id="Задание-1-Прерывание-внешнего-цикла"><a class="header" href="#Задание-1-Прерывание-внешнего-цикла">Задание 1: Прерывание внешнего цикла</a></h3>
-<p>Напишите программу, в которой есть два вложенных цикла <strong><code>for</code></strong>. Программа должна выводить значения переменных обоих циклов. Когда сумма переменных внутреннего и внешнего циклов равна 5, программа должна прервать выполнение внешнего цикла с помощью <strong><code>break</code></strong> с меткой.</p>
-<h3 id="Пример-вывода-14"><a class="header" href="#Пример-вывода-14">Пример вывода:</a></h3>
-<pre><code>0 0
-0 1
-0 2
-1 0
-1 1
-1 2
-Программа завершена.
-</code></pre>
-<h3 id="Задание-2-Пропуск-итераций"><a class="header" href="#Задание-2-Пропуск-итераций">Задание 2: Пропуск итераций</a></h3>
-<p>Создайте программу с двумя вложенными циклами. Внутренний цикл должен перебирать числа от 0 до 5, а внешний — от 0 до 2. Используйте <strong><code>continue</code></strong> с меткой, чтобы пропустить внешнюю итерацию цикла, если переменная внутреннего цикла равна 3.</p>
-<h3 id="Пример-вывода-15"><a class="header" href="#Пример-вывода-15">Пример вывода:</a></h3>
-<pre><code>0 0
-0 1
-0 2
-1 0
-1 1
-1 2
-2 0
-2 1
-2 2
-</code></pre>
-<h3 id="Задание-3-Прерывание-и-продолжение-в-зависимости-от-условия"><a class="header" href="#Задание-3-Прерывание-и-продолжение-в-зависимости-от-условия">Задание 3: Прерывание и продолжение в зависимости от условия</a></h3>
-<p>Напишите программу, которая выводит все числа от 0 до 10. Если число чётное — продолжите выполнение внешнего цикла с помощью <strong><code>continue</code></strong> с меткой, если нечётное — завершите выполнение программы, используя <strong><code>break</code></strong> с меткой.</p>
-<h3 id="Пример-вывода-16"><a class="header" href="#Пример-вывода-16">Пример вывода:</a></h3>
-<pre><code>Число: 1
-Программа завершена.
-</code></pre>
-<h3 id="Задание-4-Таблица-умножения-с-выходом"><a class="header" href="#Задание-4-Таблица-умножения-с-выходом">Задание 4: Таблица умножения с выходом</a></h3>
-<p>Напишите программу, которая выводит таблицу умножения от 1 до 9. Если результат умножения равен 36, программа должна прервать оба цикла с помощью <strong><code>break</code></strong> с меткой.</p>
-<h3 id="Пример-вывода-17"><a class="header" href="#Пример-вывода-17">Пример вывода:</a></h3>
-<pre><code>1 * 1 = 1
-1 * 2 = 2
-...
-6 * 6 = 36
-Цикл прерван.
-</code></pre>
 
                     </main>
 

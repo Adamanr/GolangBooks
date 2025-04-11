@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html" class="active"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -174,10 +156,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="Урок-1-Первое-знакомство-с-go"><a class="header" href="#Урок-1-Первое-знакомство-с-go">Урок 1: Первое знакомство с Go</a></h1>
-<p>Добро пожаловать в ваш первый урок по Go! Мы начнем с классического примера, с которого все программисты начинают своё путешествие — с вывода <strong>"Hello, World!"</strong>. Но, как и подобает разработчикам на Go, мы разберём этот код детально, чтобы понять не только, как его написать, но и почему он работает именно так.</p>
-<h2 id="Как-выглядит-программа-hello-world-на-go"><a class="header" href="#Как-выглядит-программа-hello-world-на-go">Как выглядит программа "Hello, World!" на Go?</a></h2>
+<p>Добро пожаловать в ваш первый урок по Go! В этом уроке мы не только напишем классическую программу "Hello, World!", но и разберёмся, почему Go стал одним из самых популярных языков программирования в современной разработке.</p>
+<h2 id="Почему-go"><a class="header" href="#Почему-go">Почему Go?</a></h2>
+<p>Прежде чем мы начнём писать код, давайте поговорим о том, почему Go стоит изучать:</p>
+<ul>
+<li><strong>Простота и читаемость</strong>: Синтаксис Go минималистичен и понятен</li>
+<li><strong>Высокая производительность</strong>: Go компилируется в нативный код</li>
+<li><strong>Встроенная поддержка конкурентности</strong>: Горутины и каналы делают параллельное программирование простым</li>
+<li><strong>Богатая стандартная библиотека</strong>: Множество готовых решений "из коробки"</li>
+<li><strong>Кроссплатформенность</strong>: Один код работает на разных операционных системах</li>
+<li><strong>Сильная типизация</strong>: Помогает избежать ошибок на этапе компиляции</li>
+</ul>
+<h2 id="Ваша-первая-программа-на-go"><a class="header" href="#Ваша-первая-программа-на-go">Ваша первая программа на Go</a></h2>
 <p>Вот наш код:</p>
-<pre><code class="language-Go">package main 
+<pre><code class="language-go">package main 
 
 import "fmt"
 
@@ -185,76 +177,114 @@ func main() {
     fmt.Println("Hello, World!") // Выведет: Hello, World!
 }
 </code></pre>
-<p>Теперь давайте разберём его по частям.</p>
+<p>Давайте разберём его по частям и поймём, почему он работает именно так.</p>
 <h2 id="Разбор-кода"><a class="header" href="#Разбор-кода">Разбор кода</a></h2>
 <h3 id="1-package-main"><a class="header" href="#1-package-main">1. <strong>package main</strong></a></h3>
-<p>Пакет — это основная единица организации кода в Go, которая представляет удобную организацию разделения кода на отдельные части или модули. <strong><code>package main</code></strong> — особенный пакет, который сообщает компилятору, что именно этот файл является точкой входа в программу, и именно с него всё начнётся. Без этого пакет не скомпилируется как исполняемый файл.</p>
-<p>Пакеты помогают организовать код и добавлять новые возможности. Go имеет мощную стандартную библиотеку с множеством готовых решений (например, для работы с файлами, сетью и т.д.), но вы можете писать и свои пакеты для повторного использования в других проектах.</p>
-<h3 id="2-import-fmt"><a class="header" href="#2-import-fmt">2. <strong>import "fmt"</strong></a></h3>
-<p>Ключевое слово <strong><code>import</code></strong> позволяет подключать внешние зависимости, будь то пакеты из стандартной библиотеки или сторонние решения. В нашем примере мы используем <strong><code>fmt</code></strong> — это библиотека для работы с вводом и выводом, которая входит в стандартную библиотеку Go. Она позволяет выводить данные в консоль, а также выполнять другие операции с текстом. Важно отметить, что пакет <strong>fmt</strong> вам не нужно отдельно устанавливать — он уже включён в Go.</p>
-<h3 id="3-func-main"><a class="header" href="#3-func-main">3. <strong>func main()</strong></a></h3>
-<p>Функция <strong><code>main()</code></strong> — это "точка входа" в любую программу на Go. Каждый исполняемый файл должен иметь функцию с именем <strong>main</strong>, иначе программа просто не запустится. Это ваша отправная точка — отсюда начинается выполнение всей логики программы.</p>
-<p>Функции в Go определяются с помощью ключевого слова <strong><code>func</code></strong>. Далее указывается имя функции, а в скобках могут быть переданы параметры, если они нужны.</p>
-<h3 id="4-fmtprintln"><a class="header" href="#4-fmtprintln">4. <strong>fmt.Println()</strong></a></h3>
-<p>Функция <strong><code>fmt.Println()</code></strong> — это простой способ вывести строку в консоль. Внутри скобок указываем текст, который хотим вывести, в данном случае: <strong>"Hello, World!"</strong>. В конце выполнения <strong><code>Println</code></strong> автоматически добавляет новую строку.</p>
+<p>В Go код организуется в пакеты (packages). Пакет <code>main</code> — это особый пакет, который сообщает компилятору, что этот файл является точкой входа в программу. Без него программа не сможет быть запущена как исполняемый файл.</p>
 <blockquote>
-<p>Кстати, у <strong>fmt</strong> есть и другие полезные функции для вывода:</p>
+<p>💡 <strong>Интересный факт</strong>: В Go нет понятия "классов" как в объектно-ориентированных языках. Вместо этого используются пакеты и структуры.</p>
+</blockquote>
+<h3 id="2-import-fmt"><a class="header" href="#2-import-fmt">2. <strong>import "fmt"</strong></a></h3>
+<p>Ключевое слово <code>import</code> позволяет подключать внешние пакеты. В нашем примере мы используем <code>fmt</code> — это библиотека для работы с вводом и выводом, которая входит в стандартную библиотеку Go.</p>
+<blockquote>
+<p>🚀 <strong>Совет</strong>: Стандартная библиотека Go очень богата. Позже мы изучим такие пакеты как:</p>
 <ul>
-<li><strong><code>fmt.Print()</code></strong> — вывод без добавления новой строки. Следующий вывод будет продолжен в той же строке.</li>
-<li><strong><code>fmt.Printf()</code></strong> — форматированный вывод, позволяющий вставлять значения в строку.</li>
+<li><code>net/http</code> для работы с веб</li>
+<li><code>encoding/json</code> для работы с JSON</li>
+<li><code>os</code> для работы с операционной системой</li>
+<li>и многие другие</li>
 </ul>
 </blockquote>
-<h3 id="Пример-использования-других-методов"><a class="header" href="#Пример-использования-других-методов">Пример использования других методов:</a></h3>
-<pre><code class="language-Go">fmt.Print("Hello, ")
+<h3 id="3-func-main"><a class="header" href="#3-func-main">3. <strong>func main()</strong></a></h3>
+<p>Функция <code>main()</code> — это точка входа в любую программу на Go. Каждый исполняемый файл должен иметь функцию с именем <code>main</code>, иначе программа не запустится.</p>
+<blockquote>
+<p>⚡ <strong>Важно</strong>: В Go нет понятия "конструктора" как в других языках. Инициализация обычно происходит в функции <code>init()</code>, которая выполняется автоматически перед <code>main()</code>.</p>
+</blockquote>
+<h3 id="4-fmtprintln"><a class="header" href="#4-fmtprintln">4. <strong>fmt.Println()</strong></a></h3>
+<p>Функция <code>fmt.Println()</code> выводит текст в консоль и автоматически добавляет новую строку.</p>
+<h4 id="Разные-способы-вывода-в-go"><a class="header" href="#Разные-способы-вывода-в-go">Разные способы вывода в Go:</a></h4>
+<pre><code class="language-go">// Простой вывод
+fmt.Print("Hello, ") // Без перевода строки
 fmt.Print("World!")  // Выведет: Hello, World!
+
+// Вывод с переводом строки
+fmt.Println("Hello, World!") // Выведет: Hello, World! и переведёт строку
+
+// Форматированный вывод
+name := "Иван"
+age := 25
+fmt.Printf("Привет, %s! Тебе %d лет.\n", name, age)
+// Выведет: Привет, Иван! Тебе 25 лет.
 </code></pre>
-<pre><code class="language-Go">fmt.Printf("Привет, %s! Тебе %d лет.", "Иван", 25) // Выведет: Привет, Иван! Тебе 25 лет.
-</code></pre>
-<p>Где <code>%s</code> заменится на строку, а <code>%d</code> — на число.</p>
-<p>Таким образом, <strong><code>fmt</code></strong> предоставляет разные варианты для вывода текста в зависимости от ваших нужд.</p>
-<h2 id="Ввод-данных-с-fmtscan"><a class="header" href="#Ввод-данных-с-fmtscan">Ввод данных с fmt.Scan</a></h2>
-<p>Теперь давайте добавим интерактивность в нашу программу. Мы будем не только выводить текст, но и принимать ввод от пользователя с помощью функции fmt.Scan.</p>
-<p>Пример с использованием fmt.Scan:</p>
+<h2 id="Работа-с-вводом-данных"><a class="header" href="#Работа-с-вводом-данных">Работа с вводом данных</a></h2>
+<p>Go предоставляет несколько способов для ввода данных. Давайте рассмотрим основные:</p>
+<h3 id="1-Простой-ввод-с-fmtscan"><a class="header" href="#1-Простой-ввод-с-fmtscan">1. Простой ввод с fmt.Scan</a></h3>
 <pre><code class="language-go">package main
 
 import "fmt"
 
 func main() {
-   var name string
-   fmt.Println("Введите ваше имя:")
-   fmt.Scan(&amp;name) // Считывает ввод пользователя
-   fmt.Printf("Привет, %s!\n", name) // Приветствует пользователя
+    var name string
+    fmt.Println("Введите ваше имя:")
+    fmt.Scan(&amp;name)
+    fmt.Printf("Привет, %s!\n", name)
 }
 </code></pre>
-<h3 id="Как-работает-fmtscan"><a class="header" href="#Как-работает-fmtscan">Как работает fmt.Scan?</a></h3>
-<ul>
-<li>fmt.Scan считывает данные, вводимые пользователем, и сохраняет их в переменную, переданную по ссылке (через &amp;).</li>
-<li>В данном примере мы объявили переменную name типа string и затем передали её в fmt.Scan(&amp;name).</li>
-<li>Пользователь вводит своё имя, и программа выводит приветствие, используя fmt.Printf для форматированного вывода.</li>
-</ul>
-<h4 id="Несколько-переменных-с-fmtscan"><a class="header" href="#Несколько-переменных-с-fmtscan">Несколько переменных с fmt.Scan:</a></h4>
-<p>Можно одновременно считывать несколько переменных:</p>
-<pre><code class="language-go">   var firstName, lastName string
-   fmt.Println("Введите ваше имя и фамилию:")
-   fmt.Scan(&amp;firstName, &amp;lastName)
-   fmt.Printf("Привет, %s %s!\n", firstName, lastName)
+<h3 id="2-Ввод-нескольких-значений"><a class="header" href="#2-Ввод-нескольких-значений">2. Ввод нескольких значений</a></h3>
+<pre><code class="language-go">var firstName, lastName string
+fmt.Println("Введите ваше имя и фамилию:")
+fmt.Scan(&amp;firstName, &amp;lastName)
+fmt.Printf("Привет, %s %s!\n", firstName, lastName)
 </code></pre>
-<p>Здесь функция fmt.Scan ждёт два значения (имя и фамилию) и сохраняет их в соответствующие переменные.</p>
-<h2 id="Дополнительные-задания"><a class="header" href="#Дополнительные-задания">Дополнительные задания:</a></h2>
-<p>Чтобы закрепить материал, попробуйте выполнить следующие задачи:</p>
+<h3 id="3-Более-продвинутый-ввод-с-bufio"><a class="header" href="#3-Более-продвинутый-ввод-с-bufio">3. Более продвинутый ввод с bufio</a></h3>
+<pre><code class="language-go">package main
+
+import (
+    "bufio"
+    "fmt"
+    "os"
+)
+
+func main() {
+    reader := bufio.NewReader(os.Stdin)
+    fmt.Println("Введите ваше имя:")
+    name, _ := reader.ReadString('\n')
+    fmt.Printf("Привет, %s!\n", name)
+}
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Калькулятор-возраста"><a class="header" href="#Задание-1-Калькулятор-возраста">Задание 1: Калькулятор возраста</a></h3>
+<p>Напишите программу, которая:</p>
 <ol>
-<li><strong>Выведите сообщение "Привет, <em>Ваше имя</em>"</strong> с помощью <strong><code>fmt.Println()</code></strong>.</li>
-<li><strong>Используйте <code>fmt.Print()</code></strong>, чтобы вывести ваше имя и фамилию в одной строке без перехода на новую строку.</li>
-<li><strong>Используйте <code>fmt.Printf()</code></strong> для форматированного вывода:<br />
-Например, выведите строку вида:
-<pre><code class="language-Go">fmt.Printf("Привет, %s! Тебе %d лет.", "Иван", 25)
-</code></pre>
-Замените "Иван" и возраст на свои данные.<br><br></li>
-<li><strong>Добавьте в программу ввод возраста с помощью fmt.Scan</strong> и выведите сообщение: "Привет, Ваше имя! Тебе возраст лет".</li>
+<li>Запрашивает год рождения пользователя</li>
+<li>Вычисляет его возраст</li>
+<li>Выводит приветствие с указанием возраста</li>
+</ol>
+<h3 id="Задание-2-Конвертер-температур"><a class="header" href="#Задание-2-Конвертер-температур">Задание 2: Конвертер температур</a></h3>
+<p>Создайте программу, которая:</p>
+<ol>
+<li>Запрашивает температуру в градусах Цельсия</li>
+<li>Конвертирует её в градусы Фаренгейта</li>
+<li>Выводит результат с точностью до двух знаков после запятой</li>
+</ol>
+<h3 id="Задание-3-Генератор-паролей"><a class="header" href="#Задание-3-Генератор-паролей">Задание 3: Генератор паролей</a></h3>
+<p>Напишите простой генератор паролей, который:</p>
+<ol>
+<li>Запрашивает длину пароля</li>
+<li>Генерирует случайный пароль заданной длины</li>
+<li>Выводит результат</li>
 </ol>
 <blockquote>
-<p><em><strong>Совет:</strong></em>
-Когда вы начнёте решать задания, обратите внимание на то, как Go управляет строками и форматирует вывод. Чем лучше вы поймёте эти базовые конструкции, тем легче будет разбираться в более сложных вещах, которые ждут вас в следующих уроках.</p>
+<p>💡 <strong>Совет</strong>: Для генерации случайных чисел используйте пакет <code>math/rand</code></p>
+</blockquote>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать простые программы на Go</li>
+<li>Работать с вводом и выводом данных</li>
+<li>Понимать базовую структуру Go-программы</li>
+<li>Использовать основные функции пакета fmt</li>
+</ul>
 </blockquote>
 
                     </main>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html" class="active"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -174,25 +156,21 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="Методы-синхронизации-между-горутинами"><a class="header" href="#Методы-синхронизации-между-горутинами">Методы синхронизации между горутинами</a></h1>
-<p>Когда вы начинаете работать с несколькими горутинами, часто возникает необходимость синхронизации их работы. В Go для этого существует несколько мощных инструментов, таких как <code>sync.WaitGroup</code>, <code>sync.Mutex</code>, каналы, и другие примитивы синхронизации. Этот урок поможет вам понять, как эти механизмы работают и когда их стоит использовать.</p>
-<h2 id="Темы-урока"><a class="header" href="#Темы-урока">Темы урока:</a></h2>
+<p>В этом уроке мы изучим различные методы синхронизации между горутинами в Go. Правильная синхронизация — это ключ к созданию надёжных и эффективных параллельных программ.</p>
+<h2 id="Почему-важна-синхронизация"><a class="header" href="#Почему-важна-синхронизация">Почему важна синхронизация?</a></h2>
+<p>Синхронизация горутин необходима для:</p>
 <ul>
-<li><a href="#syncwaitgroup--%D0%9E%D0%B6%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B2%D0%B5%D1%80%D1%88%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B3%D0%BE%D1%80%D1%83%D1%82%D0%B8%D0%BD">sync.WaitGroup</a></li>
-<li><a href="#syncmutex--%D0%97%D0%B0%D1%89%D0%B8%D1%82%D0%B0-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BE%D1%82-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D0%B5%D0%BD%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0">sync.Mutex</a></li>
-<li><a href="#syncrwmutex--%D0%A0%D0%B0%D0%B7%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%B0%D0%B2-%D0%BD%D0%B0-%D1%87%D1%82%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B8-%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D1%8C">sync.RWMutex</a></li>
-<li><a href="#%D0%9A%D0%B0%D0%BD%D0%B0%D0%BB%D1%8B-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8">Channel</a></li>
-<li><a href="#%D0%98%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-select-%D1%81-%D0%BD%D0%B5%D0%B1%D1%83%D1%84%D0%B5%D1%80%D0%B8%D0%B7%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%BC%D0%B8-%D0%BA%D0%B0%D0%BD%D0%B0%D0%BB%D0%B0%D0%BC%D0%B8">select</a></li>
-<li><a href="#syncmap--%D0%91%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%B0%D1%8F-%D0%BA%D0%B0%D1%80%D1%82%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D0%B5%D0%BD%D1%82%D0%BD%D0%BE%D0%B3%D0%BE-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0">sync.Map</a></li>
-<li><a href="#synccond--%D0%A1%D0%BB%D0%BE%D0%B6%D0%BD%D1%8B%D0%B5-%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F-%D0%B4%D0%BB%D1%8F-%D1%81%D0%B8%D0%BD%D1%85%D1%80%D0%BE%D0%BD%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8">sync.Cond</a></li>
+<li>Предотвращения гонок данных (race conditions)</li>
+<li>Координации работы между горутинами</li>
+<li>Безопасного доступа к общим ресурсам</li>
+<li>Эффективного использования системных ресурсов</li>
 </ul>
-<h1 id="syncwaitgroup--Ожидание-завершения-горутин"><a class="header" href="#syncwaitgroup--Ожидание-завершения-горутин"><strong>sync.WaitGroup</strong> — Ожидание завершения горутин</a></h1>
-<p><code>sync.WaitGroup</code> — это структура, которая помогает дождаться завершения нескольких горутин перед тем, как продолжить выполнение программы. Она содержит три основных метода:</p>
-<ul>
-<li><code>Add(int)</code> — увеличивает счётчик горутин, которые нужно ожидать.</li>
-<li><code>Done()</code> — уменьшает счётчик на единицу, указывая, что одна горутина завершила работу.</li>
-<li><code>Wait()</code> — блокирует выполнение основной программы, пока счётчик не станет равен нулю.</li>
-</ul>
-<p><strong>Пример использования:</strong></p>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go есть поговорка "Не общайтесь, разделяя память. Разделяйте память, общаясь". Это означает, что каналы предпочтительнее мьютексов для синхронизации.</p>
+</blockquote>
+<h2 id="Основные-методы-синхронизации"><a class="header" href="#Основные-методы-синхронизации">Основные методы синхронизации</a></h2>
+<h3 id="1-waitgroup--ожидание-завершения-горутин"><a class="header" href="#1-waitgroup--ожидание-завершения-горутин">1. WaitGroup — ожидание завершения горутин</a></h3>
+<p><code>sync.WaitGroup</code> — это простой и эффективный способ дождаться завершения группы горутин.</p>
 <pre><code class="language-go">package main
 
 import (
@@ -202,34 +180,28 @@ import (
 )
 
 func worker(id int, wg *sync.WaitGroup) {
-    defer wg.Done() // Уменьшает счётчик по завершению работы
-    fmt.Printf("Worker %d начинает работу\n", id)
+    defer wg.Done() // Уменьшаем счётчик при завершении
+    
+    fmt.Printf("Работник %d начал\n", id)
     time.Sleep(time.Second)
-    fmt.Printf("Worker %d завершил работу\n", id)
+    fmt.Printf("Работник %d закончил\n", id)
 }
 
 func main() {
     var wg sync.WaitGroup
+    
+    // Запускаем 5 работников
     for i := 1; i &lt;= 5; i++ {
-        wg.Add(1) // Увеличиваем счётчик для каждой горутины
+        wg.Add(1) // Увеличиваем счётчик
         go worker(i, &amp;wg)
     }
-
-    wg.Wait() // Ждём завершения всех горутин
-    fmt.Println("Все горутины завершены")
+    
+    wg.Wait() // Ждём завершения всех работников
+    fmt.Println("Все работники завершили работу")
 }
 </code></pre>
-<blockquote>
-<p><strong>Когда использовать</strong>: <code>sync.WaitGroup</code> полезен, когда нужно дождаться завершения нескольких горутин и продолжить выполнение программы.</p>
-</blockquote>
-<h1 id="syncmutex--Защита-данных-от-конкурентного-доступа"><a class="header" href="#syncmutex--Защита-данных-от-конкурентного-доступа"><strong>sync.Mutex</strong> — Защита данных от конкурентного доступа</a></h1>
-<p><code>sync.Mutex</code> (mutual exclusion) используется для защиты общих данных, к которым одновременно обращаются несколько горутин. Это предотвращает "гонки данных", когда несколько горутин пытаются одновременно читать и изменять одни и те же переменные.</p>
-<p>Методы <code>sync.Mutex</code>:</p>
-<ul>
-<li><code>Lock()</code> — блокирует доступ к ресурсу.</li>
-<li><code>Unlock()</code> — разблокирует доступ к ресурсу.</li>
-</ul>
-<p><strong>Пример использования:</strong></p>
+<h3 id="2-mutex--защита-общих-данных"><a class="header" href="#2-mutex--защита-общих-данных">2. Mutex — защита общих данных</a></h3>
+<p><code>sync.Mutex</code> используется для защиты общих данных от одновременного доступа.</p>
 <pre><code class="language-go">package main
 
 import (
@@ -237,448 +209,248 @@ import (
     "sync"
 )
 
-var (
-    counter int
-    mu      sync.Mutex
-)
+type SafeCounter struct {
+    mu    sync.Mutex
+    count int
+}
 
-func increment(wg *sync.WaitGroup) {
-    defer wg.Done()
-    mu.Lock()   // Блокируем доступ к переменной
-    counter++   // Увеличиваем счётчик
-    mu.Unlock() // Разблокируем доступ
+func (c *SafeCounter) Increment() {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    c.count++
+}
+
+func (c *SafeCounter) Value() int {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+    return c.count
 }
 
 func main() {
+    counter := SafeCounter{}
     var wg sync.WaitGroup
-
+    
     for i := 0; i &lt; 1000; i++ {
         wg.Add(1)
-        go increment(&amp;wg)
+        go func() {
+            defer wg.Done()
+            counter.Increment()
+        }()
     }
-
+    
     wg.Wait()
-    fmt.Printf("Итоговый счётчик: %d\n", counter)
+    fmt.Println("Итоговый счётчик:", counter.Value())
 }
 </code></pre>
-<blockquote>
-<p><strong>Когда использовать</strong>: <code>sync.Mutex</code> применяют, когда нужно защитить критические участки кода, которые работают с общими ресурсами (переменными, массивами, картами и т.д.).</p>
-</blockquote>
-<h1 id="syncrwmutex--Разделение-прав-на-чтение-и-запись"><a class="header" href="#syncrwmutex--Разделение-прав-на-чтение-и-запись"><strong>sync.RWMutex</strong> — Разделение прав на чтение и запись</a></h1>
-<p><code>sync.RWMutex</code> (Read-Write Mutex) похож на обычный <code>Mutex</code>, но позволяет нескольким горутинам читать данные одновременно, пока никто не производит запись. Если требуется запись, доступ к переменной блокируется для всех горутин.</p>
-<p>Основные методы:</p>
-<ul>
-<li><code>RLock()</code> — блокирует для записи, но разрешает чтение.</li>
-<li><code>RUnlock()</code> — разблокирует чтение.</li>
-<li><code>Lock()</code> — блокирует для чтения и записи.</li>
-<li><code>Unlock()</code> — разблокирует.</li>
-</ul>
-<p><strong>Пример использования:</strong></p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-var (
-    data = make(map[string]string)
+<h3 id="3-rwmutex--оптимизированная-блокировка"><a class="header" href="#3-rwmutex--оптимизированная-блокировка">3. RWMutex — оптимизированная блокировка</a></h3>
+<p><code>sync.RWMutex</code> позволяет нескольким горутинам читать данные одновременно, но блокирует их при записи.</p>
+<pre><code class="language-go">type SafeMap struct {
     mu   sync.RWMutex
-)
-
-func writeData(key, value string, wg *sync.WaitGroup) {
-    defer wg.Done()
-    mu.Lock() // Блокируем на запись
-    data[key] = value
-    mu.Unlock()
+    data map[string]string
 }
 
-func readData(key string, wg *sync.WaitGroup) {
-    defer wg.Done()
-    mu.RLock() // Блокируем на чтение
-    fmt.Println("Читаем значение:", data[key])
-    mu.RUnlock()
+func (m *SafeMap) Get(key string) string {
+    m.mu.RLock()
+    defer m.mu.RUnlock()
+    return m.data[key]
 }
 
-func main() {
-    var wg sync.WaitGroup
-
-    wg.Add(1)
-    go writeData("language", "Go", &amp;wg)
-
-    wg.Add(1)
-    go readData("language", &amp;wg)
-
-    wg.Wait()
+func (m *SafeMap) Set(key, value string) {
+    m.mu.Lock()
+    defer m.mu.Unlock()
+    m.data[key] = value
 }
 </code></pre>
-<blockquote>
-<p><strong>Когда использовать</strong>: <code>sync.RWMutex</code> применяют, когда нужно разделить права доступа для чтения и записи, повышая производительность в ситуациях, где чтение доминирует над записью.</p>
-</blockquote>
-<h1 id="Каналы-для-синхронизации"><a class="header" href="#Каналы-для-синхронизации"><strong>Каналы для синхронизации</strong></a></h1>
-<p>Каналы — это мощный инструмент в языке Go для организации взаимодействия между горутинами. Они позволяют безопасно передавать данные между потоками выполнения и реализовать концепцию коммуникации вместо явного использования блокировок.</p>
-<p>Каналы создаются с помощью функции <code>make</code>, и могут быть <strong>буферизированными</strong> или <strong>небуферизированными</strong>:</p>
-<pre><code class="language-go">// Создание небуферизированного канала для передачи целых чисел
-ch := make(chan int)
-
-// Создание буферизированного канала с ёмкостью 2
-chBuf := make(chan int, 2)
-</code></pre>
-<p>В небуферизированном канале операция отправки блокирует выполнение до тех пор, пока другая горутина не получит данные. Буферизированный канал позволяет отправлять несколько значений, пока не заполнится буфер.</p>
-<h3 id="Основные-операции-с-каналами"><a class="header" href="#Основные-операции-с-каналами">Основные операции с каналами</a></h3>
-<ol>
-<li>
-<p><strong>Отправка данных в канал:</strong></p>
-<pre><code class="language-go">ch &lt;- 42  // Отправка значения 42 в канал
-</code></pre>
-</li>
-<li>
-<p><strong>Чтение данных из канала:</strong></p>
-<pre><code class="language-go">value := &lt;-ch  // Чтение значения из канала
-</code></pre>
-</li>
-<li>
-<p><strong>Закрытие канала:</strong>
-Когда канал больше не будет использоваться для отправки данных, его следует закрыть, чтобы другие горутины знали, что данные больше не будут поступать.</p>
-<pre><code class="language-go">close(ch)
-</code></pre>
-<blockquote>
-<p>После закрытия канала из него всё ещё можно читать данные, но попытка отправить в закрытый канал приведёт к панике.</p>
-</blockquote>
-</li>
-</ol>
-<h2 id="Буферизированные-каналы"><a class="header" href="#Буферизированные-каналы">Буферизированные каналы</a></h2>
-<p>Буферизированные каналы позволяют отправлять несколько значений, не блокируя отправляющую горутину, пока буфер не заполнен. Получающая сторона будет блокироваться, только если буфер пуст.</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-)
-
-func main() {
-    ch := make(chan int, 2) // Буфер на 2 значения
-
-    ch &lt;- 1  // Можно отправить два значения без блокировки
-    ch &lt;- 2
-
-    fmt.Println(&lt;-ch)  // Чтение данных из канала
-    fmt.Println(&lt;-ch)
-}
-</code></pre>
-<p>Здесь буферизированный канал позволяет отправить два значения подряд без блокировки, а затем получить их.</p>
-<h2 id="Небуферезированные-каналы"><a class="header" href="#Небуферезированные-каналы">Небуферезированные каналы</a></h2>
-<p>В отличие от буферизированных каналов, небуферизированные работают синхронно: отправка данных в такой канал блокирует горутину до тех пор, пока другая горутина не примет эти данные.</p>
-<h3 id="Пример-работы-с-небуферизированным-каналом"><a class="header" href="#Пример-работы-с-небуферизированным-каналом">Пример работы с небуферизированным каналом</a></h3>
-<p>Посмотрим на пример с двумя горутинами: одна отправляет данные через канал, а другая получает их.</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-)
-
-func main() {
-    ch := make(chan int)
-
-    // Запускаем горутину для отправки данных
-    go func() {
-        fmt.Println("Отправляем данные в канал...")
-        ch &lt;- 42  // Отправляем значение 42
-        fmt.Println("Данные отправлены")
-    }()
-
-    // Читаем данные из канала
-    fmt.Println("Ожидаем данные...")
-    value := &lt;-ch
-    fmt.Println("Получено значение:", value)
-}
-</code></pre>
-<p><strong>Что здесь происходит:</strong></p>
-<ol>
-<li>Мы создаём небуферизированный канал <code>ch</code>.</li>
-<li>Запускаем горутину, которая отправляет данные в канал.</li>
-<li>Основная горутина блокируется на чтении из канала до тех пор, пока данные не будут отправлены.</li>
-<li>После этого обе горутины продолжают выполнение.</li>
-</ol>
-<h3 id="Синхронизация-через-небуферизированные-каналы"><a class="header" href="#Синхронизация-через-небуферизированные-каналы">Синхронизация через небуферизированные каналы</a></h3>
-<p>Каналы в Go используются не только для передачи данных, но и для синхронизации между горутинами. Небуферизированные каналы обеспечивают строгую синхронизацию, потому что отправка и получение должны происходить одновременно.</p>
-<h4 id="Пример-синхронизации"><a class="header" href="#Пример-синхронизации">Пример синхронизации:</a></h4>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func worker(done chan bool) {
+<h2 id="Каналы-для-синхронизации"><a class="header" href="#Каналы-для-синхронизации">Каналы для синхронизации</a></h2>
+<h3 id="1-Небуферизированные-каналы"><a class="header" href="#1-Небуферизированные-каналы">1. Небуферизированные каналы</a></h3>
+<pre><code class="language-go">func worker(done chan bool) {
     fmt.Println("Работа начинается...")
-    time.Sleep(2 * time.Second) // Имитируем какую-то работу
+    time.Sleep(time.Second)
     fmt.Println("Работа завершена")
-    done &lt;- true  // Сообщаем, что работа завершена
+    done &lt;- true
 }
 
 func main() {
     done := make(chan bool)
-
     go worker(done)
-
-    // Ожидаем сигнал от горутины
-    &lt;-done
-    fmt.Println("Главная горутина продолжает работу")
+    &lt;-done // Ждём завершения
 }
 </code></pre>
-<p><strong>Что происходит:</strong></p>
-<ol>
-<li>Горутина <code>worker</code> выполняет свою работу и через 2 секунды отправляет сигнал в канал <code>done</code>, сообщая о завершении.</li>
-<li>Главная горутина блокируется на операции чтения из канала до тех пор, пока горутина не завершит работу.</li>
-</ol>
-<h3 id="Важные-моменты-при-работе-с-небуферизированными-каналами"><a class="header" href="#Важные-моменты-при-работе-с-небуферизированными-каналами">Важные моменты при работе с небуферизированными каналами</a></h3>
-<ol>
-<li>
-<p><strong>Ожидание обеих сторон:</strong></p>
-<ul>
-<li>Если горутина пытается отправить данные в небуферизированный канал, но никто не ждёт этих данных, она заблокируется.</li>
-<li>То же самое происходит при чтении: горутина блокируется, если данные ещё не были отправлены.</li>
-</ul>
-</li>
-<li>
-<p><strong>Использование для строгой синхронизации:</strong>
-Небуферизированные каналы обеспечивают строгую синхронизацию между двумя горутинами, что полезно, когда нужно чётко контролировать выполнение. Например, когда одна горутина должна завершиться до того, как другая продолжит работу.</p>
-</li>
-<li>
-<p><strong>Потенциальные блокировки:</strong>
-Небуферизированные каналы могут привести к блокировкам, если горутины не правильно организованы. Например, если горутина ожидает получения данных, а отправляющая горутина никогда не запускается, программа заблокируется навсегда.</p>
-</li>
-</ol>
-<h3 id="Пример-с-использованием-нескольких-горутин"><a class="header" href="#Пример-с-использованием-нескольких-горутин">Пример с использованием нескольких горутин</a></h3>
-<p>В следующем примере несколько горутин отправляют значения в небуферизированный канал, а главная горутина считывает данные.</p>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-)
-
-func sendValue(ch chan int, value int) {
-    fmt.Printf("Отправляем %d в канал\n", value)
-    ch &lt;- value
-    fmt.Printf("%d отправлен\n", value)
-}
-
-func main() {
-    ch := make(chan int)
-
-    // Запуск нескольких горутин для отправки данных
-    go sendValue(ch, 1)
-    go sendValue(ch, 2)
-    go sendValue(ch, 3)
-
-    // Получаем данные из канала
-    fmt.Println("Получено:", &lt;-ch)
-    fmt.Println("Получено:", &lt;-ch)
-    fmt.Println("Получено:", &lt;-ch)
+<h3 id="2-Буферизированные-каналы"><a class="header" href="#2-Буферизированные-каналы">2. Буферизированные каналы</a></h3>
+<pre><code class="language-go">func main() {
+    ch := make(chan int, 3)
+    
+    // Отправляем три значения без блокировки
+    ch &lt;- 1
+    ch &lt;- 2
+    ch &lt;- 3
+    
+    // Читаем значения
+    fmt.Println(&lt;-ch)
+    fmt.Println(&lt;-ch)
+    fmt.Println(&lt;-ch)
 }
 </code></pre>
-<p>В этом примере три горутины пытаются отправить данные в небуферизированный канал. Каждая из них будет заблокирована до тех пор, пока данные не будут прочитаны из канала в основной горутине.</p>
-<h1 id="Использование-select-с-небуферизированными-каналами"><a class="header" href="#Использование-select-с-небуферизированными-каналами">Использование <code>select</code> с небуферизированными каналами</a></h1>
-<p>Оператор <code>select</code> позволяет работать с несколькими каналами одновременно. Это полезно, когда нужно ожидать данные от разных горутин.</p>
-<h4 id="Пример-с-select"><a class="header" href="#Пример-с-select">Пример с <code>select</code>:</a></h4>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "time"
-)
-
-func main() {
+<h3 id="3-select-для-работы-с-несколькими-каналами"><a class="header" href="#3-select-для-работы-с-несколькими-каналами">3. Select для работы с несколькими каналами</a></h3>
+<pre><code class="language-go">func main() {
     ch1 := make(chan string)
     ch2 := make(chan string)
-
+    
     go func() {
-        time.Sleep(1 * time.Second)
-        ch1 &lt;- "Сообщение из первого канала"
+        time.Sleep(time.Second)
+        ch1 &lt;- "сообщение 1"
     }()
-
+    
     go func() {
         time.Sleep(2 * time.Second)
-        ch2 &lt;- "Сообщение из второго канала"
+        ch2 &lt;- "сообщение 2"
     }()
-
+    
     select {
-    case msg1 := &lt;-ch1:
-        fmt.Println(msg1)
-    case msg2 := &lt;-ch2:
-        fmt.Println(msg2)
+    case msg := &lt;-ch1:
+        fmt.Println(msg)
+    case msg := &lt;-ch2:
+        fmt.Println(msg)
+    case &lt;-time.After(3 * time.Second):
+        fmt.Println("таймаут")
     }
 }
 </code></pre>
-<p>В этом примере <code>select</code> ждёт сообщения из двух каналов и обрабатывает первое поступившее сообщение.</p>
-<h1 id="syncmap--Безопасная-карта-для-конкурентного-доступа"><a class="header" href="#syncmap--Безопасная-карта-для-конкурентного-доступа"><code>sync.Map</code> — Безопасная карта для конкурентного доступа</a></h1>
-<p>Go предоставляет отличные инструменты для работы с картами, но обычные карты (map) не предназначены для безопасного использования в многопоточном окружении. Если несколько горутин пытаются одновременно читать и изменять карту, может произойти гонка данных. Для таких случаев Go предлагает <code>sync.Map</code>, которая обеспечивает безопасный доступ к карте в многопоточных программах.</p>
-<p><code>sync.Map</code> отличается от обычных карт:</p>
-<ul>
-<li>Не нужно использовать <code>sync.Mutex</code> для защиты операций с картой.</li>
-<li>Поддерживает безопасный конкурентный доступ для чтения, записи и удаления данных.</li>
-<li>Методы <code>sync.Map</code> оптимизированы для сценариев с большим количеством параллельных операций.</li>
-</ul>
-<h3 id="Основные-методы-syncmap"><a class="header" href="#Основные-методы-syncmap">Основные методы <code>sync.Map</code></a></h3>
-<ul>
-<li><strong><code>Store(key, value interface{})</code></strong> — сохраняет значение по ключу.</li>
-<li><strong><code>Load(key interface{}) (value interface{}, ok bool)</code></strong> — получает значение по ключу, если оно существует.</li>
-<li><strong><code>LoadOrStore(key, value interface{}) (actual interface{}, loaded bool)</code></strong> — пытается получить значение по ключу. Если значение отсутствует, сохраняет новое.</li>
-<li><strong><code>Delete(key interface{})</code></strong> — удаляет значение по ключу.</li>
-<li><strong><code>Range(f func(key, value interface{}) bool)</code></strong> — перебирает все элементы карты и передаёт их в функцию обратного вызова. Если функция возвращает <code>false</code>, перебор останавливается.</li>
-</ul>
-<h3 id="Пример-использования-syncmap"><a class="header" href="#Пример-использования-syncmap">Пример использования <code>sync.Map</code></a></h3>
-<pre><code class="language-go">package main
-
-import (
-    "fmt"
-    "sync"
-)
-
-func main() {
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-syncmap-для-конкурентного-доступа"><a class="header" href="#1-syncmap-для-конкурентного-доступа">1. sync.Map для конкурентного доступа</a></h3>
+<pre><code class="language-go">func main() {
     var m sync.Map
-
-    // Запись значений в карту
-    m.Store("language", "Go")
-    m.Store("year", 2009)
-
-    // Чтение значения
-    value, ok := m.Load("language")
-    if ok {
-        fmt.Println("Значение ключа 'language':", value)
+    
+    // Запись
+    m.Store("key", "value")
+    
+    // Чтение
+    if value, ok := m.Load("key"); ok {
+        fmt.Println(value)
     }
-
-    // Удаление значения
-    m.Delete("year")
-
-    // Попытка загрузки или сохранения
-    actual, loaded := m.LoadOrStore("platform", "Linux")
-    if loaded {
-        fmt.Println("Ключ 'platform' уже существует со значением:", actual)
-    } else {
-        fmt.Println("Ключ 'platform' отсутствовал, добавлено значение:", actual)
-    }
-
-    // Перебор всех элементов
+    
+    // Перебор
     m.Range(func(key, value interface{}) bool {
-        fmt.Printf("Ключ: %v, Значение: %v\n", key, value)
+        fmt.Println(key, value)
         return true
     })
 }
 </code></pre>
-<p>В данном примере:</p>
-<ul>
-<li>Мы добавляем несколько значений в карту с помощью метода <code>Store</code>.</li>
-<li>Читаем значения через <code>Load</code> и проверяем их существование.</li>
-<li>Используем метод <code>LoadOrStore</code> для проверки наличия ключа перед добавлением.</li>
-<li>Перебираем все элементы карты с помощью <code>Range</code>.</li>
-</ul>
-<h3 id="Когда-использовать-syncmap"><a class="header" href="#Когда-использовать-syncmap">Когда использовать <code>sync.Map</code></a></h3>
-<p><code>sync.Map</code> особенно полезна в ситуациях, когда:</p>
-<ul>
-<li>Часто выполняются конкурентные операции чтения и записи.</li>
-<li>Вы не хотите вручную защищать карту с помощью <code>sync.Mutex</code>.</li>
-<li>Требуется высокая производительность при частых операциях с данными в многопоточном окружении.</li>
-</ul>
-<p><strong>Однако</strong> <code>sync.Map</code> не всегда эффективнее, чем обычная карта с <code>sync.Mutex</code>. Если операции с картой редки или преимущественно записи, использование обычной карты с блокировками может быть быстрее.</p>
-<h3 id="Пример-сценария-с-syncmap-в-горутинах"><a class="header" href="#Пример-сценария-с-syncmap-в-горутинах">Пример сценария с <code>sync.Map</code> в горутинах</a></h3>
-<pre><code class="language-go">package main
+<h3 id="2-synccond-для-сложной-синхронизации"><a class="header" href="#2-synccond-для-сложной-синхронизации">2. sync.Cond для сложной синхронизации</a></h3>
+<pre><code class="language-go">type WorkerPool struct {
+    cond *sync.Cond
+    mu   sync.Mutex
+    jobs int
+}
 
-import (
-    "fmt"
-    "sync"
-)
+func (p *WorkerPool) AddJob() {
+    p.mu.Lock()
+    p.jobs++
+    p.cond.Signal()
+    p.mu.Unlock()
+}
 
-func main() {
-    var m sync.Map
+func (p *WorkerPool) Worker() {
+    p.mu.Lock()
+    for p.jobs == 0 {
+        p.cond.Wait()
+    }
+    p.jobs--
+    p.mu.Unlock()
+    
+    // Выполнение работы
+}
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-Пул-воркеров-с-каналами"><a class="header" href="#1-Пул-воркеров-с-каналами">1. Пул воркеров с каналами</a></h3>
+<pre><code class="language-go">type WorkerPool struct {
+    tasks chan func()
+    wg    sync.WaitGroup
+}
+
+func NewWorkerPool(size int) *WorkerPool {
+    pool := &amp;WorkerPool{
+        tasks: make(chan func()),
+    }
+    
+    pool.wg.Add(size)
+    for i := 0; i &lt; size; i++ {
+        go func() {
+            defer pool.wg.Done()
+            for task := range pool.tasks {
+                task()
+            }
+        }()
+    }
+    
+    return pool
+}
+</code></pre>
+<h3 id="2-Ограничение-количества-горутин"><a class="header" href="#2-Ограничение-количества-горутин">2. Ограничение количества горутин</a></h3>
+<pre><code class="language-go">func processTasks(tasks []string, maxWorkers int) {
+    semaphore := make(chan struct{}, maxWorkers)
     var wg sync.WaitGroup
-
-    // Запуск нескольких горутин для записи данных
-    for i := 0; i &lt; 5; i++ {
+    
+    for _, task := range tasks {
         wg.Add(1)
-        go func(id int) {
-            defer wg.Done()
-            m.Store(fmt.Sprintf("key%d", id), id)
-        }(i)
+        semaphore &lt;- struct{}{}
+        
+        go func(t string) {
+            defer func() {
+                &lt;-semaphore
+                wg.Done()
+            }()
+            
+            // Обработка задачи
+            fmt.Printf("Обработка: %s\n", t)
+            time.Sleep(time.Second)
+        }(task)
     }
-
+    
     wg.Wait()
-
-    // Перебор всех записей после завершения горутин
-    m.Range(func(key, value interface{}) bool {
-        fmt.Printf("Ключ: %v, Значение: %v\n", key, value)
-        return true
-    })
 }
 </code></pre>
-<p>Здесь мы создаём несколько горутин, каждая из которых записывает уникальные ключи и значения в карту. После завершения всех горутин мы используем <code>Range</code>, чтобы вывести содержимое карты.</p>
-<h3 id="Частые-ошибки-при-работе-с-syncmap"><a class="header" href="#Частые-ошибки-при-работе-с-syncmap">Частые ошибки при работе с <code>sync.Map</code></a></h3>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Параллельная-обработка-файлов"><a class="header" href="#Задание-1-Параллельная-обработка-файлов">Задание 1: Параллельная обработка файлов</a></h3>
+<p>Создайте программу, которая:</p>
 <ol>
-<li>
-<p><strong>Предположение о типе данных</strong>: так как <code>sync.Map</code> работает с интерфейсами, вы всегда получаете значения типа <code>interface{}</code>. При чтении значений вам нужно использовать приведение типов, иначе может возникнуть паника.</p>
-<pre><code class="language-go">value, ok := m.Load("key")
-intValue := value.(int) // Приведение типов
-</code></pre>
-</li>
-<li>
-<p><strong>Неиспользование <code>sync.Map</code> по назначению</strong>: <code>sync.Map</code> оптимизирована для сценариев, где много горутин одновременно работают с картой. Если работа с картой однопоточная или требует большого количества операций записи, использование обычной карты с <code>sync.Mutex</code> может быть более подходящим.</p>
-</li>
-<li>
-<p><strong>Использование сложных ключей</strong>: так как ключи в <code>sync.Map</code> являются интерфейсами, убедитесь, что ключи могут корректно сравниваться, иначе могут возникнуть непредсказуемые результаты. Например, при использовании структур в качестве ключей важно реализовать правильные методы сравнения.</p>
-</li>
+<li>Читает несколько файлов параллельно</li>
+<li>Обрабатывает их содержимое</li>
+<li>Объединяет результаты</li>
+<li>Использует WaitGroup для синхронизации</li>
 </ol>
-<br>
-<h1 id="synccond--Сложные-условия-для-синхронизации"><a class="header" href="#synccond--Сложные-условия-для-синхронизации">sync.Cond — Сложные условия для синхронизации</a></h1>
-<p>sync.Cond — это условная переменная, позволяющая одной или нескольким горутинам ждать сигнала о том, что нужно продолжить выполнение. Она используется в случаях, когда несколько горутин должны дождаться определённого условия.</p>
-<h3 id="Основные-методы"><a class="header" href="#Основные-методы">Основные методы:</a></h3>
+<h3 id="Задание-2-Кэш-с-конкурентным-доступом"><a class="header" href="#Задание-2-Кэш-с-конкурентным-доступом">Задание 2: Кэш с конкурентным доступом</a></h3>
+<p>Напишите потокобезопасный кэш, который:</p>
+<ol>
+<li>Хранит данные в map</li>
+<li>Использует RWMutex для оптимизации</li>
+<li>Поддерживает TTL для записей</li>
+<li>Обеспечивает атомарные операции</li>
+</ol>
+<h3 id="Задание-3-Система-очередей"><a class="header" href="#Задание-3-Система-очередей">Задание 3: Система очередей</a></h3>
+<p>Создайте систему очередей, которая:</p>
+<ol>
+<li>Принимает задачи через каналы</li>
+<li>Обрабатывает их в пуле воркеров</li>
+<li>Ограничивает количество одновременных задач</li>
+<li>Предоставляет статус выполнения</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
 <ul>
-<li>Wait() — горутина ждёт сигнала.</li>
-<li>Signal() — сигнализирует одной горутине.</li>
-<li>Broadcast() — сигнализирует всем горутинам.</li>
+<li>Изучим паттерны параллельного программирования</li>
+<li>Познакомимся с контекстами в Go</li>
+<li>Узнаем о конкурентных структурах данных</li>
+<li>Начнём писать более сложные параллельные программы</li>
 </ul>
-<h3 id="Пример-использования"><a class="header" href="#Пример-использования">Пример использования:</a></h3>
-<pre><code class="language-go">package main
-
-import (
-   "fmt"
-   "sync"
-   "time"
-)
-
-var ready = false
-var mu sync.Mutex
-var cond = sync.NewCond(&amp;mu)
-
-func worker(id int, wg *sync.WaitGroup) {
-   defer wg.Done()
-
-    cond.L.Lock()
-    for !ready {
-        cond.Wait() // Ожидаем сигнала
-    }
-    fmt.Printf("Worker %d начал работу\n", id)
-    cond.L.Unlock()
-}
-
-func main() {
-   var wg sync.WaitGroup
-
-    for i := 1; i &lt;= 5; i++ {
-        wg.Add(1)
-        go worker(i, &amp;wg)
-    }
-
-    time.Sleep(time.Second)
-    cond.L.Lock()
-    ready = true
-    cond.Broadcast() // Сигнализируем всем горутинам
-    cond.L.Unlock()
-
-    wg.Wait()
-}
-</code></pre>
 <blockquote>
-<p>Когда использовать: sync.Cond используется для синхронизации сложных зависимостей между горутинами, когда одна или несколько горутин должны ждать выполнения определённого условия.</p>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Синхронизировать горутины различными способами</li>
+<li>Защищать общие данные от гонок</li>
+<li>Использовать каналы для коммуникации</li>
+<li>Оптимизировать параллельные программы</li>
+</ul>
 </blockquote>
 
                     </main>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html" class="active"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,11 +155,29 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Работа-с-файловой-системой"><a class="header" href="#Работа-с-файловой-системой">Работа с файловой системой</a></h1>
-<p>В Go существует несколько встроенных пакетов для работы с файловой системой. Наиболее важный и часто используемый пакет — <strong><code>os</code></strong>, который предоставляет функции для создания, чтения, записи и удаления файлов, а также для работы с директориями и манипуляции с путями. В этом уроке мы рассмотрим основные возможности работы с файлами и каталогами в Go.</p>
-<h3 id="Открытие-и-чтение-файлов"><a class="header" href="#Открытие-и-чтение-файлов">Открытие и чтение файлов</a></h3>
-<p>Для открытия файлов в Go используется функция <strong><code>os.Open</code></strong>, которая возвращает дескриптор файла и ошибку. Файл может быть прочитан с помощью пакета <strong><code>io/ioutil</code></strong> или <strong><code>bufio</code></strong>.</p>
-<h4 id="Пример"><a class="header" href="#Пример">Пример:</a></h4>
+                        <h1 id="Работа-с-файловой-системой-в-go"><a class="header" href="#Работа-с-файловой-системой-в-go">Работа с файловой системой в Go</a></h1>
+<p>В этом уроке мы изучим работу с файловой системой в Go. Это важный навык, который позволит вам:</p>
+<ul>
+<li>Читать и записывать данные в файлы</li>
+<li>Управлять директориями и путями</li>
+<li>Обрабатывать ошибки при работе с файлами</li>
+<li>Эффективно работать с большими файлами</li>
+<li>Создавать надёжные системы хранения данных</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: Go предоставляет несколько способов работы с файлами, от простых однострочных операций до сложных буферизированных операций, что позволяет выбрать оптимальный подход для каждой задачи.</p>
+</blockquote>
+<h2 id="Основные-пакеты-для-работы-с-файлами"><a class="header" href="#Основные-пакеты-для-работы-с-файлами">Основные пакеты для работы с файлами</a></h2>
+<p>В Go есть несколько важных пакетов для работы с файлами:</p>
+<ul>
+<li><strong><code>os</code></strong> - базовые операции с файлами и директориями</li>
+<li><strong><code>io</code></strong> - интерфейсы для ввода/вывода</li>
+<li><strong><code>bufio</code></strong> - буферизированные операции</li>
+<li><strong><code>path/filepath</code></strong> - работа с путями</li>
+<li><strong><code>ioutil</code></strong> - вспомогательные функции</li>
+</ul>
+<h2 id="Чтение-файлов"><a class="header" href="#Чтение-файлов">Чтение файлов</a></h2>
+<h3 id="1-Простое-чтение-файла"><a class="header" href="#1-Простое-чтение-файла">1. Простое чтение файла</a></h3>
 <pre><code class="language-go">package main
 
 import (
@@ -193,6 +193,7 @@ func main() {
 		fmt.Println("Ошибка при открытии файла:", err)
 		return
 	}
+	// Гарантированное закрытие файла
 	defer file.Close()
 
 	// Чтение содержимого файла
@@ -206,46 +207,20 @@ func main() {
 	fmt.Println(string(content))
 }
 </code></pre>
+<p><strong>Объяснение:</strong></p>
 <ul>
-<li><strong><code>os.Open</code></strong> открывает файл в режиме только для чтения.</li>
-<li><strong><code>ioutil.ReadAll</code></strong> читает всё содержимое файла в один вызов и возвращает его как байтовый срез.</li>
+<li><code>os.Open</code> открывает файл в режиме только для чтения</li>
+<li><code>defer file.Close()</code> гарантирует закрытие файла даже при ошибках</li>
+<li><code>ioutil.ReadAll</code> читает всё содержимое файла за один раз</li>
+<li>Преобразование <code>string(content)</code> необходимо, так как <code>ReadAll</code> возвращает байтовый срез</li>
 </ul>
-<h3 id="Запись-данных-в-файл"><a class="header" href="#Запись-данных-в-файл">Запись данных в файл</a></h3>
-<p>Для записи данных в файл используйте функцию <strong><code>os.Create</code></strong> или <strong><code>os.OpenFile</code></strong>. Первый создаёт новый файл или перезаписывает существующий, а второй предоставляет гибкий способ открытия файлов с разными режимами.</p>
-<h4 id="Пример-записи-файла"><a class="header" href="#Пример-записи-файла">Пример записи файла:</a></h4>
-<pre><code class="language-go">package main
-
-import (
-	"fmt"
-	"os"
-)
-
-func main() {
-	// Создаем новый файл или перезаписываем существующий
-	file, err := os.Create("output.txt")
-	if err != nil {
-		fmt.Println("Ошибка при создании файла:", err)
-		return
-	}
-	defer file.Close()
-
-	// Записываем строку в файл
-	_, err = file.WriteString("Привет, мир!\n")
-	if err != nil {
-		fmt.Println("Ошибка при записи в файл:", err)
-		return
-	}
-
-	fmt.Println("Запись в файл успешна!")
-}
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Содержимое файла:
+Это содержимое файла example.txt
+Вторая строка
+Третья строка
 </code></pre>
-<ul>
-<li><strong><code>os.Create</code></strong> создаёт новый файл (или перезаписывает существующий).</li>
-<li><strong><code>file.WriteString</code></strong> записывает строку в файл.</li>
-</ul>
-<h3 id="Чтение-и-запись-через-буферы"><a class="header" href="#Чтение-и-запись-через-буферы">Чтение и запись через буферы</a></h3>
-<p>Если вам нужно более контролируемое чтение или запись (например, построчное чтение), вы можете использовать <strong><code>bufio.Scanner</code></strong> для чтения или <strong><code>bufio.Writer</code></strong> для буферизированной записи.</p>
-<h4 id="Пример-построчного-чтения"><a class="header" href="#Пример-построчного-чтения">Пример построчного чтения:</a></h4>
+<h3 id="2-Построчное-чтение-файла"><a class="header" href="#2-Построчное-чтение-файла">2. Построчное чтение файла</a></h3>
 <pre><code class="language-go">package main
 
 import (
@@ -262,17 +237,86 @@ func main() {
 	}
 	defer file.Close()
 
+	// Создаём сканер для построчного чтения
 	scanner := bufio.NewScanner(file)
+	lineNumber := 1
+
+	// Читаем файл построчно
 	for scanner.Scan() {
-		fmt.Println(scanner.Text()) // Печатает каждую строку файла
+		fmt.Printf("Строка %d: %s\n", lineNumber, scanner.Text())
+		lineNumber++
 	}
 
+	// Проверяем ошибки сканера
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Ошибка при чтении файла:", err)
 	}
 }
 </code></pre>
-<h4 id="Пример-буферизированной-записи"><a class="header" href="#Пример-буферизированной-записи">Пример буферизированной записи:</a></h4>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>bufio.NewScanner</code> создаёт сканер для построчного чтения</li>
+<li><code>scanner.Scan()</code> читает следующую строку</li>
+<li><code>scanner.Text()</code> возвращает текущую строку</li>
+<li><code>scanner.Err()</code> проверяет наличие ошибок</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Строка 1: Это содержимое файла example.txt
+Строка 2: Вторая строка
+Строка 3: Третья строка
+</code></pre>
+<h2 id="Запись-в-файлы"><a class="header" href="#Запись-в-файлы">Запись в файлы</a></h2>
+<h3 id="1-Простая-запись-в-файл"><a class="header" href="#1-Простая-запись-в-файл">1. Простая запись в файл</a></h3>
+<pre><code class="language-go">package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	// Создаём новый файл (или перезаписываем существующий)
+	file, err := os.Create("output.txt")
+	if err != nil {
+		fmt.Println("Ошибка при создании файла:", err)
+		return
+	}
+	defer file.Close()
+
+	// Записываем несколько строк
+	lines := []string{
+		"Первая строка",
+		"Вторая строка",
+		"Третья строка",
+	}
+
+	for _, line := range lines {
+		_, err := file.WriteString(line + "\n")
+		if err != nil {
+			fmt.Println("Ошибка при записи в файл:", err)
+			return
+		}
+	}
+
+	fmt.Println("Запись в файл успешно завершена!")
+}
+</code></pre>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>os.Create</code> создаёт новый файл или перезаписывает существующий</li>
+<li><code>file.WriteString</code> записывает строку в файл</li>
+<li>Добавляем <code>\n</code> для перевода строки</li>
+<li><code>defer file.Close()</code> гарантирует закрытие файла</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Запись в файл успешно завершена!
+</code></pre>
+<p>Содержимое файла output.txt:</p>
+<pre><code>Первая строка
+Вторая строка
+Третья строка
+</code></pre>
+<h3 id="2-Буферизированная-запись"><a class="header" href="#2-Буферизированная-запись">2. Буферизированная запись</a></h3>
 <pre><code class="language-go">package main
 
 import (
@@ -289,102 +333,193 @@ func main() {
 	}
 	defer file.Close()
 
+	// Создаём буферизированный писатель
 	writer := bufio.NewWriter(file)
-	writer.WriteString("Первая строка\n")
-	writer.WriteString("Вторая строка\n")
+	
+	// Записываем данные в буфер
+	for i := 1; i &lt;= 1000; i++ {
+		fmt.Fprintf(writer, "Строка %d\n", i)
+	}
 
-	// Обязательно вызываем Flush, чтобы записать буфер в файл
-	writer.Flush()
+	// Записываем буфер в файл
+	if err := writer.Flush(); err != nil {
+		fmt.Println("Ошибка при записи буфера:", err)
+		return
+	}
 
-	fmt.Println("Запись в файл завершена!")
+	fmt.Println("Буферизированная запись завершена!")
 }
 </code></pre>
-<h3 id="Работа-с-директориями"><a class="header" href="#Работа-с-директориями">Работа с директориями</a></h3>
-<p>Для работы с директориями Go предоставляет функции <strong><code>os.Mkdir</code></strong>, <strong><code>os.Remove</code></strong>, <strong><code>os.Rename</code></strong> и другие. Эти функции позволяют создавать, удалять и переименовывать директории.</p>
-<h4 id="Пример-создания-директории"><a class="header" href="#Пример-создания-директории">Пример создания директории:</a></h4>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>bufio.NewWriter</code> создаёт буферизированный писатель</li>
+<li><code>fmt.Fprintf</code> форматирует и записывает строку в буфер</li>
+<li><code>writer.Flush()</code> записывает буфер в файл</li>
+<li>Буферизация повышает производительность при большом количестве записей</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Буферизированная запись завершена!
+</code></pre>
+<p>Содержимое файла buffered_output.txt:</p>
+<pre><code>Строка 1
+Строка 2
+...
+Строка 1000
+</code></pre>
+<h2 id="Работа-с-директориями"><a class="header" href="#Работа-с-директориями">Работа с директориями</a></h2>
+<h3 id="1-Создание-и-удаление-директорий"><a class="header" href="#1-Создание-и-удаление-директорий">1. Создание и удаление директорий</a></h3>
 <pre><code class="language-go">package main
 
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 func main() {
-	// Создаём директорию с правами доступа 0755
-	err := os.Mkdir("new_directory", 0755)
-	if err != nil {
+	// Создаём путь к новой директории
+	dirPath := filepath.Join("test", "subdir", "data")
+	
+	// Создаём директорию со всеми родительскими директориями
+	if err := os.MkdirAll(dirPath, 0755); err != nil {
 		fmt.Println("Ошибка при создании директории:", err)
 		return
 	}
 
-	fmt.Println("Директория создана!")
-}
-</code></pre>
-<h4 id="Пример-удаления-файла-или-директории"><a class="header" href="#Пример-удаления-файла-или-директории">Пример удаления файла или директории:</a></h4>
-<pre><code class="language-go">package main
+	fmt.Printf("Директория %s создана успешно\n", dirPath)
 
-import (
-	"fmt"
-	"os"
-)
-
-func main() {
-	// Удаляем файл или пустую директорию
-	err := os.Remove("output.txt")
-	if err != nil {
-		fmt.Println("Ошибка при удалении файла/директории:", err)
+	// Удаляем директорию и все её содержимое
+	if err := os.RemoveAll("test"); err != nil {
+		fmt.Println("Ошибка при удалении директории:", err)
 		return
 	}
 
-	fmt.Println("Файл/директория удалены!")
+	fmt.Println("Директория и её содержимое удалены")
 }
 </code></pre>
-<h3 id="Получение-информации-о-файлах"><a class="header" href="#Получение-информации-о-файлах">Получение информации о файлах</a></h3>
-<p>С помощью функции <strong><code>os.Stat</code></strong> можно получить информацию о файле или директории, например, размер, права доступа, время изменения и т.д.</p>
-<h4 id="Пример-получения-информации-о-файле"><a class="header" href="#Пример-получения-информации-о-файле">Пример получения информации о файле:</a></h4>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>filepath.Join</code> создаёт корректный путь для текущей ОС</li>
+<li><code>os.MkdirAll</code> создаёт все необходимые директории</li>
+<li><code>0755</code> устанавливает права доступа (rwxr-xr-x)</li>
+<li><code>os.RemoveAll</code> удаляет директорию и всё её содержимое</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Директория test/subdir/data создана успешно
+Директория и её содержимое удалены
+</code></pre>
+<h3 id="2-Получение-информации-о-файлах"><a class="header" href="#2-Получение-информации-о-файлах">2. Получение информации о файлах</a></h3>
 <pre><code class="language-go">package main
 
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 func main() {
+	// Получаем информацию о файле
 	info, err := os.Stat("example.txt")
 	if err != nil {
-		fmt.Println("Ошибка при получении информации о файле:", err)
+		fmt.Println("Ошибка при получении информации:", err)
 		return
 	}
 
+	// Выводим информацию о файле
 	fmt.Println("Имя файла:", info.Name())
-	fmt.Println("Размер файла:", info.Size())
+	fmt.Println("Размер:", info.Size(), "байт")
 	fmt.Println("Права доступа:", info.Mode())
 	fmt.Println("Время изменения:", info.ModTime())
+	fmt.Println("Это директория:", info.IsDir())
+
+	// Получаем абсолютный путь
+	absPath, err := filepath.Abs("example.txt")
+	if err != nil {
+		fmt.Println("Ошибка при получении пути:", err)
+		return
+	}
+	fmt.Println("Абсолютный путь:", absPath)
 }
 </code></pre>
-<h3 id="Полезные-задания"><a class="header" href="#Полезные-задания">Полезные задания</a></h3>
+<p><strong>Объяснение:</strong></p>
+<ul>
+<li><code>os.Stat</code> возвращает информацию о файле</li>
+<li><code>info.Name()</code> возвращает имя файла</li>
+<li><code>info.Size()</code> возвращает размер в байтах</li>
+<li><code>info.Mode()</code> показывает права доступа</li>
+<li><code>info.ModTime()</code> возвращает время последнего изменения</li>
+<li><code>filepath.Abs</code> получает абсолютный путь к файлу</li>
+</ul>
+<p><strong>Ожидаемый вывод:</strong></p>
+<pre><code>Имя файла: example.txt
+Размер: 1024 байт
+Права доступа: -rw-r--r--
+Время изменения: 2023-01-01 12:00:00 +0000 UTC
+Это директория: false
+Абсолютный путь: /home/user/projects/example.txt
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Анализатор-логов"><a class="header" href="#Задание-1-Анализатор-логов">Задание 1: Анализатор логов</a></h3>
+<p>Создайте программу, которая:</p>
 <ol>
-<li>
-<p><strong>Задание на чтение файлов:</strong>
-Напишите программу, которая читает файл построчно и выводит только те строки, которые содержат определённое ключевое слово.</p>
-</li>
-<li>
-<p><strong>Задание на запись файлов:</strong>
-Напишите программу, которая записывает в файл строки, введённые пользователем в консоль, пока не будет введена пустая строка.</p>
-</li>
-<li>
-<p><strong>Работа с директориями:</strong>
-Напишите программу, которая создаёт несколько вложенных директорий и файлов в них, а затем рекурсивно удаляет их.</p>
-</li>
-<li>
-<p><strong>Задание на буферизированную запись:</strong>
-Создайте программу, которая записывает в файл большой объём данных через буфер, но вызывает <code>Flush</code> только после завершения записи.</p>
-</li>
-<li>
-<p><strong>Задание на информацию о файлах:</strong>
-Напишите программу, которая получает информацию обо всех файлах в указанной директории и выводит их размер, права доступа и дату последнего изменения.</p>
-</li>
+<li>Читает лог-файл построчно</li>
+<li>Находит строки, содержащие ошибки</li>
+<li>Сохраняет найденные ошибки в отдельный файл</li>
+<li>Выводит статистику по ошибкам</li>
 </ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Отфильтрованные ошибки в отдельном файле</li>
+<li>Статистика по типам ошибок</li>
+<li>Временные метки ошибок</li>
+</ul>
+<h3 id="Задание-2-Менеджер-резервных-копий"><a class="header" href="#Задание-2-Менеджер-резервных-копий">Задание 2: Менеджер резервных копий</a></h3>
+<p>Разработайте программу для:</p>
+<ol>
+<li>Создания резервных копий указанных файлов</li>
+<li>Хранения нескольких версий файлов</li>
+<li>Восстановления файлов из резервной копии</li>
+<li>Ведения лога операций</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Резервные копии файлов</li>
+<li>История изменений</li>
+<li>Возможность восстановления</li>
+<li>Лог операций</li>
+</ul>
+<h3 id="Задание-3-Система-мониторинга"><a class="header" href="#Задание-3-Система-мониторинга">Задание 3: Система мониторинга</a></h3>
+<p>Создайте систему для:</p>
+<ol>
+<li>Мониторинга изменений в директории</li>
+<li>Отслеживания новых файлов</li>
+<li>Проверки размера файлов</li>
+<li>Генерации отчётов</li>
+</ol>
+<p><strong>Ожидаемый результат:</strong></p>
+<ul>
+<li>Отслеживание изменений</li>
+<li>Предупреждения о больших файлах</li>
+<li>Ежедневные отчёты</li>
+<li>История изменений</li>
+</ul>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим работу с сетью</li>
+<li>Познакомимся с HTTP-клиентами и серверами</li>
+<li>Узнаем о протоколах передачи данных</li>
+<li>Начнём создавать сетевые приложения</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Читать и записывать файлы</li>
+<li>Работать с директориями</li>
+<li>Использовать буферизацию</li>
+<li>Обрабатывать ошибки при работе с файлами</li>
+</ul>
+</blockquote>
 
                     </main>
 

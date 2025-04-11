@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="ru" class="light" dir="ltr">
+<html lang="ru" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> О курсе</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1.html"><strong aria-hidden="true">2.</strong> Основы Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_2.html"><strong aria-hidden="true">2.1.</strong> Первое знакомство с Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_3.html"><strong aria-hidden="true">2.2.</strong> Работа с переменными</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_4.html"><strong aria-hidden="true">2.3.</strong> Основные конструкции управления в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_5.html"><strong aria-hidden="true">2.4.</strong> Slice, map и их особенности</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_6.html"><strong aria-hidden="true">2.5.</strong> Горутины</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_7.html"><strong aria-hidden="true">2.6.</strong> Методы синхронизации между горутинами</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_8.html"><strong aria-hidden="true">2.7.</strong> Структуры</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_9.html" class="active"><strong aria-hidden="true">2.8.</strong> Интерфейсы</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_10.html"><strong aria-hidden="true">2.9.</strong> Работа с паникой и defer</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_11.html"><strong aria-hidden="true">2.10.</strong> Работа с файловой системой</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_12.html"><strong aria-hidden="true">2.11.</strong> Дженерики в Go</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_13.html"><strong aria-hidden="true">2.12.</strong> Работа с ошибками</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_0.html"><strong aria-hidden="true">3.</strong> Погружение в глубину</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_1.html"><strong aria-hidden="true">3.1.</strong> Рефлексия</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2.html"><strong aria-hidden="true">3.2.</strong> Slice, map глубже</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_3.html"><strong aria-hidden="true">3.3.</strong> Scheduler и уникальность горутин в Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_4.html"><strong aria-hidden="true">3.4.</strong> Небезопасный Go</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_5.html"><strong aria-hidden="true">3.5.</strong> Системное программирование в Go и сигналы</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_6.html"><strong aria-hidden="true">3.6.</strong> GC и методы работы с ним</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_7.html"><strong aria-hidden="true">3.7.</strong> </a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3.html"><strong aria-hidden="true">4.</strong> Библиотеки Go</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -173,129 +155,236 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="Интерфейсы"><a class="header" href="#Интерфейсы">Интерфейсы</a></h1>
-<p>Интерфейсы в Go — это мощный инструмент для создания гибких и расширяемых программ. Интерфейс в Go определяет набор методов, которые должны быть реализованы типом, чтобы он соответствовал этому интерфейсу. Одной из ключевых особенностей интерфейсов в Go является то, что реализация интерфейса не требует явного указания соответствия типу — если тип реализует все методы интерфейса, то этот тип автоматически считается удовлетворяющим интерфейсу.</p>
-<h3 id="Объявление-интерфейса"><a class="header" href="#Объявление-интерфейса">Объявление интерфейса</a></h3>
-<p>Интерфейс определяется как набор сигнатур методов. Любой тип, который реализует эти методы, автоматически считается реализующим этот интерфейс.</p>
-<p>Пример простого интерфейса:</p>
-<pre><code class="language-go">type Speaker interface {
+                        <h1 id="Интерфейсы-в-go-гибкость-и-абстракция"><a class="header" href="#Интерфейсы-в-go-гибкость-и-абстракция">Интерфейсы в Go: гибкость и абстракция</a></h1>
+<p>В этом уроке мы изучим интерфейсы — один из самых мощных инструментов Go для создания гибких и расширяемых программ. Интерфейсы позволяют определять поведение, не привязываясь к конкретной реализации, что делает код более модульным и тестируемым.</p>
+<h2 id="Почему-важны-интерфейсы"><a class="header" href="#Почему-важны-интерфейсы">Почему важны интерфейсы?</a></h2>
+<p>Интерфейсы в Go необходимы для:</p>
+<ul>
+<li>Создания абстракций</li>
+<li>Реализации полиморфизма</li>
+<li>Упрощения тестирования</li>
+<li>Разделения ответственности</li>
+<li>Создания гибких API</li>
+</ul>
+<blockquote>
+<p>💡 <strong>Интересный факт</strong>: В Go нет явного объявления реализации интерфейса. Если тип реализует все методы интерфейса, он автоматически считается его реализацией.</p>
+</blockquote>
+<h2 id="Основы-интерфейсов"><a class="header" href="#Основы-интерфейсов">Основы интерфейсов</a></h2>
+<h3 id="1-Объявление-и-реализация"><a class="header" href="#1-Объявление-и-реализация">1. Объявление и реализация</a></h3>
+<pre><code class="language-go">// Определение интерфейса
+type Speaker interface {
     Speak() string
+    Listen() string
 }
-</code></pre>
-<p>Здесь <code>Speaker</code> — это интерфейс с одним методом <code>Speak()</code>, который должен возвращать строку.</p>
-<h3 id="Реализация-интерфейса"><a class="header" href="#Реализация-интерфейса">Реализация интерфейса</a></h3>
-<p>В Go не нужно явно объявлять, что тип реализует интерфейс. Достаточно просто реализовать все методы, определённые в интерфейсе, чтобы тип соответствовал ему.</p>
-<pre><code class="language-go">type Person struct {
+
+// Реализация интерфейса
+type Person struct {
     Name string
 }
 
 func (p Person) Speak() string {
-    return "Hello, my name is " + p.Name
+    return fmt.Sprintf("Привет, я %s", p.Name)
 }
-</code></pre>
-<p>Тип <code>Person</code> реализует интерфейс <code>Speaker</code>, потому что он имеет метод <code>Speak</code>, который возвращает строку.</p>
-<h3 id="Пример-использования-интерфейсов"><a class="header" href="#Пример-использования-интерфейсов">Пример использования интерфейсов</a></h3>
-<p>Теперь создадим функцию, которая принимает в качестве аргумента любой тип, реализующий интерфейс <code>Speaker</code>:</p>
-<pre><code class="language-go">func SaySomething(s Speaker) {
-    fmt.Println(s.Speak())
+
+func (p Person) Listen() string {
+    return fmt.Sprintf("%s слушает", p.Name)
 }
 
 func main() {
-    person := Person{Name: "John"}
-    SaySomething(person)
+    person := Person{Name: "Иван"}
+    fmt.Println(person.Speak())
+    fmt.Println(person.Listen())
 }
 </code></pre>
-<p>Функция <code>SaySomething</code> принимает любой тип, который реализует интерфейс <code>Speaker</code>, и вызывает метод <code>Speak()</code>.</p>
-<h3 id="Интерфейсы-с-несколькими-методами"><a class="header" href="#Интерфейсы-с-несколькими-методами">Интерфейсы с несколькими методами</a></h3>
-<p>Интерфейсы могут содержать несколько методов. Например:</p>
-<pre><code class="language-go">type Shape interface {
-    Area() float64
-    Perimeter() float64
-}
-</code></pre>
-<p>Здесь интерфейс <code>Shape</code> требует реализации двух методов: <code>Area</code> и <code>Perimeter</code>.</p>
-<p>Пример реализации интерфейса для типа <code>Rectangle</code>:</p>
-<pre><code class="language-go">type Rectangle struct {
-    Width, Height float64
+<h3 id="2-Использование-интерфейсов"><a class="header" href="#2-Использование-интерфейсов">2. Использование интерфейсов</a></h3>
+<pre><code class="language-go">type Animal interface {
+    Speak() string
+    Move() string
 }
 
-func (r Rectangle) Area() float64 {
-    return r.Width * r.Height
+type Dog struct {
+    Name string
 }
 
-func (r Rectangle) Perimeter() float64 {
-    return 2 * (r.Width + r.Height)
+func (d Dog) Speak() string {
+    return "Гав-гав!"
 }
-</code></pre>
-<p>Теперь <code>Rectangle</code> реализует интерфейс <code>Shape</code>, поскольку он реализует оба метода — <code>Area</code> и <code>Perimeter</code>.</p>
-<h3 id="Пустой-интерфейс-interface"><a class="header" href="#Пустой-интерфейс-interface">Пустой интерфейс (interface{})</a></h3>
-<p>Пустой интерфейс в Go (<code>interface{}</code>) не содержит методов, что означает, что любой тип удовлетворяет этому интерфейсу. Это делает его универсальным контейнером для любого значения.</p>
-<p>Пример использования пустого интерфейса:</p>
-<pre><code class="language-go">func PrintValue(v interface{}) {
-    fmt.Println(v)
+
+func (d Dog) Move() string {
+    return "Бежит"
+}
+
+func DescribeAnimal(a Animal) {
+    fmt.Printf("Животное говорит: %s\n", a.Speak())
+    fmt.Printf("Животное двигается: %s\n", a.Move())
 }
 
 func main() {
-    PrintValue(42)
-    PrintValue("Hello")
-    PrintValue([]int{1, 2, 3})
+    dog := Dog{Name: "Рекс"}
+    DescribeAnimal(dog)
 }
 </code></pre>
-<h3 id="Интерфейсные-значения-и-приведение-типов"><a class="header" href="#Интерфейсные-значения-и-приведение-типов">Интерфейсные значения и приведение типов</a></h3>
-<p>Интерфейсное значение состоит из двух частей: конкретного значения и конкретного типа. Чтобы извлечь конкретное значение из интерфейсного, используется <strong>type assertion</strong> (утверждение типа).</p>
-<p>Пример использования <strong>type assertion</strong>:</p>
-<pre><code class="language-go">var i interface{} = "Hello"
+<h2 id="Продвинутые-техники"><a class="header" href="#Продвинутые-техники">Продвинутые техники</a></h2>
+<h3 id="1-Пустой-интерфейс"><a class="header" href="#1-Пустой-интерфейс">1. Пустой интерфейс</a></h3>
+<pre><code class="language-go">type Storage interface {
+    Store(key string, value interface{}) error
+    Retrieve(key string) (interface{}, error)
+}
 
-s, ok := i.(string)
-if ok {
-    fmt.Println("Это строка:", s)
-} else {
-    fmt.Println("Это не строка")
+type MemoryStorage struct {
+    data map[string]interface{}
+}
+
+func (m *MemoryStorage) Store(key string, value interface{}) error {
+    m.data[key] = value
+    return nil
+}
+
+func (m *MemoryStorage) Retrieve(key string) (interface{}, error) {
+    value, exists := m.data[key]
+    if !exists {
+        return nil, fmt.Errorf("ключ не найден")
+    }
+    return value, nil
 }
 </code></pre>
-<p>Здесь <code>i.(string)</code> проверяет, хранится ли в <code>i</code> значение типа <code>string</code>. Если да, то оно присваивается переменной <code>s</code>.</p>
-<h3 id="Интерфейсы-как-композиция"><a class="header" href="#Интерфейсы-как-композиция">Интерфейсы как композиция</a></h3>
-<p>Интерфейсы в Go могут быть составными — один интерфейс может включать другие интерфейсы.</p>
-<p>Пример:</p>
-<pre><code class="language-go">type Printer interface {
-    Print()
-}
-
-type Scanner interface {
-    Scan()
-}
-
-type AllInOne interface {
-    Printer
-    Scanner
+<h3 id="2-Приведение-типов"><a class="header" href="#2-Приведение-типов">2. Приведение типов</a></h3>
+<pre><code class="language-go">func ProcessValue(v interface{}) {
+    switch value := v.(type) {
+    case int:
+        fmt.Printf("Целое число: %d\n", value)
+    case string:
+        fmt.Printf("Строка: %s\n", value)
+    case bool:
+        fmt.Printf("Булево значение: %v\n", value)
+    default:
+        fmt.Printf("Неизвестный тип: %T\n", value)
+    }
 }
 </code></pre>
-<p>Здесь <code>AllInOne</code> включает в себя два интерфейса: <code>Printer</code> и <code>Scanner</code>. Любой тип, который реализует оба метода <code>Print()</code> и <code>Scan()</code>, будет удовлетворять интерфейсу <code>AllInOne</code>.</p>
-<h3 id="Задания-для-изучения-интерфейсов"><a class="header" href="#Задания-для-изучения-интерфейсов">Задания для изучения интерфейсов</a></h3>
+<h3 id="3-Композиция-интерфейсов"><a class="header" href="#3-Композиция-интерфейсов">3. Композиция интерфейсов</a></h3>
+<pre><code class="language-go">type Reader interface {
+    Read() string
+}
+
+type Writer interface {
+    Write(string)
+}
+
+type ReadWriter interface {
+    Reader
+    Writer
+}
+
+type File struct {
+    content string
+}
+
+func (f *File) Read() string {
+    return f.content
+}
+
+func (f *File) Write(text string) {
+    f.content = text
+}
+</code></pre>
+<h2 id="Практические-примеры"><a class="header" href="#Практические-примеры">Практические примеры</a></h2>
+<h3 id="1-http-клиент-с-интерфейсом"><a class="header" href="#1-http-клиент-с-интерфейсом">1. HTTP-клиент с интерфейсом</a></h3>
+<pre><code class="language-go">type HTTPClient interface {
+    Get(url string) ([]byte, error)
+    Post(url string, data []byte) ([]byte, error)
+}
+
+type RealHTTPClient struct {
+    client *http.Client
+}
+
+func (c *RealHTTPClient) Get(url string) ([]byte, error) {
+    resp, err := c.client.Get(url)
+    if err != nil {
+        return nil, err
+    }
+    defer resp.Body.Close()
+    return io.ReadAll(resp.Body)
+}
+
+// Тестовый клиент для unit-тестов
+type MockHTTPClient struct {
+    Response []byte
+    Error    error
+}
+
+func (c *MockHTTPClient) Get(url string) ([]byte, error) {
+    return c.Response, c.Error
+}
+</code></pre>
+<h3 id="2-Система-логирования"><a class="header" href="#2-Система-логирования">2. Система логирования</a></h3>
+<pre><code class="language-go">type Logger interface {
+    Debug(msg string, fields ...interface{})
+    Info(msg string, fields ...interface{})
+    Error(msg string, fields ...interface{})
+}
+
+type ConsoleLogger struct {
+    level string
+}
+
+func (l *ConsoleLogger) Debug(msg string, fields ...interface{}) {
+    if l.level == "debug" {
+        fmt.Printf("[DEBUG] %s %v\n", msg, fields)
+    }
+}
+
+type FileLogger struct {
+    file *os.File
+}
+
+func (l *FileLogger) Debug(msg string, fields ...interface{}) {
+    fmt.Fprintf(l.file, "[DEBUG] %s %v\n", msg, fields)
+}
+</code></pre>
+<h2 id="Практические-задания"><a class="header" href="#Практические-задания">Практические задания</a></h2>
+<h3 id="Задание-1-Система-платежей"><a class="header" href="#Задание-1-Система-платежей">Задание 1: Система платежей</a></h3>
+<p>Создайте систему для обработки различных типов платежей:</p>
 <ol>
-<li>
-<p><strong>Задание на реализацию интерфейса:</strong>
-Создайте интерфейс <code>Animal</code> с методом <code>Speak()</code>, который возвращает звук, который издаёт животное. Реализуйте этот интерфейс для типов <code>Dog</code>, <code>Cat</code> и <code>Cow</code>.</p>
-</li>
-<li>
-<p><strong>Задание на работу с пустым интерфейсом:</strong>
-Напишите функцию <code>Describe(value interface{})</code>, которая выводит тип и значение переданного аргумента. Используйте <strong>type assertion</strong> для проверки типов.</p>
-</li>
-<li>
-<p><strong>Задание на композицию интерфейсов:</strong>
-Создайте два интерфейса: <code>Runner</code> и <code>Swimmer</code>. Реализуйте тип <code>Triathlete</code>, который должен удовлетворять обоим интерфейсам. Реализуйте методы, чтобы модель спортсмена могла "бегать" и "плавать".</p>
-</li>
-<li>
-<p><strong>Задание на интерфейсные значения:</strong>
-Напишите программу, которая принимает список объектов, реализующих интерфейс <code>Shape</code> (например, <code>Circle</code>, <code>Square</code>, <code>Rectangle</code>), и выводит их площадь и периметр. Реализуйте типы для нескольких фигур.</p>
-</li>
-<li>
-<p><strong>Задание на использование пустого интерфейса и приведение типов:</strong>
-Создайте структуру, которая будет работать как универсальный контейнер. В неё можно положить данные любого типа, но при извлечении должна быть проверка типа данных с помощью <strong>type assertion</strong>.</p>
-</li>
+<li>Определите интерфейс <code>PaymentProcessor</code></li>
+<li>Реализуйте разные типы платежей (кредитная карта, PayPal, банковский перевод)</li>
+<li>Создайте универсальный обработчик платежей</li>
+<li>Добавьте валидацию и обработку ошибок</li>
 </ol>
-<h3 id="Заключение"><a class="header" href="#Заключение">Заключение</a></h3>
-<p>Интерфейсы — важный и мощный инструмент в Go, который позволяет абстрагировать детали реализации и создавать более гибкие и модульные программы. Понимание того, как работают интерфейсы, даёт возможность создавать универсальные решения, способные адаптироваться к разным типам данных и задачам.</p>
+<h3 id="Задание-2-Система-кэширования"><a class="header" href="#Задание-2-Система-кэширования">Задание 2: Система кэширования</a></h3>
+<p>Разработайте систему кэширования с поддержкой разных бэкендов:</p>
+<ol>
+<li>Создайте интерфейс <code>Cache</code></li>
+<li>Реализуйте кэш в памяти и Redis</li>
+<li>Добавьте поддержку TTL</li>
+<li>Реализуйте стратегии вытеснения</li>
+</ol>
+<h3 id="Задание-3-Система-уведомлений"><a class="header" href="#Задание-3-Система-уведомлений">Задание 3: Система уведомлений</a></h3>
+<p>Создайте систему для отправки уведомлений:</p>
+<ol>
+<li>Определите интерфейс <code>Notifier</code></li>
+<li>Реализуйте отправку через email, SMS и push-уведомления</li>
+<li>Добавьте поддержку шаблонов</li>
+<li>Реализуйте очередь уведомлений</li>
+</ol>
+<h2 id="Что-дальше"><a class="header" href="#Что-дальше">Что дальше?</a></h2>
+<p>В следующем уроке мы:</p>
+<ul>
+<li>Изучим работу с файлами</li>
+<li>Познакомимся с пакетом <code>io</code></li>
+<li>Узнаем о буферизации</li>
+<li>Начнём работать с потоками данных</li>
+</ul>
+<blockquote>
+<p>🎯 <strong>Цель урока</strong>: К концу этого урока вы должны уметь:</p>
+<ul>
+<li>Создавать и использовать интерфейсы</li>
+<li>Работать с пустым интерфейсом</li>
+<li>Применять приведение типов</li>
+<li>Использовать композицию интерфейсов</li>
+</ul>
+</blockquote>
 
                     </main>
 
